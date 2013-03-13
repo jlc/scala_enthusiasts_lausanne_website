@@ -12,6 +12,20 @@
 	    <li><a href="@routes.Application.meetings">@Messages("menu.meetings")</a></li>
 	    <li><a href="@routes.Application.address">@Messages("menu.address")</a></li>
 	    <li><a href="@routes.Application.sponsors">@Messages("menu.sponsors")</a></li>
+
+	</ul>
+
+	<ul class="nav pull-right">
+	    <li class="dropdown">
+		<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		    <i class="icon-flag"></i>
+		    <b class="caret"></b>
+		</a>
+		<ul class="dropdown-menu">
+		    <li><a href="@routes.Application.lang("en")">English</a></li>
+		    <li><a href="@routes.Application.lang("fr")">French</a></li>
+		</ul>
+	    </li>
 	</ul>
 
     </div> <!-- navbar-inner -->

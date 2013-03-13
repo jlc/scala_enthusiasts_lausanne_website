@@ -4,9 +4,14 @@
 
 # Home page
 GET     /                           controllers.Application.index
+GET     /index			    controllers.Application.index
 GET	/meetings		    controllers.Application.meetings
 GET	/address		    controllers.Application.address
 GET	/sponsors		    controllers.Application.sponsors
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+# Languages
+GET	/lang				controllers.Application.lang(l: String)
+
