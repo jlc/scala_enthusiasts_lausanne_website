@@ -1,0 +1,19 @@
+@()(implicit lang: Lang)
+
+@import play.api.i18n.Messages
+
+<div class="navbar navbar-fixed-top">
+
+    <div class="navbar-inner">
+
+	<a class="brand" href="@routes.Application.index">@Messages("menu.home")</a>
+
+	<ul class="nav">
+	    <li><a href="@routes.Application.meetings">@Messages("menu.meetings")</a></li>
+	    <li><a href="@routes.Application.address">@Messages("menu.address")</a></li>
+	    <li><a href="@routes.Application.sponsors">@Messages("menu.sponsors")</a></li>
+	</ul>
+
+    </div> <!-- navbar-inner -->
+
+</div> <!-- navbar -->

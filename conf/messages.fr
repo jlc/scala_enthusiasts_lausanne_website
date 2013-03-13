@@ -1,0 +1,8 @@
+# french (fr) messages
+
+main.title = Scala Enthusiasts Lausanne
+
+menu.home = Scala Enthusiasts Lausanne
+menu.meetings = Quoi?
+menu.address = Où?
+menu.sponsors = Qui?
