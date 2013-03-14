@@ -1,7 +1,41 @@
 @()(implicit lang: Lang)
 
-@main("Home") {
-    
+@import play.api.i18n.Messages
 
-    
+@main()(Messages("index.title")) {
+
+<div class="container">
+
+    <div class="row-fluid">
+	<legend>Welcome</legend>
+    </div> <!-- row-fluid -->
+
+    <div class="row-fluid">
+
+	<div class="well span12">
+
+	    Presentation
+
+	    What is the Scala Enthusiast Group Lausanne?
+
+	    <img src="@routes.Assets.at("images/scala_enthusiasts.jpeg")"/>
+
+	</div> <!-- well -->
+
+    </div> <!-- row-fluid -->
+
+    <div class="row-fluid">
+
+	<div class="well span12">
+
+	    Announcements
+
+	    <img src="@routes.Assets.at("images/scala_logo.jpg")"/>
+
+	    Scala is just amazingly sweet and tasty!
+
+	</div> <!-- well -->
+
+    </div> <!-- row-fluid -->
+
 }

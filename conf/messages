@@ -7,3 +7,10 @@ menu.meetings = What?
 menu.address = Where?
 menu.sponsors = Who?
 
+# index page
+index.title = Home
+
+
+# address page
+address.title = Address
+

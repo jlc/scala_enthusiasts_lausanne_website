@@ -1,9 +1,9 @@
-@(subTitle: String)(content: Html)(implicit lang: Lang)
+@(ngAppModule: Option[String] = None)(subTitle: String)(content: Html)(implicit lang: Lang)
 
 @import play.api.i18n.Messages
 
 <!DOCTYPE html>
-<html>
+<html @{"ng-app" + ngAppModule.map("=\""+_+"\"") getOrElse ""}>
     <head>
         <title>@Messages("main.title") - @subTitle</title>
         <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">

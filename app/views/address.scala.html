@@ -1,7 +1,34 @@
 @()(implicit lang: Lang)
 
-@main("Address") {
-    
+@import play.api.i18n.Messages
+
+@main()(Messages("address.title")) {
+
+<div class="container">
+
+    <div class="row-fluid">
+	<legend>Address</legend>
+    </div> <!-- row-fluid -->
+
+    <div class="row-fluid">
+
+	<div class="span2">
+	    <ul class="nav nav-tabs nav-stacked">
+		<li><a href="#">Address</a></li>
+		<li><a href="#">Map</a></li>
+		<li><a href="#">Contact</a></li>
+	    </ul> <!-- nav-stacked -->
+	</div> <!-- span2 -->
+
+	<div class="span10 well">
+	    Some content here
+	    
+	    <img src="@routes.Assets.at("images/scala_logo.jpg")"/>
+	</div> <!-- span10 -->
+
+    </div> <!-- row-fluid -->
+
+</div> <!-- container -->
 
     
 }
