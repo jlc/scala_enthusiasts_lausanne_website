@@ -2,7 +2,10 @@
 
 @import play.api.i18n.Messages
 
-@main(Some("address"))(Messages("address.title")) {
+@* defining variables within the template *@
+@defining(("https://maps.googleapis.com/maps/api/js?key=AIzaSyDb4NCzXMokpVNhBOhu0mlje_ir61NkeqA&sensor=false" :: Nil, "gmap3/gmap3.js" :: Nil)) { case(extJs, extraJavascripts) =>
+
+@main(ngAppModule = Some("address"), extraJs = extraJavascripts, externalJs = extJs)(Messages("address.title")) {
 
 <div class="container">
 
@@ -29,5 +32,5 @@
 
 </div> <!-- container -->
 
-    
-}
+
+}}
