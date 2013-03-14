@@ -7,21 +7,7 @@ import play.api.Logger
 import play.api.i18n.Lang
 import play.api.Play.current
 
-object Application extends Controller {
-  
-  private object SessionValue {
-    val Lang = "lang"
-    val User = "well_known_user"
-  }
-
-  private def authenticated(f: (String) => Result)(implicit request: Request[_]): Option[Result] = {
-    request.session.get(SessionValue.User).map { user => f(user) }
-  }
-
-  private def clientLanguage(implicit request: Request[_]) =
-    request.session.get(SessionValue.Lang) map { Lang(_) } getOrElse { Lang.preferred(request.acceptLanguages) }
-
-
+object Application extends Controller with ControllerHelper {
 
   def index() = Action { implicit request =>
     Ok(views.html.index()(clientLanguage))
