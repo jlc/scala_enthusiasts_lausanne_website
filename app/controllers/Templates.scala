@@ -6,19 +6,19 @@ import play.api.mvc._
 object Templates extends Controller with ControllerHelper {
 
   def ngAppAddressMap = Action { implicit request =>
-    Ok(views.html.templates.ngapp.addressMap()(clientLanguage))
+    Ok(views.html.templates.addressMap()(clientLanguage))
   }
 
   def ngAppAddressContact = Action { implicit request =>
-    Ok(views.html.templates.ngapp.addressContact()(clientLanguage))
+    Ok(views.html.templates.addressContact()(clientLanguage))
   }
 
   def ngAppSponsorsCrossingTech = Action { implicit request =>
-    Ok(views.html.templates.ngapp.sponsorsCrossingTech()(clientLanguage))
+    Ok(views.html.templates.sponsorsCrossingTech()(clientLanguage))
   }
 
   def ngAppSponsorsEpfl = Action { implicit request =>
-    Ok(views.html.templates.ngapp.sponsorsEpfl()(clientLanguage))
+    Ok(views.html.templates.sponsorsEpfl()(clientLanguage))
   }
 
 }
