@@ -10,7 +10,12 @@ menu.sponsors = Who?
 # index page
 index.title = Home
 
+# meetings page
+meetings.title = Meetings
 
 # address page
 address.title = Address
+
+# sponsors page
+sponsors.title = Sponsors
 

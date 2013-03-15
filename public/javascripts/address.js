@@ -24,8 +24,8 @@ angular.module('address', ['common']).
     // configure view routes
     config(['$routeProvider', function($routeProvider) {
 	$routeProvider.
-	    when('/map', {templateUrl: '/templates/ngapp/address/map', controller: MapCtrl}).
-	    when('/contact', {templateUrl: '/templates/ngapp/address/contact', controller: ContactCtrl}).
+	    when('/map', {templateUrl: '/templates/address/map', controller: MapCtrl}).
+	    when('/contact', {templateUrl: '/templates/address/contact', controller: ContactCtrl}).
 	    otherwise({redirectTo: '/map'});
     }]).
 
@@ -41,26 +41,6 @@ angular.module('address', ['common']).
 		    $(elm).animate({opacity: 1.0}, 1000);
 		}
 	    }
-	};
-    }).
-
-    directive('dynamicResizeRatio', function() {
-	return function(scope, elm, attrs) {
-
-	    function update(ratio) {
-		var width = $(elm).parent().width() * ratio;
-		var height = $(window).height() * ratio;
-
-		$(elm).width(width).height(height);
-	    }
-
-	    scope.$watch(attrs.dynamicResizeRatio, function(ratio) {
-		update(ratio);
-	    });
-
-	    $(window).resize(function() {
-		update(attrs.dynamicResizeRatio);
-	    });
 	};
     }).
 

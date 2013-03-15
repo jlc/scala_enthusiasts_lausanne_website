@@ -1,8 +1,24 @@
 @()(implicit lang: Lang)
 
-@main()("Meetings") {
-    
+@main(ngAppModule = Some("meetings"), extraJs = "meetings.js" :: Nil, extraCss = "meetings.css" :: Nil)(Messages("meetings.title")) {
 
-    
+<div class="container">
+
+    <div class="row-fluid">
+
+	<div class="span2">
+	    <ul class="nav nav-tabs nav-stacked">
+		<li><a href="#/agenda">Agenda</a></li>
+		<li><a href="#/sessions">Sessions</a></li>
+		<li><a href="#/speakers">Speakers</a></li>
+	    </ul> <!-- nav-stacked -->
+	</div> <!-- span2 -->
+
+	<div class="span10 well" ng-view>
+	</div> <!-- span10 -->
+
+    </div> <!-- row-fluid -->
+
+</div> <!-- container -->
+
 }
-

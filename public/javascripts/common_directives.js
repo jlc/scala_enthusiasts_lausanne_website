@@ -24,4 +24,25 @@ angular.module('common', []).
 		}
 	    }
 	};
+    }).
+
+    directive('dynamicResizeRatio', function() {
+	return function(scope, elm, attrs) {
+	    console.debug("dynamicResizeRatio");
+
+	    function update(ratio) {
+		var width = $(elm).parent().width() * ratio;
+		var height = $(window).height() * ratio;
+
+		$(elm).width(width).height(height);
+	    }
+
+	    scope.$watch(attrs.dynamicResizeRatio, function(ratio) {
+		update(ratio);
+	    });
+
+	    $(window).resize(function() {
+		update(attrs.dynamicResizeRatio);
+	    });
+	};
     });
