@@ -13,13 +13,13 @@ MapCtrl.$inject = ['$scope', '$routeParams'];
 
 function ContactCtrl($scope, $routeParams) {
 }
-MapCtrl.$inject = ['$scope', '$routeParams'];
+ContactCtrl.$inject = ['$scope', '$routeParams'];
 
 /*
  * Angular module
  */
 
-angular.module('address', []).
+angular.module('address', ['common']).
 
     // configure view routes
     config(['$routeProvider', function($routeProvider) {
@@ -97,7 +97,10 @@ angular.module('address', []).
 		    });
 		}
 
-		$timeout(renderMap, 500);
+		$timeout(function(){
+		    renderMap();
+		    //$(elm).gmap3({trigger: 'resize'});
+		}, 500);
 	    }
 	};
     });
