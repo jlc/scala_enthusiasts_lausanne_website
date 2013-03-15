@@ -2,10 +2,8 @@
 
 @import play.api.i18n.Messages
 
-@* defining variables within the template *@
-@defining(("https://maps.googleapis.com/maps/api/js?key=AIzaSyDb4NCzXMokpVNhBOhu0mlje_ir61NkeqA&sensor=false" :: Nil, "gmap3/gmap3.js" :: Nil)) { case(extJs, extraJavascripts) =>
-
-@main(ngAppModule = Some("address"), extraJs = extraJavascripts, externalJs = extJs)(Messages("address.title")) {
+@main(ngAppModule = Some("address"), extraJs = "gmap3/gmap3.js" :: "address.js" :: Nil, extraCss = "address.css" :: Nil,
+externalJs = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDb4NCzXMokpVNhBOhu0mlje_ir61NkeqA&sensor=false" :: Nil)(Messages("address.title")) {
 
 <div class="container">
 
@@ -22,15 +20,11 @@
 	    </ul> <!-- nav-stacked -->
 	</div> <!-- span2 -->
 
-	<div class="span10 well">
-	    <img src="@routes.Assets.at("images/scala_logo.jpg")"/>
-
-	    <div ng-view></div>
+	<div class="span10 well" ng-view>
 	</div> <!-- span10 -->
 
     </div> <!-- row-fluid -->
 
 </div> <!-- container -->
 
-
-}}
+}
