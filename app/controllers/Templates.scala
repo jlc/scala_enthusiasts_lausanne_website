@@ -13,4 +13,12 @@ object Templates extends Controller with ControllerHelper {
     Ok(views.html.templates.ngapp.addressContact()(clientLanguage))
   }
 
+  def ngAppSponsorsCrossingTech = Action { implicit request =>
+    Ok(views.html.templates.ngapp.sponsorsCrossingTech()(clientLanguage))
+  }
+
+  def ngAppSponsorsEpfl = Action { implicit request =>
+    Ok(views.html.templates.ngapp.sponsorsEpfl()(clientLanguage))
+  }
+
 }

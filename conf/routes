@@ -16,6 +16,8 @@ GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET	/lang				controllers.Application.lang(l: String)
 
 # Templates
-GET	/templates/ngapp/address/map		controllers.Templates.ngAppAddressMap
-GET	/templates/ngapp/address/contact	controllers.Templates.ngAppAddressContact
+GET	/templates/ngapp/address/map				controllers.Templates.ngAppAddressMap
+GET	/templates/ngapp/address/contact			controllers.Templates.ngAppAddressContact
+GET	/templates/ngapp/sponsors/crossing-tech			controllers.Templates.ngAppSponsorsCrossingTech
+GET	/templates/ngapp/sponsors/epfl				controllers.Templates.ngAppSponsorsEpfl
 

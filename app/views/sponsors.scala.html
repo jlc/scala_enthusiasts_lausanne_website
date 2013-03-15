@@ -1,7 +1,28 @@
 @()(implicit lang: Lang)
 
-@main()("Sponsors") {
-    
 
-    
+@main(ngAppModule = Some("sponsors"), extraJs = "sponsors.js" :: Nil, extraCss = "sponsors.css" :: Nil)(Messages("sponsors.title")) {
+
+<div class="container">
+
+    <div class="row-fluid">
+	<legend>Address</legend>
+    </div> <!-- row-fluid -->
+
+    <div class="row-fluid">
+
+	<div class="span2">
+	    <ul class="nav nav-tabs nav-stacked">
+		<li><a href="#/crossing-tech">Crossing-Tech</a></li>
+		<li><a href="#/epfl">EPFL</a></li>
+	    </ul> <!-- nav-stacked -->
+	</div> <!-- span2 -->
+
+	<div class="span10 well" ng-view>
+	</div> <!-- span10 -->
+
+    </div> <!-- row-fluid -->
+
+</div> <!-- container -->
+
 }
