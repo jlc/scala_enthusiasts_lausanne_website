@@ -10,12 +10,23 @@ object ApplicationBuild extends Build {
   val appDependencies = Seq(
     // Add your project dependencies here,
     jdbc,
-    anorm
+    anorm,
+    "com.shorrockin" %% "cascal" % "1.3-SNAPSHOT"
+    // Alternate cassandra scala client: cassie (not yet scala 2.10 compatible)
+    /*
+    "com.twitter" %% "finagle-core" % "6.2.0",
+    "com.twitter" % "cassie" % "0.20.0"
+      exclude("javax.jms", "jms")
+      exclude("com.sun.jdmk", "jmxtools")
+      exclude("com.sun.jmx", "jmxri")
+     */
   )
 
-
   val main = play.Project(appName, appVersion, appDependencies).settings(
-    // Add your own project settings here      
+    resolvers += (
+      "Local Maven Repository" at "file:///"+Path.userHome+"/.m2/repository"
+    )
+ 
   )
 
 }
