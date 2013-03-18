@@ -1,0 +1,15 @@
+
+create keyspace segl;
+
+use segl;
+
+create column family Users
+       with key_validation_class = 'UTF8Type'
+       and comparator = 'UTF8Type'
+       and default_validation_class = 'UTF8Type';
+
+create column family Sessions
+       with key_validation_class = 'UTF8Type'
+       and comparator = 'UTF8Type'
+       and default_validation_class = 'UTF8Type';
+
