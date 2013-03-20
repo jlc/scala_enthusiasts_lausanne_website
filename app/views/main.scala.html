@@ -1,5 +1,5 @@
 @(ngAppModule: Option[String] = None, extraJs: List[String] = Nil, extraCss: List[String] = Nil,
-externalJs: List[String] = Nil, externalCss: List[String] = Nil)(subTitle: String)(content: Html)(implicit lang: Lang)
+externalJs: List[String] = Nil, externalCss: List[String] = Nil)(subTitle: String)(content: Html)(implicit user: User, lang: Lang)
 
 @import play.api.i18n.Messages
 
@@ -46,7 +46,7 @@ externalJs: List[String] = Nil, externalCss: List[String] = Nil)(subTitle: Strin
 
     </head>
     <body>
-	@menu()
+	@menu()(user, lang)
 
         @content
     </body>

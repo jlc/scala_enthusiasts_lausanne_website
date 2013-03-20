@@ -25,19 +25,19 @@ object Application extends Controller with ControllerHelper {
       println("XXX after inserting, here is the value: " + value)
     }
 
-    Ok(views.html.index()(clientLanguage))
+    Ok(views.html.index()(User.anonymous, clientLanguage))
   }
 
   def meetings = Action { implicit request =>
-    Ok(views.html.meetings()(clientLanguage))
+    Ok(views.html.meetings()(User.anonymous, clientLanguage))
   }
 
   def address = Action { implicit request =>
-    Ok(views.html.address()(clientLanguage))
+    Ok(views.html.address()(User.anonymous, clientLanguage))
   }
 
   def sponsors = Action { implicit request =>
-    Ok(views.html.sponsors()(clientLanguage))
+    Ok(views.html.sponsors()(User.anonymous, clientLanguage))
   }
   
   def lang(l: String) = Action { implicit request =>
@@ -45,10 +45,10 @@ object Application extends Controller with ControllerHelper {
 
     Lang.get(l) map { lang =>
       Logger.debug("lang: Setting lang to: " + l)
-      redirect.withSession(SessionValue.Lang -> l)
+      redirect.withSession(SessionKey.Lang -> l)
     } getOrElse {
       Logger.debug("lang: Removing previous setting of lang")
-      redirect.withSession(session - SessionValue.Lang)
+      redirect.withSession(session - SessionKey.Lang)
     }
   }
 

@@ -1,4 +1,4 @@
-@()(implicit lang: Lang)
+@()(implicit user: User, lang: Lang)
 
 
 @main(ngAppModule = Some("sponsors"), extraJs = "sponsors.js" :: Nil, extraCss = "sponsors.css" :: Nil)(Messages("sponsors.title")) {
