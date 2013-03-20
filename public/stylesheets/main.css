@@ -7,3 +7,21 @@
 body {
     padding-top: 60px;
 }
+
+/*
+ * Those rules remove default accordion's margins
+ */
+.accordion.no-margin {
+    margin-bottom: 0px; /* instead of 20px */
+}
+
+.accordion-group.no-margin {
+    margin-bottom: 0px; /* instead of 2px */
+    border: 0px; /* instead of nice grey 1px border */
+}
+
+.accordion-body .adjust-content-margin {
+    margin-bottom: 20px; /* move margin-bottom here so to keep vertical alignment */
+}
+
+

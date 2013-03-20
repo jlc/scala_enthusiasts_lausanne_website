@@ -39,6 +39,25 @@
 
 	</div> <!-- container -->
 
+	<!-- sub menu within accordion -->
+	<div class="container">
+	    <div class="accordion no-margin" id="subMenu">
+		<div class="accordion-group no-margin">
+		    <div class="accordion-body collapse" id="collapseSubMenu" ng-controller="LoginCtrl">
+
+			<form class="navbar-form adjust-content-margin pull-right" novalidate>
+			    <span ng-show="authenticated" class="text-success">Authentication success</span>
+			    <span ng-show="errorAuthenticate" class="text-error">Error in email and/or password</span>
+			    <input type="email" class="input-small" id="inputUsername" placeholder="Email" ng-model="user.email">
+			    <input type="password" class="input-small" id="inputPassword" placeholder="Password" ng-model="user.password">
+			    <button class="btn" ng-click="authenticate(user)">Sign in</button>
+			</form>
+
+		    </div> <!-- accordion-body -->
+		</div> <!-- accordion-group -->
+	    </div> <!-- accordion -->
+	</div> <!-- container -->
+
     </div> <!-- navbar-inner -->
 
 </div> <!-- navbar -->

@@ -27,6 +27,7 @@ externalJs: List[String] = Nil, externalCss: List[String] = Nil)(subTitle: Strin
 	
 	@* application specific *@
         <script src="@routes.Assets.at("javascripts/common_directives.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/main.js")" type="text/javascript"></script>
 
 	@for(js <- extraJs) {
             <script src="@routes.Assets.at("javascripts/" + js)" type="text/javascript"></script>
