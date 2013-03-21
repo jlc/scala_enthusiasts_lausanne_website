@@ -23,6 +23,8 @@
 		<ul class="nav pull-right">
 		    @if(user.group == Group.Anonymous()) {
 		    <li><a href="#" data-toggle="collapse" data-target="#collapseSubMenu"><i class="icon-chevron-up"></i></a></li>
+		    } else {
+		    <li><a href="@routes.Application.logout"><i class="icon-remove-circle"></i></a></li>
 		    }
 		</ul>
 	    </div> <!-- nav-collapse -->

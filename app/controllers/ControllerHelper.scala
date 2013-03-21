@@ -7,15 +7,23 @@ import play.api.Logger
 import play.api.i18n.Lang
 import play.api.Play.current
 
+import models.{User, UsersDao}
+
 trait ControllerHelper {
 
-  def authenticated(f: (String) => Result)(implicit request: Request[_]): Option[Result] = {
-    request.session.get(SessionKey.User).map { user => f(user) }
-  }
+  def loggedAs(f: (User) => Result)(implicit request: Request[_]): Result =
+    request.session.get(SessionKey.UserId).map { email =>
+      val user = UsersDao.getUser(email)
+
+      Logger.info("loggedAs: user for '"+email+"': "+user)
+
+      f(user)
+    }.getOrElse {
+      f(User.anonymous)
+    }
 
   def clientLanguage(implicit request: Request[_]) =
     request.session.get(SessionKey.Lang) map { Lang(_) } getOrElse { Lang.preferred(request.acceptLanguages) }
-
 
 }
 

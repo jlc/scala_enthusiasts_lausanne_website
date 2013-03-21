@@ -5,8 +5,9 @@
 function LoginCtrl($scope, $http, $timeout) {
 
     $scope.authenticate = function(user) {
-	$http.post('/remote/authenticate', user).
+	$http.post('/auth/authenticate', user).
 	    success(function(data, status, headers, config) {
+		// invalid authentication
 		if (!data.return) {
 		    $scope.setAuthResult(false);
 
@@ -14,6 +15,7 @@ function LoginCtrl($scope, $http, $timeout) {
 
 		    $timeout(function() { $scope.setAuthResult(null); }, 3000);
 		}
+		// valid auth
 		else {
 		    $scope.setAuthResult(true);
 
@@ -22,7 +24,7 @@ function LoginCtrl($scope, $http, $timeout) {
 			    $(location).attr('href', '/');
 			});
 			$('#collapseSubMenu').collapse('toggle');
-		    }, 3000);
+		    }, 1500);
 		}
 	    }).
 	    error(function(data, status, headers, config) {
