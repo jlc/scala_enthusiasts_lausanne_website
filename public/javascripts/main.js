@@ -67,7 +67,7 @@ function OtherClientsCtrl($scope, $timeout) {
 	    return;
 	}
 
-	$scope.feed = new EventSource('/stream/otherclients');
+	$scope.feed = new EventSource('/stream/otheruseragent');
 
 	$scope.feed.addEventListener('open', function(e) {
 	    //console.debug('OtherClientsCtrl.setupServerSentEvent: open: ' + e);
@@ -77,7 +77,7 @@ function OtherClientsCtrl($scope, $timeout) {
 	    console.debug('OtherClientsCtrl.setupServerSentEvent: error: ' + e);
 	});
 
-	$scope.feed.addEventListener('otheruseragentinfo', function(e) {
+	$scope.feed.addEventListener('otherUserAgentInfo', function(e) {
 	    var json = JSON.parse(e.data);
 	    $scope.userAgentInfo = json;
 	    $scope.$apply();
@@ -88,4 +88,40 @@ function OtherClientsCtrl($scope, $timeout) {
 }
 
 OtherClientsCtrl.$inject = ['$scope', '$timeout'];
+
+
+
+/*
+ * OtherClientsCtrl
+ */
+function IndividualMessageCtrl($scope, $timeout) {
+
+    $scope.message = '';
+
+    $scope.setupServerSentEvent = function() {
+	if (typeof(EventSource) == 'undefined') {
+	    console.debug("IndividualMessageCtrl.setupServerSentEvent: Server Sent Event not supported.");
+	    return;
+	}
+
+	$scope.feed = new EventSource('/stream/individualmsg');
+
+	$scope.feed.addEventListener('open', function(e) {
+	});
+
+	$scope.feed.addEventListener('error', function(e) {
+	    console.debug('IndividualMessageCtrl.setupServerSentEvent: error: ' + e);
+	});
+
+	$scope.feed.addEventListener('individualMessage', function(e) {
+	    var json = JSON.parse(e.data);
+	    $scope.message = json['message'];
+	    $scope.$apply();
+	});
+    }
+
+    $scope.setupServerSentEvent();
+}
+
+IndividualMessageCtrl.$inject = ['$scope', '$timeout'];
 

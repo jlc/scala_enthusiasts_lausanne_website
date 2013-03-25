@@ -1,8 +1,9 @@
 package controllers
 
 import scala.collection.{mutable, immutable}
-import scala.concurrent._
 import scala.concurrent.duration._
+
+import java.util.UUID
 
 import akka.actor.{Actor, ActorRef, Props}
 
@@ -10,7 +11,7 @@ import play.Logger
 import play.api.Play.current
 import play.api.libs.{EventSource, Comet}
 import play.api.libs.json.{Json, JsValue}
-import play.api.libs.iteratee.{Concurrent, Enumeratee, Enumerator, Iteratee}
+import play.api.libs.iteratee.{Concurrent, Enumeratee, Enumerator, Iteratee, Input}
 import play.api.libs.concurrent.Akka
 
 object ClientMessages {
@@ -25,12 +26,17 @@ object ClientMessages {
     family: String, version: String, typeName: String, producer: String,
     osName: String, osVersion: String, location: String)
       extends Message {
-    val eventName = "otheruseragentinfo"
+    val eventName = "otherUserAgentInfo"
     def json =
       Json.obj(
         "family" -> family, "version" -> version, "typeName" -> typeName, "producer" -> producer,
         "osName" -> osName, "osVersion" -> osVersion, "location" -> location
       )
+  }
+
+  case class IndividualMessage(msg: String) extends Message {
+    val eventName = "individualMessage"
+    def json = Json.obj("message" -> msg)
   }
 
   /*
@@ -46,27 +52,68 @@ object ClientMessages {
 object ClientsActorMessages {
   case class PageViewedBy(clientInfo: ClientMessages.UserAgentInfo)
 
+  case class JoinUAInfoBroadcast()
+
   case class RegisterClient()
+
+  case class DeregisterClient(uuid: UUID)
 }
 
 class ClientsActor extends Actor {
   import ClientMessages._
   import ClientsActorMessages._
 
-  val (newClientEnumerator, newClientChannel) = Concurrent.broadcast[UserAgentInfo]
+  val (uaInfoEnumerator, uaInfoChannel) = Concurrent.broadcast[UserAgentInfo]
 
   var lastInfo: Option[UserAgentInfo] = None
+
+  val clients = new mutable.HashMap[UUID, Concurrent.Channel[IndividualMessage]]
 
   def receive = {
 
     case PageViewedBy(uaInfo) => {
       lastInfo = Some(uaInfo)
 
-      newClientChannel.push(uaInfo)
+      uaInfoChannel.push(uaInfo)
+
+      // Test unicast connection with clients
+      clients.map { case (uuid, channel) =>
+          channel.push(IndividualMessage("Producer: " + uaInfo.producer + ", type: " + uaInfo.typeName ))
+      }
+    }
+
+    case JoinUAInfoBroadcast() => {
+      sender ! uaInfoEnumerator
     }
 
     case RegisterClient() => {
-      sender ! newClientEnumerator
+      // NOTE: Experiment here a unicast connection with clients
+
+      val uuid = UUID.randomUUID()
+
+      def onStart(channel: Concurrent.Channel[IndividualMessage]) = {
+        Logger.debug("ClientsActor.receive: RegisterClient: onStart: " + uuid)
+        clients += (uuid -> channel)
+      }
+
+      def onComplete = {
+        Logger.debug("ClientsActor.receive: RegisterClient: onComplete: " + uuid)
+        self ! DeregisterClient(uuid)
+      }
+
+      def onError(e: String, in: Input[IndividualMessage]) = {
+        Logger.error("ClientsActor.receive: RegisterClient: onError: " + e)
+        self ! DeregisterClient(uuid)
+      }
+
+      val individualEnumerator = Concurrent.unicast[IndividualMessage](onStart, onComplete, onError)
+
+      sender ! individualEnumerator
+    }
+
+    case DeregisterClient(uuid) => {
+      Logger.debug("ClientsActor.receive: DeregisterClient: uuid: " + uuid)
+      clients -= uuid
     }
 
   }

@@ -34,9 +34,21 @@ object Streamer extends Controller with ControllerHelper {
    * EventSource() implicit parameters are defined in ClientMessages
    */
 
-  def otherClients = Action { implicit request =>
+  def otherUserAgent = Action { implicit request =>
     Async {
-      (ClientsActor() ? RegisterClient()).mapTo[Enumerator[UserAgentInfo]].map {
+      (ClientsActor() ? JoinUAInfoBroadcast()).mapTo[Enumerator[UserAgentInfo]].map {
+        case enumerator =>
+          Ok.stream(enumerator &> EventSource()).withHeaders(
+            "Cache-Control" -> "no-cache",
+            "Connection" -> "keep-alive"
+          ).as("text/event-stream")
+      }
+    }
+  }
+
+  def individualMessage = Action { implicit request =>
+    Async {
+      (ClientsActor() ? RegisterClient()).mapTo[Enumerator[IndividualMessage]].map {
         case enumerator =>
           Ok.stream(enumerator &> EventSource()).withHeaders(
             "Cache-Control" -> "no-cache",
