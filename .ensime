@@ -93,6 +93,8 @@
         "/usr/local/bin/../Cellar/play/2.1.0/bin/../libexec/framework/../repository/cache/com.eaio.uuid/uuid/jars/uuid-3.2.jar"
         "/usr/local/bin/../Cellar/play/2.1.0/bin/../libexec/framework/../repository/cache/commons-pool/commons-pool/jars/commons-pool-1.6.jar"
         "/usr/local/bin/../Cellar/play/2.1.0/bin/../libexec/framework/../repository/cache/org.slf4j/slf4j-log4j12/jars/slf4j-log4j12-1.6.1.jar"
+        "/usr/local/bin/../Cellar/play/2.1.0/bin/../libexec/framework/../repository/cache/net.sf.uadetector/uadetector-resources/bundles/uadetector-resources-2013.02.jar"
+        "/usr/local/bin/../Cellar/play/2.1.0/bin/../libexec/framework/../repository/cache/net.sf.uadetector/uadetector-core/bundles/uadetector-core-0.9.2.jar"
       )
       :runtime-deps (
         "/usr/local/bin/../Cellar/play/2.1.0/bin/../libexec/framework/sbt/boot/scala-2.10.0/lib/scala-library.jar"
@@ -175,6 +177,8 @@
         "/usr/local/bin/../Cellar/play/2.1.0/bin/../libexec/framework/../repository/cache/com.eaio.uuid/uuid/jars/uuid-3.2.jar"
         "/usr/local/bin/../Cellar/play/2.1.0/bin/../libexec/framework/../repository/cache/commons-pool/commons-pool/jars/commons-pool-1.6.jar"
         "/usr/local/bin/../Cellar/play/2.1.0/bin/../libexec/framework/../repository/cache/org.slf4j/slf4j-log4j12/jars/slf4j-log4j12-1.6.1.jar"
+        "/usr/local/bin/../Cellar/play/2.1.0/bin/../libexec/framework/../repository/cache/net.sf.uadetector/uadetector-resources/bundles/uadetector-resources-2013.02.jar"
+        "/usr/local/bin/../Cellar/play/2.1.0/bin/../libexec/framework/../repository/cache/net.sf.uadetector/uadetector-core/bundles/uadetector-core-0.9.2.jar"
         "/Users/jeanluc/src/segl/scala_enthusiasts_lausanne/target/scala-2.10/classes"
         "/Users/jeanluc/src/segl/scala_enthusiasts_lausanne/target/scala-2.10/classes"
       )
@@ -255,6 +259,8 @@
         "/usr/local/bin/../Cellar/play/2.1.0/bin/../libexec/framework/../repository/cache/com.eaio.uuid/uuid/jars/uuid-3.2.jar"
         "/usr/local/bin/../Cellar/play/2.1.0/bin/../libexec/framework/../repository/cache/commons-pool/commons-pool/jars/commons-pool-1.6.jar"
         "/usr/local/bin/../Cellar/play/2.1.0/bin/../libexec/framework/../repository/cache/org.slf4j/slf4j-log4j12/jars/slf4j-log4j12-1.6.1.jar"
+        "/usr/local/bin/../Cellar/play/2.1.0/bin/../libexec/framework/../repository/cache/net.sf.uadetector/uadetector-resources/bundles/uadetector-resources-2013.02.jar"
+        "/usr/local/bin/../Cellar/play/2.1.0/bin/../libexec/framework/../repository/cache/net.sf.uadetector/uadetector-core/bundles/uadetector-core-0.9.2.jar"
         "/usr/local/Cellar/play/2.1.0/libexec/repository/local/play/play-test_2.10/2.1.0/jars/play-test_2.10.jar"
         "/usr/local/Cellar/play/2.1.0/libexec/repository/local/junit/junit-dep/4.10/jars/junit-dep.jar"
         "/usr/local/Cellar/play/2.1.0/libexec/repository/local/org.hamcrest/hamcrest-core/1.1/jars/hamcrest-core.jar"
