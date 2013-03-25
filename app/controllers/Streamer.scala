@@ -36,8 +36,8 @@ object Streamer extends Controller with ControllerHelper {
 
   def otherClients = Action { implicit request =>
     Async {
-      (ClientsActor() ? RegisterClient()).map {
-        case enumerator: Enumerator[NewClient] =>
+      (ClientsActor() ? RegisterClient()).mapTo[Enumerator[NewClient]].map {
+        case enumerator =>
           Ok.stream(enumerator &> EventSource()).withHeaders(
             "Cache-Control" -> "no-cache",
             "Connection" -> "keep-alive"

@@ -4,7 +4,6 @@
 
 # Pages
 GET     /                           controllers.Application.index
-GET     /index			    controllers.Application.index
 GET	/meetings		    controllers.Application.meetings
 GET	/address		    controllers.Application.address
 GET	/sponsors		    controllers.Application.sponsors

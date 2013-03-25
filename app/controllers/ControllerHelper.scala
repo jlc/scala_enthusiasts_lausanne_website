@@ -9,8 +9,6 @@ import play.api.Play.current
 
 import models.{User, UsersDao}
 
-
-
 trait ControllerHelper {
 
   def loggedAs(f: (User) => Result)(implicit request: Request[_]): Result =
