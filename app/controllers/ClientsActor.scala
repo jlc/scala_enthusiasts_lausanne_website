@@ -21,11 +21,15 @@ object ClientMessages {
     def json: JsValue
   }
 
-  case class NewClient(info: String) extends Message {
-    val eventName = "newclient"
+  case class UserAgentInfo(
+    family: String, version: String, typeName: String, producer: String,
+    osName: String, osVersion: String, location: String)
+      extends Message {
+    val eventName = "otheruseragentinfo"
     def json =
       Json.obj(
-        "info" -> info
+        "family" -> family, "version" -> version, "typeName" -> typeName, "producer" -> producer,
+        "osName" -> osName, "osVersion" -> osVersion, "location" -> location
       )
   }
 
@@ -40,7 +44,7 @@ object ClientMessages {
 }
 
 object ClientsActorMessages {
-  case class PageView(clientInfo: String)
+  case class PageViewedBy(clientInfo: ClientMessages.UserAgentInfo)
 
   case class RegisterClient()
 }
@@ -49,16 +53,16 @@ class ClientsActor extends Actor {
   import ClientMessages._
   import ClientsActorMessages._
 
-  val (newClientEnumerator, newClientChannel) = Concurrent.broadcast[NewClient]
+  val (newClientEnumerator, newClientChannel) = Concurrent.broadcast[UserAgentInfo]
 
-  var lastInfo = ""
+  var lastInfo: Option[UserAgentInfo] = None
 
   def receive = {
 
-    case PageView(clientInfo) => {
-      lastInfo = clientInfo
+    case PageViewedBy(uaInfo) => {
+      lastInfo = Some(uaInfo)
 
-      newClientChannel.push(NewClient(clientInfo))
+      newClientChannel.push(uaInfo)
     }
 
     case RegisterClient() => {

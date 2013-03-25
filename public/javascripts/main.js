@@ -59,7 +59,7 @@ LoginCtrl.$inject = ['$scope', '$http', '$timeout'];
  */
 function OtherClientsCtrl($scope, $timeout) {
 
-    $scope.lastInfo = "";
+    $scope.userAgentInfo = {family: '', version: '', osName: ''};
 
     $scope.setupServerSentEvent = function() {
 	if (typeof(EventSource) == 'undefined') {
@@ -69,23 +69,17 @@ function OtherClientsCtrl($scope, $timeout) {
 
 	$scope.feed = new EventSource('/stream/otherclients');
 
-	console.debug("Debug: source created: ");
-	console.debug($scope.feed);
-
 	$scope.feed.addEventListener('open', function(e) {
-	    console.debug('OtherClientsCtrl.setupServerSentEvent: open: ' + e);
+	    //console.debug('OtherClientsCtrl.setupServerSentEvent: open: ' + e);
 	});
 
 	$scope.feed.addEventListener('error', function(e) {
 	    console.debug('OtherClientsCtrl.setupServerSentEvent: error: ' + e);
 	});
 
-	$scope.feed.addEventListener('newclient', function(e) {
+	$scope.feed.addEventListener('otheruseragentinfo', function(e) {
 	    var json = JSON.parse(e.data);
-	    console.debug('OtherClientsCtrl.setupServerSentEvent: newclient: ' + json);
-	    console.debug(json);
-
-	    $scope.lastInfo = json['info'];
+	    $scope.userAgentInfo = json;
 	    $scope.$apply();
 	});
     }

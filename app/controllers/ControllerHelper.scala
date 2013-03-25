@@ -26,10 +26,11 @@ trait ControllerHelper {
     request.session.get(SessionKey.Lang) map { Lang(_) } getOrElse { Lang.preferred(request.acceptLanguages) }
 
   def informOtherClient(implicit request: Request[_]) = {
-    val userAgent = request.headers("User-Agent")
+    import controllers.UserAgentSpy._
+    val userAgent = UserAgentSpy()
     val remoteAddress = request.remoteAddress
 
-    ClientsActor() ! ClientsActorMessages.PageView(userAgent + ", from: " + remoteAddress)
+    ClientsActor() ! ClientsActorMessages.PageViewedBy(userAgent)
   }
 
 }

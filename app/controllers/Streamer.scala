@@ -36,7 +36,7 @@ object Streamer extends Controller with ControllerHelper {
 
   def otherClients = Action { implicit request =>
     Async {
-      (ClientsActor() ? RegisterClient()).mapTo[Enumerator[NewClient]].map {
+      (ClientsActor() ? RegisterClient()).mapTo[Enumerator[UserAgentInfo]].map {
         case enumerator =>
           Ok.stream(enumerator &> EventSource()).withHeaders(
             "Cache-Control" -> "no-cache",

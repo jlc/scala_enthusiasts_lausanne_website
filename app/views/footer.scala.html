@@ -6,7 +6,17 @@
 
     <div class="row-fluid">
 	<div class="pull-left" ng-controller="OtherClientsCtrl">
-	    <span style="font-size:75%">{{lastInfo}}</span>
+	    <span style="font-size:75%;" ng-show="userAgentInfo.family != ''">
+		Last visitor is using:&nbsp;
+		<span ng-show="userAgentInfo.family == 'Firefox'" class=""><img src="@routes.Assets.at("images/browser_firefox.gif")" alt="Firefox"></span>
+		<span ng-show="userAgentInfo.family == 'Safari'" class=""><img src="@routes.Assets.at("images/browser_safari.gif")" alt="Safari"></span>
+		<span ng-show="userAgentInfo.family == 'Chrome'" class=""><img src="@routes.Assets.at("images/browser_chrome.gif")" alt="Chrome"></span>
+		<span ng-show="userAgentInfo.family == 'Opera'" class=""><img src="@routes.Assets.at("images/browser_opera.gif")" alt="Opera"></span>
+		<span ng-show="userAgentInfo.family == 'IE'" class=""><img src="@routes.Assets.at("images/browser_ie.gif")" alt="IE"></span>
+		<span ng-show="userAgentInfo.family != 'Firefox' && userAgentInfo.family != 'Safari' && userAgentInfo.family != 'Chrome' && userAgentInfo.family != 'Opera' && userAgentInfo.family != 'IE'" class="">{{userAgentInfo.family}}</span>
+		<span ng-show="userAgentInfo.version != ''">{{userAgentInfo.version}}</span>
+		<span ng-show="userAgentInfo.osName != ''">on {{userAgentInfo.osName}}</span>
+	    </span>
 	</div>
 	
 	<div class="pull-right">
