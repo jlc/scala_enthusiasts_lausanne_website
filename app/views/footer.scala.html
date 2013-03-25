@@ -3,10 +3,16 @@
 <div class="container">
 
     <legend></legend>
-    
-    <div class="pull-right">
-	<a href="@routes.Application.lang("fr")"><img src="@routes.Assets.at("images/flag_fr_24.png")" alt="French"></a>
-	<a href="@routes.Application.lang("en")"><img src="@routes.Assets.at("images/flag_gb_24.png")" alt="English"></a>
+
+    <div class="row-fluid">
+	<div class="pull-left" ng-controller="OtherClientsCtrl">
+	    <span style="font-size:75%">{{lastInfo}}</span>
+	</div>
+	
+	<div class="pull-right">
+	    <a href="@routes.Application.lang("fr")"><img src="@routes.Assets.at("images/flag_fr_24.png")" alt="French"></a>
+	    <a href="@routes.Application.lang("en")"><img src="@routes.Assets.at("images/flag_gb_24.png")" alt="English"></a>
+	</div>
     </div>
 
 </div>

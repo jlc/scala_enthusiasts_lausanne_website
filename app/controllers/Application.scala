@@ -18,24 +18,28 @@ object Application extends Controller with ControllerHelper {
 
   def index() = Action { implicit request =>
     loggedAs { user =>
+      informOtherClient
       Ok(views.html.index()(user, clientLanguage))
     }
   }
 
   def meetings = Action { implicit request =>
     loggedAs { user =>
+      informOtherClient
       Ok(views.html.meetings()(user, clientLanguage))
     }
   }
 
   def address = Action { implicit request =>
     loggedAs { user =>
+      informOtherClient
       Ok(views.html.address()(user, clientLanguage))
     }
   }
 
   def sponsors = Action { implicit request =>
     loggedAs { user =>
+      informOtherClient
       Ok(views.html.sponsors()(user, clientLanguage))
     }
   }
@@ -51,6 +55,7 @@ object Application extends Controller with ControllerHelper {
   }
 
   def admin = Action { implicit request =>
+      informOtherClient
     Ok("")
   }
 

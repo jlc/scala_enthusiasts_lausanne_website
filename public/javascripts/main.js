@@ -54,3 +54,44 @@ function LoginCtrl($scope, $http, $timeout) {
 
 LoginCtrl.$inject = ['$scope', '$http', '$timeout'];
 
+/*
+ * OtherClientsCtrl
+ */
+function OtherClientsCtrl($scope, $timeout) {
+
+    $scope.lastInfo = "";
+
+    $scope.setupServerSentEvent = function() {
+	if (typeof(EventSource) == 'undefined') {
+	    console.debug("OtherClientsCtrl.setupServerSentEvent: Server Sent Event not supported.");
+	    return;
+	}
+
+	$scope.feed = new EventSource('/stream/otherclients');
+
+	console.debug("Debug: source created: ");
+	console.debug($scope.feed);
+
+	$scope.feed.addEventListener('open', function(e) {
+	    console.debug('OtherClientsCtrl.setupServerSentEvent: open: ' + e);
+	});
+
+	$scope.feed.addEventListener('error', function(e) {
+	    console.debug('OtherClientsCtrl.setupServerSentEvent: error: ' + e);
+	});
+
+	$scope.feed.addEventListener('newclient', function(e) {
+	    var json = JSON.parse(e.data);
+	    console.debug('OtherClientsCtrl.setupServerSentEvent: newclient: ' + json);
+	    console.debug(json);
+
+	    $scope.lastInfo = json['info'];
+	    $scope.$apply();
+	});
+    }
+
+    $scope.setupServerSentEvent();
+}
+
+OtherClientsCtrl.$inject = ['$scope', '$timeout'];
+

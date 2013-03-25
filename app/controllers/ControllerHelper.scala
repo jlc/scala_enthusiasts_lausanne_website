@@ -9,6 +9,8 @@ import play.api.Play.current
 
 import models.{User, UsersDao}
 
+
+
 trait ControllerHelper {
 
   def loggedAs(f: (User) => Result)(implicit request: Request[_]): Result =
@@ -24,6 +26,13 @@ trait ControllerHelper {
 
   def clientLanguage(implicit request: Request[_]) =
     request.session.get(SessionKey.Lang) map { Lang(_) } getOrElse { Lang.preferred(request.acceptLanguages) }
+
+  def informOtherClient(implicit request: Request[_]) = {
+    val userAgent = request.headers("User-Agent")
+    val remoteAddress = request.remoteAddress
+
+    ClientsActor() ! ClientsActorMessages.PageView(userAgent + ", from: " + remoteAddress)
+  }
 
 }
 
