@@ -43,6 +43,13 @@ object Application extends Controller with ControllerHelper {
       Ok(views.html.sponsors()(user, clientLanguage))
     }
   }
+
+  def admin = Action { implicit request =>
+    loggedAs { user =>
+      // do not inform other clients for admin
+      Ok(views.html.admin()(user, clientLanguage))
+    }
+  }
   
   def lang(l: String) = Action { implicit request =>
     def redirect = Redirect(routes.Application.index())
@@ -52,11 +59,6 @@ object Application extends Controller with ControllerHelper {
     } getOrElse {
       redirect.withSession(session - SessionKey.Lang)
     }
-  }
-
-  def admin = Action { implicit request =>
-    informOtherClient
-    Ok("")
   }
 
   def initialise = Action { implicit request =>

@@ -30,4 +30,7 @@ GET	/templates/sponsors/epfl			controllers.Templates.sponsorsEpfl
 GET	/templates/meetings/agenda			controllers.Templates.meetingsAgenda
 GET	/templates/meetings/sessions			controllers.Templates.meetingsSessions
 GET	/templates/meetings/speakers			controllers.Templates.meetingsSpeakers
+GET	/templates/admin/edit-introduction		controllers.Templates.adminEditIntroduction
+GET	/templates/admin/edit-announcement		controllers.Templates.adminEditAnnouncement
+GET	/templates/admin/edit-sessions			controllers.Templates.adminEditSessions
 

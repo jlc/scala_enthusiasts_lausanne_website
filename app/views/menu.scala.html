@@ -15,7 +15,7 @@
 		<li><a href="@routes.Application.address">@Messages("menu.address")</a></li>
 		<li><a href="@routes.Application.sponsors">@Messages("menu.sponsors")</a></li>
 		@if(user.group == Group.God()) {
-		  <li><a href="@routes.Application.admin">@Messages("menu.sponsors")</a></li>
+		  <li><a href="@routes.Application.admin"><i class="icon-asterisk"></i></a></li>
 		}
 	    </ul>
 

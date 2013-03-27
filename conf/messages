@@ -19,3 +19,6 @@ address.title = Address
 # sponsors page
 sponsors.title = Sponsors
 
+# admin page
+admin.title = Admin
+

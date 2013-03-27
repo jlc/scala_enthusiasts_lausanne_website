@@ -1,0 +1,25 @@
+@()(implicit user: User, lang: Lang)
+
+
+@main(ngAppModule = Some("admin"), extraJs = "admin.js" :: Nil, extraCss = "admin.css" :: Nil)(Messages("admin.title")) {
+
+<div class="container">
+
+    <div class="row-fluid">
+
+	<div class="span2">
+	    <ul class="nav nav-tabs nav-stacked">
+		<li><a href="#/edit-introduction">Edit introduction</a></li>
+		<li><a href="#/edit-announcement">Edit announcements</a></li>
+		<li><a href="#/edit-sessions">Edit sessions</a></li>
+	    </ul> <!-- nav-stacked -->
+	</div> <!-- span2 -->
+
+	<div class="span10 well" ng-view>
+	</div> <!-- span10 -->
+
+    </div> <!-- row-fluid -->
+
+</div> <!-- container -->
+
+}

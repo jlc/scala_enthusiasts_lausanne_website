@@ -33,4 +33,16 @@ object Templates extends Controller with ControllerHelper {
     Ok(views.html.templates.meetingsSpeakers()(clientLanguage))
   }
 
+  def adminEditIntroduction = Action { implicit request =>
+    Ok(views.html.templates.adminEditIntroduction()(clientLanguage))
+  }
+
+  def adminEditAnnouncement = Action { implicit request =>
+    Ok(views.html.templates.adminEditAnnouncement()(clientLanguage))
+  }
+
+  def adminEditSessions = Action { implicit request =>
+    Ok(views.html.templates.adminEditSessions()(clientLanguage))
+  }
+
 }
