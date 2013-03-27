@@ -27,7 +27,6 @@ object UsersDao {
   }
 
   def getUser(email: User.Email): Option[User] = DB { session =>
-    Logger.debug("UsersDao.getUser(Email): email: " + email.value)
     session.get(ks \ CF.EmailUserUUID \ email.toString \ "uuid").flatMap { uuid =>
       getUser(UUID.fromString(uuid.value))
     }
@@ -40,24 +39,25 @@ object UsersDao {
    */
 
   def getUser(uuid: UUID): Option[User] = DB { session =>
-    Logger.debug("UsersDao.getUser(UUID): uuid: " + uuid.toString)
+    if (session.count(ks \ CF.User \ uuid.toString) == 0)
+      None
+    else {
+      val values =
+        session.list(ks \ CF.User \ uuid.toString, ColumnPredicate(List("email", "group", "realname", "password", "twitter")))
 
-    val values =
-      session.list(ks \ CF.User \ uuid.toString, ColumnPredicate(List("email", "group", "realname", "password", "twitter")))
+      // NOTE: values won't be in the same order as ColumnPredicate, moreover, _.name and _.value can be read only once
+      val mappedValues = values.map(v => (string(v.name) -> string(v.value))).toMap
 
-    // NOTE: values won't be in the same order as ColumnPredicate, moreover, _.name and _.value can be read only once
-    val mappedValues = values.map(v => (string(v.name) -> string(v.value))).toMap
+      val email = mappedValues.getOrElse("email", "")
+      val group = mappedValues.getOrElse("group", "")
+      val realname = mappedValues.getOrElse("realname", "")
+      val password = mappedValues.getOrElse("password", "")
+      val twitter = mappedValues.getOrElse("twitter", "")
 
-    val email = mappedValues.getOrElse("email", "")
-    val group = mappedValues.getOrElse("group", "")
-    val realname = mappedValues.getOrElse("realname", "")
-    val password = mappedValues.getOrElse("password", "")
-    val twitter = mappedValues.getOrElse("twitter", "")
+      val user = User(uuid, Group.fromName(group), realname, User.Email(email), password, twitter)
 
-    val user = User(uuid, Group.fromName(group), realname, User.Email(email), password, twitter)
-
-    Logger.debug("UsersDao.getUser: " + user)
-    Some(user)
+      Some(user)
+    }
   }
 
   def initialise() { DB { session =>

@@ -11,7 +11,7 @@ object User {
     override val toString = value
   }
 
-  def anonymous = User(UUID.randomUUID(), Group.Anonymous(), "anonymous", Email("anonymous@anonymous"), "", "@anonymous")
+  def anonymous(uuid: UUID = UUID.randomUUID()) = User(uuid, Group.Anonymous(), "anonymous", Email("anonymous@anonymous"), "", "@anonymous")
 
 }
 

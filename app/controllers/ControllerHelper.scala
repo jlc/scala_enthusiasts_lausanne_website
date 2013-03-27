@@ -14,13 +14,18 @@ import models.{User, UsersDao}
 trait ControllerHelper {
 
   def loggedAs(f: (User) => Result)(implicit request: Request[_]): Result = {
-    val user = request.session.get(SessionKey.UserUUID).flatMap { uuid =>
-      UsersDao.getUser(UUID.fromString(uuid))
+    request.session.get(SessionKey.UserUUID).map { uuidStr =>
+      val uuid = UUID.fromString(uuidStr)
+      val user = UsersDao.getUser(uuid).getOrElse(User.anonymous(uuid))
+
+      Logger.info("loggedAs: "+user)
+      f(user)
     }.getOrElse {
-      User.anonymous
+      val user = User.anonymous()
+
+      Logger.debug("loggedAs: new anonymous: " + user)
+      f(user).withSession(SessionKey.UserUUID -> user.uuid.toString)
     }
-    Logger.info("loggedAs: "+user)
-    f(user)
   }
 
   def clientLanguage(implicit request: Request[_]) =

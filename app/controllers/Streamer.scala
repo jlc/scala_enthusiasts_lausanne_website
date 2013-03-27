@@ -35,25 +35,29 @@ object Streamer extends Controller with ControllerHelper {
    */
 
   def otherUserAgent = Action { implicit request =>
-    Async {
-      (ClientsActor() ? JoinUAInfoBroadcast()).mapTo[Enumerator[UserAgentInfo]].map {
-        case enumerator =>
-          Ok.stream(enumerator &> EventSource()).withHeaders(
-            "Cache-Control" -> "no-cache",
-            "Connection" -> "keep-alive"
-          ).as("text/event-stream")
+    loggedAs { user =>
+      Async {
+        (ClientsActor() ? JoinUAInfoBroadcast()).mapTo[Enumerator[UserAgentInfo]].map {
+          case enumerator =>
+            Ok.stream(enumerator &> EventSource()).withHeaders(
+              "Cache-Control" -> "no-cache",
+              "Connection" -> "keep-alive"
+            ).as("text/event-stream")
+        }
       }
     }
   }
 
   def individualMessage = Action { implicit request =>
-    Async {
-      (ClientsActor() ? RegisterClient()).mapTo[Enumerator[IndividualMessage]].map {
-        case enumerator =>
-          Ok.stream(enumerator &> EventSource()).withHeaders(
-            "Cache-Control" -> "no-cache",
-            "Connection" -> "keep-alive"
-          ).as("text/event-stream")
+    loggedAs { user =>
+      Async {
+        (ClientsActor() ? RegisterClient(user.uuid)).mapTo[Enumerator[IndividualMessage]].map {
+          case enumerator =>
+            Ok.stream(enumerator &> EventSource()).withHeaders(
+              "Cache-Control" -> "no-cache",
+              "Connection" -> "keep-alive"
+            ).as("text/event-stream")
+        }
       }
     }
   }

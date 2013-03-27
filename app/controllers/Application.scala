@@ -84,9 +84,8 @@ object Application extends Controller with ControllerHelper {
         Logger.debug("authenticate: form does not validate")
         Ok(fail).withSession(session - SessionKey.UserUUID)
       },
-      login => {
-        val (email, password) = login
-        UsersDao.authenticate(email, password).map { user =>
+      credentials => {
+        UsersDao.authenticate(credentials._1, credentials._2).map { user =>
           Ok(success).withSession(SessionKey.UserUUID -> user.uuid.toString)
         }.getOrElse {
           Ok(fail).withSession(session - SessionKey.UserUUID)

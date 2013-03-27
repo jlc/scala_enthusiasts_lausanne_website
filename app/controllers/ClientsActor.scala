@@ -54,7 +54,7 @@ object ClientsActorMessages {
 
   case class JoinUAInfoBroadcast()
 
-  case class RegisterClient()
+  case class RegisterClient(uuid: UUID)
 
   case class DeregisterClient(uuid: UUID)
 }
@@ -86,10 +86,8 @@ class ClientsActor extends Actor {
       sender ! uaInfoEnumerator
     }
 
-    case RegisterClient() => {
+    case RegisterClient(uuid: UUID) => {
       // NOTE: Experiment here a unicast connection with clients
-
-      val uuid = UUID.randomUUID()
 
       def onStart(channel: Concurrent.Channel[IndividualMessage]) = {
         Logger.debug("ClientsActor.receive: RegisterClient: onStart: " + uuid)
@@ -97,7 +95,6 @@ class ClientsActor extends Actor {
       }
 
       def onComplete = {
-        Logger.debug("ClientsActor.receive: RegisterClient: onComplete: " + uuid)
         self ! DeregisterClient(uuid)
       }
 
