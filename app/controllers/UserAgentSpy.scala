@@ -9,7 +9,9 @@ import net.sf.uadetector.service.UADetectorServiceFactory
 
 object UserAgentSpy {
 
-  private val parser = UADetectorServiceFactory.getCachingAndUpdatingParser();
+  private lazy val parser = 
+    try { UADetectorServiceFactory.getCachingAndUpdatingParser() }
+    catch { case e: Throwable => UADetectorServiceFactory.getResourceModuleParser() }
 
   private val cache = new mutable.HashMap[String, UserAgent]
 
