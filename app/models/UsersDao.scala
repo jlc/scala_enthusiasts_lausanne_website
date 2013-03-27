@@ -1,5 +1,7 @@
 package models
 
+import java.util.UUID
+
 import play.Logger
 
 import com.shorrockin.cascal.utils.Conversions._
@@ -11,22 +13,86 @@ import controllers.DB
 
 object UsersDao {
 
-  def authenticate(email: String, password: String): Boolean = DB { session =>
-    session.get("segl" \ "Users" \ email \ "password").
-      map(_.value.trim == password.trim).
-      getOrElse(false)
+  private val ks = "segl"
+  private object CF {
+    val EmailUserUUID = "EmailUserUUID"
+    val User = "User"
   }
 
-  def getUser(email: String): User = DB { session =>
-    val List(groupName, realname, twitter) =
-      session.list("segl" \ "Users" \ email, ColumnPredicate(List("group", "realname", "twitter")))
-
-    val group = Group.fromName(groupName.value)
-
-    val user = User(group, realname.value, email.value, twitter.value)
-
-    Logger.debug("getUser: " + user)
-    user
+  def authenticate(email: String, password: String): Option[User] = {
+    getUser(User.Email(email)).flatMap { user =>
+      if (user.password.trim == password.trim) Some(user)
+      else None
+    }
   }
+
+  def getUser(email: User.Email): Option[User] = DB { session =>
+    Logger.debug("UsersDao.getUser(Email): email: " + email.value)
+    session.get(ks \ CF.EmailUserUUID \ email.toString \ "uuid").flatMap { uuid =>
+      getUser(UUID.fromString(uuid.value))
+    }
+  }
+
+  /*
+   * NOTE: using cascal
+   * - returned value can be read only once (e.g. email.value), after it is reseted
+   * - returned list may not be in the same order as given in session.list()
+   */
+
+  def getUser(uuid: UUID): Option[User] = DB { session =>
+    Logger.debug("UsersDao.getUser(UUID): uuid: " + uuid.toString)
+
+    val values =
+      session.list(ks \ CF.User \ uuid.toString, ColumnPredicate(List("email", "group", "realname", "password", "twitter")))
+
+    // NOTE: values won't be in the same order as ColumnPredicate, moreover, _.name and _.value can be read only once
+    val mappedValues = values.map(v => (string(v.name) -> string(v.value))).toMap
+
+    val email = mappedValues.getOrElse("email", "")
+    val group = mappedValues.getOrElse("group", "")
+    val realname = mappedValues.getOrElse("realname", "")
+    val password = mappedValues.getOrElse("password", "")
+    val twitter = mappedValues.getOrElse("twitter", "")
+
+    val user = User(uuid, Group.fromName(group), realname, User.Email(email), password, twitter)
+
+    Logger.debug("UsersDao.getUser: " + user)
+    Some(user)
+  }
+
+  def initialise() { DB { session =>
+    object Default {
+      val email = "admin@admin.com"
+      val password = "password"
+      val uuid = UUID.randomUUID()
+
+      val keyUser = ks \ CF.User \ uuid.toString
+      val keyEmailUserUUID = ks \ CF.EmailUserUUID \ email
+
+      val userValues =
+        Insert(keyUser \ ("email", email)) :: Insert(keyUser \ ("group", Group.God().toString)) ::
+        Insert(keyUser \ ("realname", "admin")) :: Insert(keyUser \ ("password", password)) :: Insert(keyUser \ ("twitter", "@admin")) :: Nil
+
+      val emailUserValues =
+        Insert(keyEmailUserUUID \ ("uuid", uuid.toString)) :: Nil
+    }
+
+    getUser(User.Email("admin@admin")).map { user =>
+      Logger.info("initialise: admin user already exists ("+user.uuid.toString+")")
+      Logger.info("initialise: removing previous admin user...")
+
+      session.remove(ks \ CF.User \ user.uuid.toString)
+      session.remove(ks \ CF.EmailUserUUID \ user.email.toString)
+    }
+
+    Logger.info("initialise: creating admin user...")
+    // NOTE: using '->' notation generate an '[InvalidRequestException: null]', use the second form instead
+    //session.insert(Default.keyUser \ ("email" -> Default.email))
+    //session.insert(Default.keyUser \ ("email", Default.email))
+
+    session.batch(Default.userValues)
+    session.batch(Default.emailUserValues)
+    Logger.info("initialise: done")
+  }}
 }
 

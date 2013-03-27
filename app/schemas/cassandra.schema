@@ -3,12 +3,17 @@ create keyspace segl;
 
 use segl;
 
-create column family Users
+create column family User
        with key_validation_class = 'UTF8Type'
        and comparator = 'UTF8Type'
        and default_validation_class = 'UTF8Type';
 
-create column family Sessions
+create column family EmailUserUUID
+       with key_validation_class = 'UTF8Type'
+       and comparator = 'UTF8Type'
+       and default_validation_class = 'UTF8Type';
+
+create column family Session
        with key_validation_class = 'UTF8Type'
        and comparator = 'UTF8Type'
        and default_validation_class = 'UTF8Type';

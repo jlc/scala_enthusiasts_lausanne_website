@@ -8,6 +8,7 @@ GET	/meetings		    controllers.Application.meetings
 GET	/address		    controllers.Application.address
 GET	/sponsors		    controllers.Application.sponsors
 GET	/admin			    controllers.Application.admin
+GET	/admin/initialise	    controllers.Application.initialise
 
 GET	/auth/logout		    controllers.Application.logout
 POST	 /auth/authenticate	    controllers.Application.authenticate

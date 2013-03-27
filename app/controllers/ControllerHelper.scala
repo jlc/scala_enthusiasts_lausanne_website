@@ -1,5 +1,7 @@
 package controllers
 
+import java.util.UUID
+
 import play.api._
 import play.api.mvc._
 
@@ -11,16 +13,15 @@ import models.{User, UsersDao}
 
 trait ControllerHelper {
 
-  def loggedAs(f: (User) => Result)(implicit request: Request[_]): Result =
-    request.session.get(SessionKey.UserId).map { email =>
-      val user = UsersDao.getUser(email)
-
-      Logger.info("loggedAs: user for '"+email+"': "+user)
-
-      f(user)
+  def loggedAs(f: (User) => Result)(implicit request: Request[_]): Result = {
+    val user = request.session.get(SessionKey.UserUUID).flatMap { uuid =>
+      UsersDao.getUser(UUID.fromString(uuid))
     }.getOrElse {
-      f(User.anonymous)
+      User.anonymous
     }
+    Logger.info("loggedAs: "+user)
+    f(user)
+  }
 
   def clientLanguage(implicit request: Request[_]) =
     request.session.get(SessionKey.Lang) map { Lang(_) } getOrElse { Lang.preferred(request.acceptLanguages) }

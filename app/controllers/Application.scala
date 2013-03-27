@@ -55,8 +55,13 @@ object Application extends Controller with ControllerHelper {
   }
 
   def admin = Action { implicit request =>
-      informOtherClient
+    informOtherClient
     Ok("")
+  }
+
+  def initialise = Action { implicit request =>
+    UsersDao.initialise()
+    Ok("done")
   }
 
   /*
@@ -77,18 +82,20 @@ object Application extends Controller with ControllerHelper {
     loginForm.bindFromRequest.fold(
       loginWithErrors => {
         Logger.debug("authenticate: form does not validate")
-        Ok(fail).withSession(session - SessionKey.UserId)
+        Ok(fail).withSession(session - SessionKey.UserUUID)
       },
       login => {
-        if (UsersDao.authenticate(login._1, login._2))
-          Ok(success).withSession(SessionKey.UserId -> login._1)
-        else
-          Ok(fail).withSession(session - SessionKey.UserId)
+        val (email, password) = login
+        UsersDao.authenticate(email, password).map { user =>
+          Ok(success).withSession(SessionKey.UserUUID -> user.uuid.toString)
+        }.getOrElse {
+          Ok(fail).withSession(session - SessionKey.UserUUID)
+        }
       }
     )
   }
 
   def logout = Action { implicit request =>
-    Redirect(routes.Application.index()).withSession(session - SessionKey.UserId)
+    Redirect(routes.Application.index()).withSession(session - SessionKey.UserUUID)
   }
 }
