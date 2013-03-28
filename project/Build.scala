@@ -11,7 +11,7 @@ object ApplicationBuild extends Build {
     // Add your project dependencies here,
     jdbc,
     anorm,
-    "com.shorrockin" %% "cascal" % "1.3-SNAPSHOT",
+    "com.shorrockin" %% "cascal" % "1.3-SNAPSHOT" changing(),
     "net.sf.uadetector" % "uadetector-resources" % "2013.02"
     // Alternate cassandra scala client: cassie (not yet scala 2.10 compatible)
     /*

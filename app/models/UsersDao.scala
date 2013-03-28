@@ -12,12 +12,7 @@ import com.shorrockin.cascal.session._
 import controllers.DB
 
 object UsersDao {
-
-  private val ks = "segl"
-  private object CF {
-    val EmailUserUUID = "EmailUserUUID"
-    val User = "User"
-  }
+  import DaoParams._
 
   def authenticate(email: String, password: String): Option[User] = {
     getUser(User.Email(email)).flatMap { user =>

@@ -78,8 +78,8 @@ object Application extends Controller with ControllerHelper {
       )
     )
 
-    val fail = Json.stringify(Json.obj("return" -> false, "error" -> "Invalid authentication"))
-    val success = Json.stringify(Json.obj("return" -> true))
+    val fail = Json.obj("return" -> false, "error" -> "Invalid authentication")
+    val success = Json.obj("return" -> true)
 
     loginForm.bindFromRequest.fold(
       loginWithErrors => {

@@ -7,23 +7,37 @@
 	<legend>EPFL</legend>
     </div> <!-- row-fluid -->
 
-    <div class="row-fluid">
-	<img src="@routes.Assets.at("images/logo_epfl.jpg")" alt="EPFL Logo"/>
-    </div> <!-- row-fluid -->
 
     <div class="row-fluid">
-	<legend>Contact</legend>
-    </div> <!-- row-fluid -->
+	
+	<form class="form-horizontal" name="formEdit" ng-controller="EditIntroductionCtrl">
 
-    <div class="row-fluid">
-	EPFL</br>
-	CE 3 316 (Centre Est), Station 1</br>
-	CH-1015 Lausanne</br>
-	Switzerland</br>
-	</br>
-	Phone: +41 21 693 11 11</br>
-	accueil [at] epfl.ch</br>	
-	</br>
-	<a href="http://www.epfl.ch">www.epfl.ch</a>
+	    <!-- title -->
+	    <div class="control-group" ng-class="{error: formEdit.title.$invalid}">
+		<label class="control-label" for="title">Title</label>
+		<div class="controls">
+		    <input type="text" name="title" placeholder="Title" required ng-model="intro.title">
+		    <span class="help-inline" ng-show="formEdit.title.$error.required">A title is mandatory</span>
+		</div> <!-- controls -->
+	    </div> <!-- control-group -->
+
+	    <!-- content -->
+	    <div class="control-group" ng-class="{error: formEdit.content.$invalid}">
+		<label class="control-label" for="content">Content</label>
+		<div class="controls">
+		    <textarea name="content" rows="10" cols="60" placeholder="Introduction here" required ng-model="intro.content"></textarea>
+		    <span class="help-inline" ng-show="formEdit.content.$error.required">An introduction is important</span>
+		</div> <!-- controls -->
+	    </div> <!-- control-group -->
+
+	    <!-- actions -->
+	    <div class="control-group">
+		<div class="controls">
+		    <button type="submit" class="btn btn-primary" ng-disabled="formEdit.$invalid"  ng-click="save()">Save</button>
+		</div> <!-- controls -->
+	    </div> <!-- control-group -->
+
+	</form>
+
     </div> <!-- row-fluid -->
 </div>
