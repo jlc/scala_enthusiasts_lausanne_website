@@ -23,25 +23,30 @@ import play.api.libs.EventSource
 import play.api.libs.json.{Json, JsValue}
 import play.api.libs.iteratee.{Concurrent, Enumeratee, Enumerator, Iteratee}
 
-import models.{MiscContent, EnthusiastSession, ContentDao, MCType}
-
-import controllers.ClientMessages._
-import controllers.ClientsActorMessages._
+import models.{MiscContent, EnthusiastSession, ContentDao, MCType, Group}
 
 object DataProvider extends Controller with ControllerHelper {
 
   def getIntroduction = Action { implicit request =>
-    Ok(getMiscContent(MCType.Introduction))
+    loggedAs { user =>
+      Ok(getMiscContent(MCType.Introduction))
+    }
   }
   def saveIntroduction = Action { implicit request =>
-    Ok(saveMiscContent(MCType.Introduction, nonEmptyText))
+    ensureMembership(Group.God()) { user =>
+      Ok(saveMiscContent(MCType.Introduction, nonEmptyText))
+    }
   }
 
   def getAnnouncement = Action { implicit request =>
-    Ok(getMiscContent(MCType.Announcement))
+    loggedAs { user =>
+      Ok(getMiscContent(MCType.Announcement))
+    }
   }
   def saveAnnouncement = Action { implicit request =>
-    Ok(saveMiscContent(MCType.Announcement, text))
+    ensureMembership(Group.God()) { user =>
+      Ok(saveMiscContent(MCType.Announcement, text))
+    }
   }
 
   private def getMiscContent(mctype: MCType): JsValue = {
@@ -50,9 +55,7 @@ object DataProvider extends Controller with ControllerHelper {
       getOrElse(Json.obj())
   }
 
-  // TODO: guard agains unauthorized accesses
   private def saveMiscContent(mctype: MCType, mapping: Mapping[String])(implicit request: Request[_]): JsValue = {
-    Logger.debug("saveAdminIntroduction")
     val textForm = Form(
       tuple(
         "title" -> mapping,
@@ -62,13 +65,12 @@ object DataProvider extends Controller with ControllerHelper {
 
     textForm.bindFromRequest.fold(
       formWithError => {
-        Logger.debug("form with error: " + formWithError)
+        Logger.debug("saveMiscContent: form with error: " + formWithError)
         Json.obj("return" -> false)
       },
       form => {
         val (title, content) = form
         val mc = MiscContent(mctype, new JDate, title, content)
-        Logger.debug("saveAdminIntroduction: form ok, saving: " + mc)
         ContentDao.saveMiscContent(mc)
         mc.toJson
       }

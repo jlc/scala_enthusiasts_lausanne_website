@@ -12,7 +12,7 @@ import play.api.data.Forms._
 
 import play.api.libs.json.Json
 
-import models.{User, UsersDao}
+import models.{User, Group, UsersDao}
 
 object Application extends Controller with ControllerHelper {
 
@@ -45,7 +45,7 @@ object Application extends Controller with ControllerHelper {
   }
 
   def admin = Action { implicit request =>
-    loggedAs { user =>
+    ensureMembership(Group.God()) { user =>
       // do not inform other clients for admin
       Ok(views.html.admin()(user, clientLanguage))
     }
@@ -61,6 +61,7 @@ object Application extends Controller with ControllerHelper {
     }
   }
 
+  // TODO: this should definitely be removed!
   def initialise = Action { implicit request =>
     UsersDao.initialise()
     Ok("done")

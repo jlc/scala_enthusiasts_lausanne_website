@@ -14,12 +14,9 @@ object ContentDao {
   import DaoHelper._
 
   def getMiscContent(mcType: MCType): Option[MiscContent] = DB { session =>
-    Logger.debug("getMiscContent: of type: " + mcType.value)
     if (session.count(ks \ CF.MiscContent \ byteBuffer(mcType.value)) == 0) {
-      Logger.debug("getMiscContent: nothing found")
       None
     } else {
-      Logger.debug("getMiscContent: ok, read!")
       val values = session.list(ks \ CF.MiscContent \ byteBuffer(mcType.value), ColumnPredicate(List("date", "title", "content")))
       val vs = mapColumns(values)
 

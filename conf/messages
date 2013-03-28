@@ -1,5 +1,7 @@
 # Default messages (all languages)
 
+common.forbidden = Authorisation denied
+
 main.title = Scala Enthusiasts Lausanne
 
 menu.home = Scala Enthusiasts Lausanne

@@ -4,12 +4,13 @@ import java.util.UUID
 
 import play.api._
 import play.api.mvc._
-
+import play.api.mvc.Results._
 import play.api.Logger
 import play.api.i18n.Lang
 import play.api.Play.current
+import play.api.i18n.Messages
 
-import models.{User, UsersDao}
+import models.{User, Group, UsersDao}
 
 trait ControllerHelper {
 
@@ -25,6 +26,16 @@ trait ControllerHelper {
 
       Logger.debug("loggedAs: new anonymous: " + user)
       f(user).withSession(SessionKey.UserUUID -> user.uuid.toString)
+    }
+  }
+
+  def ensureMembership(group: Group)(f: (User) => Result)(implicit request: Request[_]): Result = {
+    loggedAs { user =>
+      if (user.group == group) f(user)
+      else {
+        Logger.error("ensureMembership: forbidden access for user "+user.uuid+", email: "+user.email+", address: "+request.remoteAddress)
+        Forbidden(Messages("common.forbidden"))
+      }
     }
   }
 
