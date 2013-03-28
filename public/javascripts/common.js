@@ -11,6 +11,11 @@ angular.module('common', ['ngResource']).
 	return ContentIntroduction;
     }).
 
+    factory('ContentAnnouncement', function($resource) {
+	var ContentAnnouncement = $resource('/rest/content/announcement');
+	return ContentAnnouncement;
+    }).
+
     // to enable animation, we declare a new directive (fade-it) that create animation
     directive('fadeIn', function() {
 	return {

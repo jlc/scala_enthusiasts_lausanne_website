@@ -24,8 +24,6 @@ angular.module('admin', ['common']).
  */
 
 function EditIntroductionCtrl($scope, $routeParams, ContentIntroduction) {
-    var self = this;
-
     $scope.intro = ContentIntroduction.get({}, function(intro) {
 	console.debug("ContentIntroductionCtrl.intro.callback: ");
 	console.debug(intro);
@@ -39,10 +37,19 @@ function EditIntroductionCtrl($scope, $routeParams, ContentIntroduction) {
 EditIntroductionCtrl.$inject = ['$scope', '$routeParams', 'ContentIntroduction'];
 
 
+function EditAnnouncementCtrl($scope, $routeParams, ContentAnnouncement) {
+    $scope.announce = ContentAnnouncement.get({}, function(ann) {
+	console.debug("ContentAnnouncementCtrl.announce.callback: ");
+	console.debug(ann);
+	$scope.announce = ann; // with {title: '', content: ''}
+    });
 
-function EditAnnouncementCtrl($scope, $routeParams) {
+    $scope.save = function() {
+	$scope.announce.$save();
+    }
 }
-EditAnnouncementCtrl.$inject = ['$scope', '$routeParams'];
+EditAnnouncementCtrl.$inject = ['$scope', '$routeParams', 'ContentAnnouncement'];
+
 
 function EditSessionsCtrl($scop, $routeParams) {
 }

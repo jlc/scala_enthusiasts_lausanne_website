@@ -24,4 +24,14 @@ function IntroductionCtrl($scope, ContentIntroduction) {
 IntroductionCtrl.$inject = ['$scope', 'ContentIntroduction'];
 
 
+function AnnouncementCtrl($scope, ContentAnnouncement) {
+    $scope.announce = ContentAnnouncement.get({}, function(ann) {
+	console.debug("AnnouncementCtrl.announce.callback: ");
+	console.debug(ann);
+	$scope.announce = ann; // with {title: '', content: ''}
+    });
+}
+AnnouncementCtrl.$inject = ['$scope', 'ContentAnnouncement'];
+
+
 

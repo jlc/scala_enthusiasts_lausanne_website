@@ -4,26 +4,40 @@
 
 <div fade-in="500">
     <div class="row-fluid">
-	<legend>EPFL</legend>
+	<legend>Edit site announcement</legend>
     </div> <!-- row-fluid -->
 
-    <div class="row-fluid">
-	<img src="@routes.Assets.at("images/logo_epfl.jpg")" alt="EPFL Logo"/>
-    </div> <!-- row-fluid -->
 
     <div class="row-fluid">
-	<legend>Contact</legend>
-    </div> <!-- row-fluid -->
+	
+	<form class="form-horizontal" name="formEdit" ng-controller="EditAnnouncementCtrl">
 
-    <div class="row-fluid">
-	EPFL</br>
-	CE 3 316 (Centre Est), Station 1</br>
-	CH-1015 Lausanne</br>
-	Switzerland</br>
-	</br>
-	Phone: +41 21 693 11 11</br>
-	accueil [at] epfl.ch</br>	
-	</br>
-	<a href="http://www.epfl.ch">www.epfl.ch</a>
+	    <!-- title -->
+	    <div class="control-group" ng-class="{warning: announce.title == ''}">
+		<label class="control-label" for="title">Title</label>
+		<div class="controls">
+		    <input type="text" name="title" placeholder="Title" ng-model="announce.title">
+		    <span class="help-inline" ng-show="announce.title == ''">Announcement is hidden if title is empty</span>
+		</div> <!-- controls -->
+	    </div> <!-- control-group -->
+
+	    <!-- content -->
+	    <div class="control-group" ng-class="{warning: announce.content == ''}">
+		<label class="control-label" for="content">Content</label>
+		<div class="controls">
+		    <textarea name="content" rows="10" cols="60" placeholder="Great announcement here" ng-model="announce.content"></textarea>
+		    <span class="help-inline" ng-show="announce.content == ''">An announcement is better with some content</span>
+		</div> <!-- controls -->
+	    </div> <!-- control-group -->
+
+	    <!-- actions -->
+	    <div class="control-group">
+		<div class="controls">
+		    <button type="submit" class="btn btn-primary" ng-click="save()">Save</button>
+		</div> <!-- controls -->
+	    </div> <!-- control-group -->
+
+	</form>
+
     </div> <!-- row-fluid -->
 </div>

@@ -31,34 +31,46 @@ import controllers.ClientsActorMessages._
 object DataProvider extends Controller with ControllerHelper {
 
   def getIntroduction = Action { implicit request =>
-    Ok(
-      ContentDao.getMiscContent(MCType.Introduction).
-        map(_.toJson).
-        getOrElse(Json.obj())
-    )
+    Ok(getMiscContent(MCType.Introduction))
+  }
+  def saveIntroduction = Action { implicit request =>
+    Ok(saveMiscContent(MCType.Introduction, nonEmptyText))
+  }
+
+  def getAnnouncement = Action { implicit request =>
+    Ok(getMiscContent(MCType.Announcement))
+  }
+  def saveAnnouncement = Action { implicit request =>
+    Ok(saveMiscContent(MCType.Announcement, text))
+  }
+
+  private def getMiscContent(mctype: MCType): JsValue = {
+    ContentDao.getMiscContent(mctype).
+      map(_.toJson).
+      getOrElse(Json.obj())
   }
 
   // TODO: guard agains unauthorized accesses
-  def saveIntroduction = Action { implicit request =>
+  private def saveMiscContent(mctype: MCType, mapping: Mapping[String])(implicit request: Request[_]): JsValue = {
     Logger.debug("saveAdminIntroduction")
     val textForm = Form(
       tuple(
-        "title" -> nonEmptyText,
-        "content" -> nonEmptyText
+        "title" -> mapping,
+        "content" -> mapping
       )
     )
 
     textForm.bindFromRequest.fold(
       formWithError => {
         Logger.debug("form with error: " + formWithError)
-        Ok(Json.obj("return" -> false))
+        Json.obj("return" -> false)
       },
       form => {
         val (title, content) = form
-        val mc = MiscContent(MCType.Introduction, new JDate, title, content)
+        val mc = MiscContent(mctype, new JDate, title, content)
         Logger.debug("saveAdminIntroduction: form ok, saving: " + mc)
         ContentDao.saveMiscContent(mc)
-        Ok(mc.toJson)
+        mc.toJson
       }
     )
   }

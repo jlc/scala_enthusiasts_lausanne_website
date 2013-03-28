@@ -10,25 +10,20 @@
 	<legend>Welcome</legend>
     </div> <!-- row-fluid -->
 
-    <div class="row-fluid">
+    <div class="row-fluid" ng-controller="IntroductionCtrl">
 
-	<div class="well span12" ng-controller="IntroductionCtrl">
+	<div class="well span12">
 	    <legend>{{intro.title}}</legend>
 	    <div>{{intro.content}}</div>
 	</div> <!-- well -->
 
     </div> <!-- row-fluid -->
 
-    <div class="row-fluid">
+    <div class="row-fluid" ng-controller="AnnouncementCtrl">
 
-	<div class="well span12">
-
-	    Announcements
-
-	    <img src="@routes.Assets.at("images/scala_logo.jpg")"/>
-
-	    Scala is just amazingly sweet and tasty!
-
+	<div class="well span12" ng-show="announce.title">
+	    <legend>{{announce.title}}</legend>
+	    <div>{{announce.content}}</div>
 	</div> <!-- well -->
 
     </div> <!-- row-fluid -->
