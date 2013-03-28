@@ -30,7 +30,7 @@ import controllers.ClientsActorMessages._
 
 object DataProvider extends Controller with ControllerHelper {
 
-  def getAdminIntroduction = Action { implicit request =>
+  def getIntroduction = Action { implicit request =>
     Ok(
       ContentDao.getMiscContent(MCType.Introduction).
         map(_.toJson).
@@ -38,7 +38,8 @@ object DataProvider extends Controller with ControllerHelper {
     )
   }
 
-  def saveAdminIntroduction = Action { implicit request =>
+  // TODO: guard agains unauthorized accesses
+  def saveIntroduction = Action { implicit request =>
     Logger.debug("saveAdminIntroduction")
     val textForm = Form(
       tuple(

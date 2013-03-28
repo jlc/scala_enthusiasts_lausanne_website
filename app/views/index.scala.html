@@ -2,7 +2,7 @@
 
 @import play.api.i18n.Messages
 
-@main()(Messages("index.title")) {
+@main(ngAppModule = Some("index"), extraJs = "index.js" :: Nil)(Messages("index.title")) {
 
 <div class="container">
 
@@ -12,14 +12,9 @@
 
     <div class="row-fluid">
 
-	<div class="well span12">
-
-	    Presentation
-
-	    What is the Scala Enthusiast Group Lausanne?
-
-	    <img src="@routes.Assets.at("images/scala_enthusiasts.jpeg")"/>
-
+	<div class="well span12" ng-controller="IntroductionCtrl">
+	    <legend>{{intro.title}}</legend>
+	    <div>{{intro.content}}</div>
 	</div> <!-- well -->
 
     </div> <!-- row-fluid -->

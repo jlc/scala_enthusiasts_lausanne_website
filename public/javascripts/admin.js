@@ -7,13 +7,7 @@
  * Angular module
  */
 
-angular.module('adminResources', ['ngResource']).
-    factory('AdminIntroduction', function($resource) {
-	var AdminIntroduction = $resource('/rest/admin/introduction');
-	return AdminIntroduction;
-    });
-
-angular.module('admin', ['common', 'adminResources']).
+angular.module('admin', ['common']).
 
     // configure view routes
     config(['$routeProvider', function($routeProvider) {
@@ -29,11 +23,11 @@ angular.module('admin', ['common', 'adminResources']).
  * Angular Controllers
  */
 
-function EditIntroductionCtrl($scope, $routeParams, AdminIntroduction) {
+function EditIntroductionCtrl($scope, $routeParams, ContentIntroduction) {
     var self = this;
 
-    $scope.intro = AdminIntroduction.get({}, function(intro) {
-	console.debug("EditIntroductionCtrl.AdminIntro.callback: ");
+    $scope.intro = ContentIntroduction.get({}, function(intro) {
+	console.debug("ContentIntroductionCtrl.intro.callback: ");
 	console.debug(intro);
 	$scope.intro = intro; // with {title: '', content: ''}
     });
@@ -42,7 +36,7 @@ function EditIntroductionCtrl($scope, $routeParams, AdminIntroduction) {
 	$scope.intro.$save();
     }
 }
-EditIntroductionCtrl.$inject = ['$scope', '$routeParams', 'AdminIntroduction'];
+EditIntroductionCtrl.$inject = ['$scope', '$routeParams', 'ContentIntroduction'];
 
 
 

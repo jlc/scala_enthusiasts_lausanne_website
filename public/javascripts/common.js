@@ -1,10 +1,15 @@
 /*
- * common_directives.js
+ * common.js
  *
- * comman angular directives
+ * comman angular modules
  */
 
-angular.module('common', []).
+angular.module('common', ['ngResource']).
+
+    factory('ContentIntroduction', function($resource) {
+	var ContentIntroduction = $resource('/rest/content/introduction');
+	return ContentIntroduction;
+    }).
 
     // to enable animation, we declare a new directive (fade-it) that create animation
     directive('fadeIn', function() {
