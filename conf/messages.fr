@@ -1,8 +1,87 @@
-# french (fr) messages
+# French messages
 
+common.forbidden = Acces interdit
+
+# main
 main.title = Scala Enthusiasts Lausanne
 
+# menu
 menu.home = Scala Enthusiasts Lausanne
 menu.meetings = Quoi?
-menu.address = Où?
+menu.address = Ou?
 menu.sponsors = Qui?
+menu.auth.success = Succes d'authentification
+menu.auth.error = Erreur d'authentification, verifiez votre email et/ou mot de passe
+menu.auth.button.signin = Connexion
+
+# footer
+footer.otherclients.visitor.use = Le dernier visiteur utilise:
+footer.otherclients.visitor.on = sur
+footer.individualmessage.tmp = Une note pour vous:
+
+# index page
+index.title = Accueil
+
+# meetings page
+meetings.title = Rendez-vous
+meetings.menu.agenda = Agenda
+meetings.menu.sessions = Sessions
+meetings.menu.speakers = Speakers
+
+# address page
+address.title = Addresse
+address.menu.map = Carte
+address.menu.contact = Contacte
+
+# sponsors page
+sponsors.title = Sponsors
+sponsors.menu.crossingtech = Crossing-Tech
+sponsors.menu.epfl = EPFL
+
+# admin page
+admin.title = Administration
+admin.menu.edit.intro = Edition de l'introduction
+admin.menu.edit.announce = Edition de l'annonce
+admin.menu.edit.sessions = Edition des sessions
+
+# template.addressContact
+tmpl.addresscontact.title = Contacte
+tmpl.addresscontact.content.tmp = info@segl.io
+
+# template.addressMap
+tmpl.addressmap.title = Localisation
+tmpl.addressmap.address.title = Addresse
+
+# template.adminEditAnnouncement
+tmpl.admineditannounce.title = Edition de l'annonces du site
+tmpl.admineditannounce.form.title = Titre
+tmpl.admineditannounce.form.title.helpinline = L'annonce sera cachee si le titre n'est pas definit
+tmpl.admineditannounce.form.content = Contenu
+tmpl.admineditannounce.form.content.helpinline = L'annonce est plus correcte avec du contenu
+tmpl.admineditannounce.form.save = Sauvegarder
+
+# template.adminEditIntroduction
+tmpl.admineditintro.title = Edition de l'introduction du site
+tmpl.admineditintro.form.title = Titre
+tmpl.admineditintro.form.title.helpinline = Un titre est obligatoire
+tmpl.admineditintro.form.content = Contenu
+tmpl.admineditintro.form.content.helpinline = Une introduction est importante
+tmpl.admineditintro.form.save = Sauvegarder
+
+# template.adminEditSessions
+# todo
+
+# template.meetingsAgenda
+tmpl.meetingsagenda.title = Agenda
+
+# template.meetingsSessions
+# todo
+
+# template.meetingsSpeakers
+# todo
+
+# template.sponsorsCrossingTech - template.sponsorsEpfl
+tmpl.sponsors.contact = Contacte
+tmpl.sponsors.phone = Telephone
+tmpl.sponsors.email = Email
+
