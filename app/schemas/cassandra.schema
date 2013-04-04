@@ -14,12 +14,12 @@ create column family EmailUserUUID
        and default_validation_class = 'UTF8Type';
 
 create column family EnthusiastSession
-       with key_validation_class = 'DateType'
+       with key_validation_class = 'UTF8Type'
        and comparator = 'UTF8Type'
        and default_validation_class = 'UTF8Type';
 
 create column family MiscContent
-       with key_validation_class = 'Int32Type'
+       with key_validation_class = 'UTF8Type'
        and comparator = 'UTF8Type'
        and default_validation_class = 'UTF8Type';
 

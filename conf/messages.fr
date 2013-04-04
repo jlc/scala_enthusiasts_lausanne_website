@@ -59,6 +59,7 @@ tmpl.admineditannounce.form.title.helpinline = L'annonce sera cachee si le titre
 tmpl.admineditannounce.form.content = Contenu
 tmpl.admineditannounce.form.content.helpinline = L'annonce est plus correcte avec du contenu
 tmpl.admineditannounce.form.save = Sauvegarder
+tmpl.admineditannounce.form.language.warning = Souvenez-vous d'editer l'anonce pour toutes les langues en les selectionnant en bas a droite.
 
 # template.adminEditIntroduction
 tmpl.admineditintro.title = Edition de l'introduction du site
@@ -67,6 +68,7 @@ tmpl.admineditintro.form.title.helpinline = Un titre est obligatoire
 tmpl.admineditintro.form.content = Contenu
 tmpl.admineditintro.form.content.helpinline = Une introduction est importante
 tmpl.admineditintro.form.save = Sauvegarder
+tmpl.admineditintro.form.language.warning = Souvenez-vous d'editer l'introduction pour toutes les langues en les selectionnant en bas a droite.
 
 # template.adminEditSessions
 # todo

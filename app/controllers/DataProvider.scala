@@ -23,31 +23,31 @@ import play.api.libs.EventSource
 import play.api.libs.json.{Json, JsValue}
 import play.api.libs.iteratee.{Concurrent, Enumeratee, Enumerator, Iteratee}
 
-import models.{MiscContent, EnthusiastSession, ContentDao, MCType, Group}
+import models.{MiscContent, EnthusiastSession, ContentDao, Group}
 
-object DataProvider extends Controller {
+object DataProvider extends Controller with LangHelper {
 
   def getIntroduction = DiscretGuardedAction { implicit request => user =>
-    Ok(getMiscContent(MCType.Introduction))
+    Ok(getMiscContent(MiscContent.Introduction, clientLanguage))
   }
   def saveIntroduction = DiscretGuardedAction.restrictedTo(Group.God()) { implicit request => user =>
-    Ok(saveMiscContent(MCType.Introduction, nonEmptyText))
+    Ok(saveMiscContent(MiscContent.Introduction, clientLanguage, nonEmptyText))
   }
 
   def getAnnouncement = DiscretGuardedAction { implicit request => user =>
-    Ok(getMiscContent(MCType.Announcement))
+    Ok(getMiscContent(MiscContent.Announcement, clientLanguage))
   }
   def saveAnnouncement = DiscretGuardedAction.restrictedTo(Group.God()) { implicit request => user =>
-    Ok(saveMiscContent(MCType.Announcement, text))
+    Ok(saveMiscContent(MiscContent.Announcement, clientLanguage, text))
   }
 
-  private def getMiscContent(mctype: MCType): JsValue = {
-    ContentDao.getMiscContent(mctype).
+  private def getMiscContent(mctype: MiscContent.Type, lang: Lang): JsValue = {
+    ContentDao.getMiscContent(mctype, lang).
       map(_.toJson).
       getOrElse(Json.obj())
   }
 
-  private def saveMiscContent(mctype: MCType, mapping: Mapping[String])(implicit request: Request[AnyContent]): JsValue = {
+  private def saveMiscContent(mctype: MiscContent.Type, lang: Lang, mapping: Mapping[String])(implicit request: Request[AnyContent]): JsValue = {
     val textForm = Form(
       tuple(
         "title" -> mapping,
@@ -62,7 +62,7 @@ object DataProvider extends Controller {
       },
       form => {
         val (title, content) = form
-        val mc = MiscContent(mctype, new JDate, title, content)
+        val mc = MiscContent(lang, mctype, new JDate, title, content)
         ContentDao.saveMiscContent(mc)
         mc.toJson
       }

@@ -59,6 +59,7 @@ tmpl.admineditannounce.form.title.helpinline = Announcement is hidden if title i
 tmpl.admineditannounce.form.content = Content
 tmpl.admineditannounce.form.content.helpinline = An announcement is better with some content
 tmpl.admineditannounce.form.save = Save
+tmpl.admineditannounce.form.language.warning = Remember to edit announce for all available languages available on the bottom right
 
 # template.adminEditIntroduction
 tmpl.admineditintro.title = Edit site introduction
@@ -67,6 +68,7 @@ tmpl.admineditintro.form.title.helpinline = A title is mandatory
 tmpl.admineditintro.form.content = Content
 tmpl.admineditintro.form.content.helpinline = An introduction is important
 tmpl.admineditintro.form.save = Save
+tmpl.admineditintro.form.language.warning = Remember to edit introduction for all available languages available on the bottom right
 
 # template.adminEditSessions
 # todo
