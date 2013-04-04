@@ -4,7 +4,7 @@
 
 <div fade-in="500">
     <div class="row-fluid">
-	<legend>Edit site announcement</legend>
+	<legend>@Messages("tmpl.admineditannounce.title")</legend>
     </div> <!-- row-fluid -->
 
 
@@ -14,26 +14,26 @@
 
 	    <!-- title -->
 	    <div class="control-group" ng-class="{warning: announce.title == ''}">
-		<label class="control-label" for="title">Title</label>
+		<label class="control-label" for="title">@Messages("tmpl.admineditannounce.form.title")</label>
 		<div class="controls">
 		    <input type="text" name="title" placeholder="Title" ng-model="announce.title">
-		    <span class="help-inline" ng-show="announce.title == ''">Announcement is hidden if title is empty</span>
+		    <span class="help-inline" ng-show="announce.title == ''">@Messages("tmpl.admineditannounce.form.title.helpinline")</span>
 		</div> <!-- controls -->
 	    </div> <!-- control-group -->
 
 	    <!-- content -->
 	    <div class="control-group" ng-class="{warning: announce.content == ''}">
-		<label class="control-label" for="content">Content</label>
+		<label class="control-label" for="content">@Messages("tmpl.admineditannounce.form.content")</label>
 		<div class="controls">
 		    <textarea name="content" rows="10" cols="60" placeholder="Great announcement here" ng-model="announce.content"></textarea>
-		    <span class="help-inline" ng-show="announce.content == ''">An announcement is better with some content</span>
+		    <span class="help-inline" ng-show="announce.content == ''">@Messages("tmpl.admineditannounce.form.content.helpinline")</span>
 		</div> <!-- controls -->
 	    </div> <!-- control-group -->
 
 	    <!-- actions -->
 	    <div class="control-group">
 		<div class="controls">
-		    <button type="submit" class="btn btn-primary" ng-click="save()">Save</button>
+		    <button type="submit" class="btn btn-primary" ng-click="save()">@Messages("tmpl.admineditannounce.form.save")</button>
 		</div> <!-- controls -->
 	    </div> <!-- control-group -->
 

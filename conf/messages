@@ -2,25 +2,86 @@
 
 common.forbidden = Authorisation denied
 
+# main
 main.title = Scala Enthusiasts Lausanne
 
+# menu
 menu.home = Scala Enthusiasts Lausanne
 menu.meetings = What?
 menu.address = Where?
 menu.sponsors = Who?
+menu.auth.success = Authentication success
+menu.auth.error = Authentication error, verify email and/or password
+menu.auth.button.signin = Sign in
+
+# footer
+footer.otherclients.visitor.use = Last visitor is using:
+footer.otherclients.visitor.on = on
+footer.individualmessage.tmp = Note for you:
 
 # index page
 index.title = Home
 
 # meetings page
 meetings.title = Meetings
+meetings.menu.agenda = Agenda
+meetings.menu.sessions = Sessions
+meetings.menu.speakers = Speakers
 
 # address page
 address.title = Address
+address.menu.map = Map
+address.menu.contact = Contact
 
 # sponsors page
 sponsors.title = Sponsors
+sponsors.menu.crossingtech = Crossing-Tech
+sponsors.menu.epfl = EPFL
 
 # admin page
 admin.title = Admin
+admin.menu.edit.intro = Edit introduction
+admin.menu.edit.announce = Edit announcement
+admin.menu.edit.sessions = Edit sessions
+
+# template.addressContact
+tmpl.addresscontact.title = Contact
+tmpl.addresscontact.content.tmp = info@segl.io
+
+# template.addressMap
+tmpl.addressmap.title = Location
+tmpl.addressmap.address.title = Address
+
+# template.adminEditAnnouncement
+tmpl.admineditannounce.title = Edit site announcement
+tmpl.admineditannounce.form.title = Title
+tmpl.admineditannounce.form.title.helpinline = Announcement is hidden if title is empty
+tmpl.admineditannounce.form.content = Content
+tmpl.admineditannounce.form.content.helpinline = An announcement is better with some content
+tmpl.admineditannounce.form.save = Save
+
+# template.adminEditIntroduction
+tmpl.admineditintro.title = Edit site introduction
+tmpl.admineditintro.form.title = Title
+tmpl.admineditintro.form.title.helpinline = A title is mandatory
+tmpl.admineditintro.form.content = Content
+tmpl.admineditintro.form.content.helpinline = An introduction is important
+tmpl.admineditintro.form.save = Save
+
+# template.adminEditSessions
+# todo
+
+# template.meetingsAgenda
+tmpl.meetingsagenda.title = Agenda
+
+# template.meetingsSessions
+# todo
+
+# template.meetingsSpeakers
+# todo
+
+# template.sponsorsCrossingTech - template.sponsorsEpfl
+tmpl.sponsors.contact = Contact
+tmpl.sponsors.phone = Phone
+tmpl.sponsors.email = Email
 

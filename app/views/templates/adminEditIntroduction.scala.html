@@ -4,7 +4,7 @@
 
 <div fade-in="500">
     <div class="row-fluid">
-	<legend>Edit site introduction</legend>
+	<legend>@Messages("tmpl.admineditintro.title")</legend>
     </div> <!-- row-fluid -->
 
 
@@ -14,26 +14,26 @@
 
 	    <!-- title -->
 	    <div class="control-group" ng-class="{error: formEdit.title.$invalid}">
-		<label class="control-label" for="title">Title</label>
+		<label class="control-label" for="title">@Messages("tmpl.admineditintro.form.title")</label>
 		<div class="controls">
 		    <input type="text" name="title" placeholder="Title" required ng-model="intro.title">
-		    <span class="help-inline" ng-show="formEdit.title.$error.required">A title is mandatory</span>
+		    <span class="help-inline" ng-show="formEdit.title.$error.required">@Messages("tmpl.admineditintro.form.title.helpinline")</span>
 		</div> <!-- controls -->
 	    </div> <!-- control-group -->
 
 	    <!-- content -->
 	    <div class="control-group" ng-class="{error: formEdit.content.$invalid}">
-		<label class="control-label" for="content">Content</label>
+		<label class="control-label" for="content">@Messages("tmpl.admineditintro.form.content")</label>
 		<div class="controls">
 		    <textarea name="content" rows="10" cols="60" placeholder="Introduction here" required ng-model="intro.content"></textarea>
-		    <span class="help-inline" ng-show="formEdit.content.$error.required">An introduction is important</span>
+		    <span class="help-inline" ng-show="formEdit.content.$error.required">@Messages("tmpl.admineditintro.form.content.helpinline")</span>
 		</div> <!-- controls -->
 	    </div> <!-- control-group -->
 
 	    <!-- actions -->
 	    <div class="control-group">
 		<div class="controls">
-		    <button type="submit" class="btn btn-primary" ng-disabled="formEdit.$invalid"  ng-click="save()">Save</button>
+		    <button type="submit" class="btn btn-primary" ng-disabled="formEdit.$invalid"  ng-click="save()">@Messages("tmpl.admineditintro.form.save")</button>
 		</div> <!-- controls -->
 	    </div> <!-- control-group -->
 

@@ -38,11 +38,11 @@
 		    <div class="accordion-body collapse" id="collapseSubMenu" ng-controller="LoginCtrl">
 
 			<form class="navbar-form adjust-content-margin pull-right" novalidate>
-			    <span ng-show="authenticated" class="text-success">Authentication success</span>
-			    <span ng-show="errorAuthenticate" class="text-error">Error in email and/or password</span>
+			    <span ng-show="authenticated" class="text-success">@Messages("menu.auth.success")</span>
+			    <span ng-show="errorAuthenticate" class="text-error">@Messages("menu.auth.error")</span>
 			    <input type="email" class="input-small" id="inputUsername" placeholder="Email" ng-model="user.email">
 			    <input type="password" class="input-small" id="inputPassword" placeholder="Password" ng-model="user.password">
-			    <button class="btn" ng-click="authenticate(user)">Sign in</button>
+			    <button class="btn" ng-click="authenticate(user)">@Messages("menu.auth.button.signin")</button>
 			</form>
 
 		    </div> <!-- accordion-body -->

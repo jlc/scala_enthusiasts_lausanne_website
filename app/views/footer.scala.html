@@ -7,7 +7,7 @@
     <div class="row-fluid">
 	<div class="pull-left" ng-controller="OtherClientsCtrl">
 	    <span style="font-size:75%;" ng-show="userAgentInfo.family != ''">
-		Last visitor is using:&nbsp;
+		@Messages("footer.otherclients.visitor.use")&nbsp;
 		<span ng-show="userAgentInfo.family == 'Firefox'" class=""><img src="@routes.Assets.at("images/browser_firefox.gif")" alt="Firefox"></span>
 		<span ng-show="userAgentInfo.family == 'Safari'" class=""><img src="@routes.Assets.at("images/browser_safari.gif")" alt="Safari"></span>
 		<span ng-show="userAgentInfo.family == 'Chrome'" class=""><img src="@routes.Assets.at("images/browser_chrome.gif")" alt="Chrome"></span>
@@ -15,7 +15,7 @@
 		<span ng-show="userAgentInfo.family == 'IE'" class=""><img src="@routes.Assets.at("images/browser_ie.gif")" alt="IE"></span>
 		<span ng-show="userAgentInfo.family != 'Firefox' && userAgentInfo.family != 'Safari' && userAgentInfo.family != 'Chrome' && userAgentInfo.family != 'Opera' && userAgentInfo.family != 'IE'" class="">{{userAgentInfo.family}}</span>
 		<span ng-show="userAgentInfo.version != ''">{{userAgentInfo.version}}</span>
-		<span ng-show="userAgentInfo.osName != ''">on {{userAgentInfo.osName}}</span>
+		<span ng-show="userAgentInfo.osName != ''">@{Messages("footer.otherclients.visitor.on")} {{userAgentInfo.osName}}</span>
 	    </span>
 	</div>
 	
@@ -28,7 +28,7 @@
     <div class="row-fluid">
 	<div class="pull-left" ng-controller="IndividualMessageCtrl">
 	    <span style="font-size:75%;" ng-show="message != ''">
-		<span>Note for you: {{message}}</span>
+		<span>@{Messages("footer.individualmessage.tmp")} {{message}}</span>
 	    </span>
 	</div>
     </div>
