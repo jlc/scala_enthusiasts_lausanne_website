@@ -52,12 +52,13 @@ object Application extends Controller with ControllerHelper {
   }
   
   def lang(l: String) = Action { implicit request =>
-    def redirect = Redirect(routes.Application.index())
+
+    val uri: String = request.headers.get("Referer").getOrElse(routes.Application.index().toString)
 
     Lang.get(l) map { lang =>
-      redirect.withSession(SessionKey.Lang -> l)
+      Redirect(uri).withSession(session + (SessionKey.Lang -> l))
     } getOrElse {
-      redirect.withSession(session - SessionKey.Lang)
+      Redirect(uri).withSession(session - SessionKey.Lang)
     }
   }
 
@@ -89,7 +90,7 @@ object Application extends Controller with ControllerHelper {
       },
       credentials => {
         UsersDao.authenticate(credentials._1, credentials._2).map { user =>
-          Ok(success).withSession(SessionKey.UserUUID -> user.uuid.toString)
+          Ok(success).withSession(session + (SessionKey.UserUUID -> user.uuid.toString))
         }.getOrElse {
           Ok(fail).withSession(session - SessionKey.UserUUID)
         }

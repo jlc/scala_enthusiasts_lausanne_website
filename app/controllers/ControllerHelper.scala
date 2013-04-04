@@ -25,7 +25,7 @@ trait ControllerHelper {
       val user = User.anonymous()
 
       Logger.debug("loggedAs: new anonymous: " + user)
-      f(user).withSession(SessionKey.UserUUID -> user.uuid.toString)
+      f(user).withSession(request.session + (SessionKey.UserUUID -> user.uuid.toString))
     }
   }
 
