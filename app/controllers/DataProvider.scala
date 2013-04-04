@@ -25,28 +25,20 @@ import play.api.libs.iteratee.{Concurrent, Enumeratee, Enumerator, Iteratee}
 
 import models.{MiscContent, EnthusiastSession, ContentDao, MCType, Group}
 
-object DataProvider extends Controller with ControllerHelper {
+object DataProvider extends Controller {
 
-  def getIntroduction = Action { implicit request =>
-    loggedAs { user =>
-      Ok(getMiscContent(MCType.Introduction))
-    }
+  def getIntroduction = DiscretGuardedAction { implicit request => user =>
+    Ok(getMiscContent(MCType.Introduction))
   }
-  def saveIntroduction = Action { implicit request =>
-    ensureMembership(Group.God()) { user =>
-      Ok(saveMiscContent(MCType.Introduction, nonEmptyText))
-    }
+  def saveIntroduction = DiscretGuardedAction.restrictedTo(Group.God()) { implicit request => user =>
+    Ok(saveMiscContent(MCType.Introduction, nonEmptyText))
   }
 
-  def getAnnouncement = Action { implicit request =>
-    loggedAs { user =>
-      Ok(getMiscContent(MCType.Announcement))
-    }
+  def getAnnouncement = DiscretGuardedAction { implicit request => user =>
+    Ok(getMiscContent(MCType.Announcement))
   }
-  def saveAnnouncement = Action { implicit request =>
-    ensureMembership(Group.God()) { user =>
-      Ok(saveMiscContent(MCType.Announcement, text))
-    }
+  def saveAnnouncement = DiscretGuardedAction.restrictedTo(Group.God()) { implicit request => user =>
+    Ok(saveMiscContent(MCType.Announcement, text))
   }
 
   private def getMiscContent(mctype: MCType): JsValue = {
@@ -55,7 +47,7 @@ object DataProvider extends Controller with ControllerHelper {
       getOrElse(Json.obj())
   }
 
-  private def saveMiscContent(mctype: MCType, mapping: Mapping[String])(implicit request: Request[_]): JsValue = {
+  private def saveMiscContent(mctype: MCType, mapping: Mapping[String])(implicit request: Request[AnyContent]): JsValue = {
     val textForm = Form(
       tuple(
         "title" -> mapping,

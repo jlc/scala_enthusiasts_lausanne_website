@@ -3,45 +3,45 @@ package controllers
 import play.api._
 import play.api.mvc._
 
-object Templates extends Controller with ControllerHelper {
+object Templates extends Controller with LangHelper {
 
-  def addressMap = Action { implicit request =>
+  def addressMap = DiscretGuardedAction { implicit request => user =>
     Ok(views.html.templates.addressMap()(clientLanguage))
   }
 
-  def addressContact = Action { implicit request =>
+  def addressContact = DiscretGuardedAction { implicit request => user =>
     Ok(views.html.templates.addressContact()(clientLanguage))
   }
 
-  def sponsorsCrossingTech = Action { implicit request =>
+  def sponsorsCrossingTech = DiscretGuardedAction { implicit request => user =>
     Ok(views.html.templates.sponsorsCrossingTech()(clientLanguage))
   }
 
-  def sponsorsEpfl = Action { implicit request =>
+  def sponsorsEpfl = DiscretGuardedAction { implicit request => user =>
     Ok(views.html.templates.sponsorsEpfl()(clientLanguage))
   }
 
-  def meetingsAgenda = Action { implicit request =>
+  def meetingsAgenda = DiscretGuardedAction { implicit request => user =>
     Ok(views.html.templates.meetingsAgenda()(clientLanguage))
   }
 
-  def meetingsSessions = Action { implicit request =>
+  def meetingsSessions = DiscretGuardedAction { implicit request => user =>
     Ok(views.html.templates.meetingsSessions()(clientLanguage))
   }
 
-  def meetingsSpeakers = Action { implicit request =>
+  def meetingsSpeakers = DiscretGuardedAction { implicit request => user =>
     Ok(views.html.templates.meetingsSpeakers()(clientLanguage))
   }
 
-  def adminEditIntroduction = Action { implicit request =>
+  def adminEditIntroduction = DiscretGuardedAction { implicit request => user =>
     Ok(views.html.templates.adminEditIntroduction()(clientLanguage))
   }
 
-  def adminEditAnnouncement = Action { implicit request =>
+  def adminEditAnnouncement = DiscretGuardedAction { implicit request => user =>
     Ok(views.html.templates.adminEditAnnouncement()(clientLanguage))
   }
 
-  def adminEditSessions = Action { implicit request =>
+  def adminEditSessions = DiscretGuardedAction { implicit request => user =>
     Ok(views.html.templates.adminEditSessions()(clientLanguage))
   }
 

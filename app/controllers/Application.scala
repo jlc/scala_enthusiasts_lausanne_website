@@ -14,45 +14,29 @@ import play.api.libs.json.Json
 
 import models.{User, Group, UsersDao}
 
-object Application extends Controller with ControllerHelper {
+object Application extends Controller with LangHelper {
 
-  def index() = Action { implicit request =>
-    loggedAs { user =>
-      informOtherClient
-      Ok(views.html.index()(user, clientLanguage))
-    }
+  def index = GuardedAction { implicit request => user =>
+    Ok(views.html.index()(user, clientLanguage))
   }
 
-  def meetings = Action { implicit request =>
-    loggedAs { user =>
-      informOtherClient
-      Ok(views.html.meetings()(user, clientLanguage))
-    }
+  def meetings = GuardedAction { implicit request => user =>
+    Ok(views.html.meetings()(user, clientLanguage))
   }
 
-  def address = Action { implicit request =>
-    loggedAs { user =>
-      informOtherClient
-      Ok(views.html.address()(user, clientLanguage))
-    }
+  def address = GuardedAction { implicit request => user =>
+    Ok(views.html.address()(user, clientLanguage))
   }
 
-  def sponsors = Action { implicit request =>
-    loggedAs { user =>
-      informOtherClient
-      Ok(views.html.sponsors()(user, clientLanguage))
-    }
+  def sponsors = GuardedAction { implicit request => user =>
+    Ok(views.html.sponsors()(user, clientLanguage))
   }
 
-  def admin = Action { implicit request =>
-    ensureMembership(Group.God()) { user =>
-      // do not inform other clients for admin
-      Ok(views.html.admin()(user, clientLanguage))
-    }
+  def admin = GuardedAction.restrictedTo(Group.God()) { implicit request => user =>
+    Ok(views.html.admin()(user, clientLanguage))
   }
   
   def lang(l: String) = Action { implicit request =>
-
     val uri: String = request.headers.get("Referer").getOrElse(routes.Application.index().toString)
 
     Lang.get(l) map { lang =>

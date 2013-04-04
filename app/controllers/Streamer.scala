@@ -26,7 +26,7 @@ import models.{User, UsersDao}
 import controllers.ClientMessages._
 import controllers.ClientsActorMessages._
 
-object Streamer extends Controller with ControllerHelper {
+object Streamer extends Controller {
 
   implicit val timeout: Timeout = 5 seconds
 
@@ -34,30 +34,26 @@ object Streamer extends Controller with ControllerHelper {
    * EventSource() implicit parameters are defined in ClientMessages
    */
 
-  def otherUserAgent = Action { implicit request =>
-    loggedAs { user =>
-      Async {
-        (ClientsActor() ? JoinUAInfoBroadcast()).mapTo[Enumerator[UserAgentInfo]].map {
-          case enumerator =>
-            Ok.stream(enumerator &> EventSource()).withHeaders(
-              "Cache-Control" -> "no-cache",
-              "Connection" -> "keep-alive"
-            ).as("text/event-stream")
-        }
+  def otherUserAgent = DiscretGuardedAction { implicit request => user =>
+    Async {
+      (ClientsActor() ? JoinUAInfoBroadcast()).mapTo[Enumerator[UserAgentInfo]].map {
+        case enumerator =>
+          Ok.stream(enumerator &> EventSource()).withHeaders(
+            "Cache-Control" -> "no-cache",
+            "Connection" -> "keep-alive"
+          ).as("text/event-stream")
       }
     }
   }
 
-  def individualMessage = Action { implicit request =>
-    loggedAs { user =>
-      Async {
-        (ClientsActor() ? RegisterClient(user.uuid)).mapTo[Enumerator[IndividualMessage]].map {
-          case enumerator =>
-            Ok.stream(enumerator &> EventSource()).withHeaders(
-              "Cache-Control" -> "no-cache",
-              "Connection" -> "keep-alive"
-            ).as("text/event-stream")
-        }
+  def individualMessage = DiscretGuardedAction { implicit request => user =>
+    Async {
+      (ClientsActor() ? RegisterClient(user.uuid)).mapTo[Enumerator[IndividualMessage]].map {
+        case enumerator =>
+          Ok.stream(enumerator &> EventSource()).withHeaders(
+            "Cache-Control" -> "no-cache",
+            "Connection" -> "keep-alive"
+          ).as("text/event-stream")
       }
     }
   }

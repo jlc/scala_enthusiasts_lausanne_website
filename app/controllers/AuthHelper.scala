@@ -6,13 +6,12 @@ import play.api._
 import play.api.mvc._
 import play.api.mvc.Results._
 import play.api.Logger
-import play.api.i18n.Lang
 import play.api.Play.current
 import play.api.i18n.Messages
 
 import models.{User, Group, UsersDao}
 
-trait ControllerHelper {
+trait AuthHelper {
 
   def loggedAs(f: (User) => Result)(implicit request: Request[_]): Result = {
     request.session.get(SessionKey.UserUUID).map { uuidStr =>
@@ -37,17 +36,6 @@ trait ControllerHelper {
         Forbidden(Messages("common.forbidden"))
       }
     }
-  }
-
-  def clientLanguage(implicit request: Request[_]) =
-    request.session.get(SessionKey.Lang) map { Lang(_) } getOrElse { Lang.preferred(request.acceptLanguages) }
-
-  def informOtherClient(implicit request: Request[_]) = {
-    import controllers.UserAgentSpy._
-    val userAgent = UserAgentSpy()
-    val remoteAddress = request.remoteAddress
-
-    ClientsActor() ! ClientsActorMessages.PageViewedBy(userAgent)
   }
 
 }
