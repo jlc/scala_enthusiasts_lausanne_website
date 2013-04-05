@@ -4,6 +4,10 @@
 
 <div fade-in="500" ng-controller="EditSessionsCtrl">
 
+    <span ng-show="false" ng-model="text.sessionUpdated" copy-to-model="Session updated"></span>
+    <span ng-show="false" ng-model="text.sessionCreated" copy-to-model="Session created"></span>
+    <span ng-show="false" ng-model="text.sessionDeleted" copy-to-model="Session deleted"></span>
+
     <div ng-repeat="sess in sessions">
 	<div class="well">
 	    <button type="button" class="close" ng-show="sess.type != 'new'" ng-click="destroy(sess.data)">&times;</button>

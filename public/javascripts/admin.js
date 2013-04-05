@@ -54,6 +54,8 @@ EditAnnouncementCtrl.$inject = ['$scope', '$routeParams', 'ContentAnnouncement']
 function EditSessionsCtrl($scope, $route, ContentSession, GeneralMessage) {
     $scope.newSession = {type: 'new', data: {}};
 
+    //$scope.text will be filled by the view (yes! not the angular way, but usefull to reuse server internationalisation)
+
     $scope.sessions = ContentSession.query(function(sessions) {
 	console.debug("EditSessionsCtrl.sessions.callback: ");
 	console.debug(sessions);
@@ -82,6 +84,9 @@ function EditSessionsCtrl($scope, $route, ContentSession, GeneralMessage) {
 
 	createdSession.$save(function(sess, headers) {
 	    console.debug("EditSessionsCtrl.create: session created");
+
+	    GeneralMessage.update($scope.text.sessionCreated);
+
 	    // update the view
 	    sess.date = new Date(Number(sess.date));
 	    $scope.newSession.data = sess;
@@ -103,7 +108,7 @@ function EditSessionsCtrl($scope, $route, ContentSession, GeneralMessage) {
 	sess.$save(function(sess, headers) {
 	    console.debug("EditSessionsCtrl.update: session updated");
 
-	    GeneralMessage.update('Yeah buddy!', 'info');
+	    GeneralMessage.update($scope.text.sessionUpdated);
 
 	    sess.date = new Date(Number(sess.date));
 	    session = sess;
@@ -115,6 +120,9 @@ function EditSessionsCtrl($scope, $route, ContentSession, GeneralMessage) {
 
 	session.$delete(function(sess, headers) {
 	    console.debug("EditSessionsCtrl.update: session deleted");
+	    GeneralMessage.update($scope.text.sessionDeleted);
+
+	    $route.reload();
 	});
     }
 }

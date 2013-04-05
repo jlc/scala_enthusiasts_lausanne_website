@@ -33,6 +33,12 @@ angular.module('common', ['ngResource']).
 	}
     }).
 
+    directive('copyToModel', function($parse) {
+	return function(scope, elem, attrs) {
+	    $parse(attrs.ngModel).assign(scope, attrs.copyToModel);
+	}
+    }).
+
     // to enable animation, we declare a new directive (fade-it) that create animation
     directive('fadeIn', function() {
 	return {
