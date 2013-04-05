@@ -68,7 +68,7 @@ object DataProvider extends Controller with LangHelper {
       tuple(
         "title" -> nonEmptyText,
         "date" -> nonEmptyText,
-        "speaker" -> text,
+        "speaker" -> optional(text),
         "content" -> nonEmptyText
       )
     )
@@ -79,9 +79,11 @@ object DataProvider extends Controller with LangHelper {
         Ok(Json.obj("return" -> false))
       },
       form => {
-        val (title, isoDate, speaker, content) = form
+        val (title, isoDate, speakerOpt, content) = form
         val uuid = if (suuid == "new") UUID.randomUUID else UUID.fromString(suuid)
         val date = javax.xml.bind.DatatypeConverter.parseDateTime(isoDate).getTime
+        val speaker = speakerOpt.getOrElse("")
+
         val eSession = EnthusiastSession(uuid, clientLanguage, date, title, speaker, content)
         ContentDao.saveEnthusiastSession(eSession)
         val json = Json.toJson(eSession)
