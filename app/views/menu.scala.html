@@ -7,7 +7,6 @@
     <div class="navbar-inner">
 
 	<div class="container">
-
 	    <a class="brand" href="@routes.Application.index">@Messages("menu.home")</a>
 
 	    <ul class="nav">
@@ -28,7 +27,6 @@
 		    }
 		</ul>
 	    </div> <!-- nav-collapse -->
-
 	</div> <!-- container -->
 
 	<!-- sub menu within accordion -->
@@ -53,3 +51,10 @@
     </div> <!-- navbar-inner -->
 
 </div> <!-- navbar -->
+
+<!-- GeneralMessage alerts -->
+<div class="general-message" ng-controller="GeneralMessageCtrl">
+    <div class="alert alert-block" ng-class="message.type" ng-show="isOpen">
+	<strong>{{message.content}}</strong>
+    </div> <!-- alert -->
+</div> <!-- GeneralMessage -->

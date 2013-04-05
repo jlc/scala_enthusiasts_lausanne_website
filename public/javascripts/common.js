@@ -21,6 +21,18 @@ angular.module('common', ['ngResource']).
 	return ContentSession;
     }).
 
+    factory('GeneralMessage', function($rootScope) {
+	return {
+	    content: '',
+	    type: '',
+	    update: function(content, type) {
+		this.content = content;
+		this.type = type;
+		$rootScope.$broadcast('updateGeneralMessage');
+	    }
+	}
+    }).
+
     // to enable animation, we declare a new directive (fade-it) that create animation
     directive('fadeIn', function() {
 	return {
@@ -69,3 +81,25 @@ function ViewLoadingCtrl($scope) {
     });
 }
 ViewLoadingCtrl.$inject = ['$scope'];
+
+function GeneralMessageCtrl($scope, $timeout, GeneralMessage) {
+    $scope.isOpen = false;
+    $scope.message = {content: '', type: ''};
+
+    $scope.update = function() {
+	$scope.message.content = GeneralMessage.content;
+	$scope.message.type = 'alert-' + GeneralMessage.type;
+    }
+
+    $scope.$on('updateGeneralMessage', function() {
+	console.debug('GeneralMessageCtrl.updateGeneralMessage');
+	$scope.update();
+	$scope.isOpen = true;
+	$timeout(function() {
+	    $scope.isOpen = false;
+	}, 5000);
+    });
+
+    $scope.update();
+}
+GeneralMessageCtrl.$inject = ['$scope', '$timeout', 'GeneralMessage'];

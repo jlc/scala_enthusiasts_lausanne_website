@@ -51,7 +51,7 @@ function EditAnnouncementCtrl($scope, $routeParams, ContentAnnouncement) {
 EditAnnouncementCtrl.$inject = ['$scope', '$routeParams', 'ContentAnnouncement'];
 
 
-function EditSessionsCtrl($scope, $route, ContentSession) {
+function EditSessionsCtrl($scope, $route, ContentSession, GeneralMessage) {
     $scope.newSession = {type: 'new', data: {}};
 
     $scope.sessions = ContentSession.query(function(sessions) {
@@ -102,6 +102,9 @@ function EditSessionsCtrl($scope, $route, ContentSession) {
 
 	sess.$save(function(sess, headers) {
 	    console.debug("EditSessionsCtrl.update: session updated");
+
+	    GeneralMessage.update('Yeah buddy!', 'info');
+
 	    sess.date = new Date(Number(sess.date));
 	    session = sess;
 	});
@@ -115,6 +118,6 @@ function EditSessionsCtrl($scope, $route, ContentSession) {
 	});
     }
 }
-EditSessionsCtrl.$inject = ['$scope', '$route', 'ContentSession'];
+EditSessionsCtrl.$inject = ['$scope', '$route', 'ContentSession', 'GeneralMessage'];
 
 
