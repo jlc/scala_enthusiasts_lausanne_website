@@ -22,7 +22,7 @@ object UsersDao {
   }
 
   def getUser(email: User.Email): Option[User] = DB { session =>
-    session.get(ks \ CF.EmailUserUUID \ email.toString \ "uuid").flatMap { uuid =>
+    session.get(ks \ CF.UserIdsByEmail \ email.toString \ "uuid").flatMap { uuid =>
       getUser(UUID.fromString(uuid.value))
     }
   }
@@ -62,7 +62,7 @@ object UsersDao {
       val uuid = UUID.randomUUID()
 
       val keyUser = ks \ CF.User \ uuid.toString
-      val keyEmailUserUUID = ks \ CF.EmailUserUUID \ email
+      val keyEmailUserUUID = ks \ CF.UserIdsByEmail \ email
 
       val userValues =
         Insert(keyUser \ ("email", email)) :: Insert(keyUser \ ("group", Group.God().toString)) ::
@@ -77,7 +77,7 @@ object UsersDao {
       Logger.info("initialise: removing previous admin user...")
 
       session.remove(ks \ CF.User \ user.uuid.toString)
-      session.remove(ks \ CF.EmailUserUUID \ user.email.toString)
+      session.remove(ks \ CF.UserIdsByEmail \ user.email.toString)
     }
 
     Logger.info("initialise: creating admin user...")

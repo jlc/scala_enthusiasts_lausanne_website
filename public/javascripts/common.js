@@ -7,13 +7,18 @@
 angular.module('common', ['ngResource']).
 
     factory('ContentIntroduction', function($resource) {
-	var ContentIntroduction = $resource('/rest/content/introduction');
+	var ContentIntroduction = $resource('/content/introduction');
 	return ContentIntroduction;
     }).
 
     factory('ContentAnnouncement', function($resource) {
-	var ContentAnnouncement = $resource('/rest/content/announcement');
+	var ContentAnnouncement = $resource('/content/announcement');
 	return ContentAnnouncement;
+    }).
+
+    factory('ContentSession', function($resource) {
+	var ContentSession = $resource('/content/session/:uuid', {uuid: '@uuid'});
+	return ContentSession;
     }).
 
     // to enable animation, we declare a new directive (fade-it) that create animation

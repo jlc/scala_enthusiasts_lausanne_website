@@ -6,9 +6,10 @@ object DaoParams {
 
   object CF {
     val User = "User"
-    val EmailUserUUID = "EmailUserUUID"
+    val UserIdsByEmail = "UserIdsByEmail"
     val MiscContent = "MiscContent"
     val EnthusiastSession = "EnthusiastSession"
+    val EnthusiastSessionIdsByLang = "EnthusiastSessionIdsByLang"
   }
 
 }

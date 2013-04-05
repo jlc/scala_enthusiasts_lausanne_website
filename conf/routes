@@ -19,10 +19,14 @@ GET	/lang				controllers.Application.lang(l: String)
 GET	 /stream/otheruseragent	    controllers.Streamer.otherUserAgent
 GET	 /stream/individualmsg	    controllers.Streamer.individualMessage
 
-GET	 /rest/content/introduction	controllers.DataProvider.getIntroduction
-POST	 /rest/content/introduction	controllers.DataProvider.saveIntroduction
-GET	 /rest/content/announcement	controllers.DataProvider.getAnnouncement
-POST	 /rest/content/announcement	controllers.DataProvider.saveAnnouncement
+GET	 /content/introduction	controllers.DataProvider.getIntroduction
+POST	 /content/introduction	controllers.DataProvider.saveIntroduction
+GET	 /content/announcement	controllers.DataProvider.getAnnouncement
+POST	 /content/announcement	controllers.DataProvider.saveAnnouncement
+GET	 /content/session	controllers.DataProvider.listSession
+GET	 /content/session/:uuid	controllers.DataProvider.getSession(uuid)
+POST	 /content/session/:uuid	controllers.DataProvider.saveSession(uuid)
+DELETE	 /content/session/:uuid	controllers.DataProvider.deleteSession(uuid)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

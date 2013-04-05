@@ -2,28 +2,73 @@
 
 @import play.api.i18n.Messages
 
-<div fade-in="500">
-    <div class="row-fluid">
-	<legend>EPFL</legend>
-    </div> <!-- row-fluid -->
+<div fade-in="500" ng-controller="EditSessionsCtrl">
 
-    <div class="row-fluid">
-	<img src="@routes.Assets.at("images/logo_epfl.jpg")" alt="EPFL Logo"/>
-    </div> <!-- row-fluid -->
+    <div ng-repeat="sess in sessions">
+	<div class="well">
+	    <button type="button" class="close" ng-show="sess.type != 'new'" ng-click="destroy(sess.data)">&times;</button>
 
-    <div class="row-fluid">
-	<legend>Contact</legend>
-    </div> <!-- row-fluid -->
+	    <div class="row-fluid" ng-show="sess.type == 'new'">
+		<legend>Add a new session</legend>
+	    </div>
 
-    <div class="row-fluid">
-	EPFL</br>
-	CE 3 316 (Centre Est), Station 1</br>
-	CH-1015 Lausanne</br>
-	Switzerland</br>
-	</br>
-	Phone: +41 21 693 11 11</br>
-	accueil [at] epfl.ch</br>	
-	</br>
-	<a href="http://www.epfl.ch">www.epfl.ch</a>
-    </div> <!-- row-fluid -->
+	    <div class="row-fluid">
+		<form class="form-horizontal" name="formEdit">
+
+		    <!-- date -->
+		    <div class="control-group" ng-class="{error: formEdit.date.$invalid}">
+			<label class="control-label" for="date">Date</label>
+			<div class="controls">
+			    <input type="text" name="date" placeholder="Date" required ng-model="sess.data.date" ui-date="{dateFormat: 'dd MM yy'}"/>
+			    <span class="help-inline" ng-show="formEdit.date.$error.required">Please enter a date</span>
+			</div> <!-- controls -->
+		    </div> <!-- control-group -->
+
+		    <!-- title -->
+		    <div class="control-group" ng-class="{error: formEdit.title.$invalid}">
+			<label class="control-label" for="title">Title</label>
+			<div class="controls">
+			    <input type="text" name="title" placeholder="Title" required ng-model="sess.data.title">
+			    <span class="help-inline" ng-show="formEdit.title.$error.required">Please enter a title</span>
+			</div> <!-- controls -->
+		    </div> <!-- control-group -->
+
+		    <!-- speaker -->
+		    <div class="control-group" ng-class="{warning: sess.data.speaker == ''}">
+			<label class="control-label" for="speaker">Speaker</label>
+			<div class="controls">
+			    <input type="text" name="speaker" placeholder="Speaker" ng-model="sess.data.speaker">
+			    <span class="help-inline" ng-show="sess.data.speaker == ''">Are you sure there won't be any speaker?</span>
+			</div> <!-- controls -->
+		    </div> <!-- control-group -->
+
+		    <!-- content -->
+		    <div class="control-group" ng-class="{error: formEdit.content.$invalid}">
+			<label class="control-label" for="content">Content</label>
+			<div class="controls">
+			    <textarea name="content" rows="10" cols="60" placeholder="Introduction here" required ng-model="sess.data.content"></textarea>
+			    <span class="help-inline" ng-show="formEdit.content.$error.required">A content is required</span>
+			</div> <!-- controls -->
+		    </div> <!-- control-group -->
+
+		    <!-- actions -->
+		    <div class="control-group">
+			<div class="controls">
+			    <button type="submit" class="btn btn-primary" ng-disabled="formEdit.$invalid"  ng-click="create()" ng-show="sess.type == 'new'">Add</button>
+			    <button type="submit" class="btn btn-primary" ng-disabled="formEdit.$invalid"  ng-click="update(sess.data)" ng-show="sess.type == 'existing'">Update</button>
+			</div> <!-- controls -->
+		    </div> <!-- control-group -->
+
+		    <!-- language -->
+		    <div class="control-group warning">
+			<div class="controls">
+			    <span class="help-inline">Warning! Edit all languages!</span>
+			</div> <!-- controls -->
+		    </div> <!-- control-group -->
+
+		</form>
+	    </div> <!-- row-fluid -->
+	</div> <!-- well -->
+    </div> <!-- ng-repeat sessions -->
+
 </div>
