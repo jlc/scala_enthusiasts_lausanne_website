@@ -38,7 +38,6 @@ angular.module('common', ['ngResource']).
 
     directive('dynamicResizeRatio', function() {
 	return function(scope, elm, attrs) {
-	    console.debug("dynamicResizeRatio");
 
 	    function update(ratio) {
 		var width = $(elm).parent().width() * ratio;
@@ -56,3 +55,12 @@ angular.module('common', ['ngResource']).
 	    });
 	};
     });
+
+function ViewLoadingCtrl($scope) {
+    $scope.showLoading = true;
+
+    $scope.$on('$viewContentLoaded', function() {
+	$scope.showLoading = false;
+    });
+}
+ViewLoadingCtrl.$inject = ['$scope'];

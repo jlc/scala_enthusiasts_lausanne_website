@@ -16,7 +16,11 @@ externalJs = "https://maps.googleapis.com/maps/api/js?key=AIzaSyDb4NCzXMokpVNhBO
 	    </ul> <!-- nav-stacked -->
 	</div> <!-- span2 -->
 
-	<div class="span10 well" ng-view>
+	<div class="span10 well" ng-controller="ViewLoadingCtrl">
+	    <div ng-show="showLoading" style="text-align: center">
+		<img src="@routes.Assets.at("images/loading.gif")" alt="Loading...">
+	    </div>
+	    <div ng-view></div>
 	</div> <!-- span10 -->
 
     </div> <!-- row-fluid -->
