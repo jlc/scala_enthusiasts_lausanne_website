@@ -85,7 +85,7 @@ function EditSessionsCtrl($scope, $route, ContentSession, GeneralMessage) {
 	createdSession.$save(function(sess, headers) {
 	    console.debug("EditSessionsCtrl.create: session created");
 
-	    GeneralMessage.update($scope.text.sessionCreated);
+	    GeneralMessage.update($scope.text.sessionCreated, 'info');
 
 	    // update the view
 	    sess.date = new Date(Number(sess.date));
@@ -108,7 +108,7 @@ function EditSessionsCtrl($scope, $route, ContentSession, GeneralMessage) {
 	sess.$save(function(sess, headers) {
 	    console.debug("EditSessionsCtrl.update: session updated");
 
-	    GeneralMessage.update($scope.text.sessionUpdated);
+	    GeneralMessage.update($scope.text.sessionUpdated, 'info');
 
 	    sess.date = new Date(Number(sess.date));
 	    session = sess;
@@ -120,7 +120,7 @@ function EditSessionsCtrl($scope, $route, ContentSession, GeneralMessage) {
 
 	session.$delete(function(sess, headers) {
 	    console.debug("EditSessionsCtrl.update: session deleted");
-	    GeneralMessage.update($scope.text.sessionDeleted);
+	    GeneralMessage.update($scope.text.sessionDeleted, 'info');
 
 	    $route.reload();
 	});

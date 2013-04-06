@@ -2,13 +2,24 @@
 
 @import play.api.i18n.Messages
 
-<div fade-in="500">
-    <div class="row-fluid">
-	<legend>Contact</legend>
-    </div> <!-- row-fluid -->
+<div fade-in="500" ng-controller="SessionsCtrl">
 
-    <div class="row-fluid">
-	info@@segl.ch
-    </div> <!-- row-fluid -->
+    <div ng-repeat="sess in sessions">
 
-</div>
+	<div class="well">	    
+	    <div class="row-fluid">
+		<legend>{{sess.title}} - {{sess.date | date:'fullDate'}}</legend>
+	    </div> <!-- row-fluid -->
+
+	    <div class="row-fluid">
+		<span ng-show="sess.speaker != ''">with <strong>{{sess.speaker}}</strong></span>
+	    </div> <!-- row-fluid -->
+
+	    <div class="row-fluid" style="padding-top:10px">
+		<div ng-bind-html-unsafe="sess.content"></div>
+	    </div> <!-- row-fluid -->
+	</div> <!-- well -->
+
+    </div> <!-- ng-repeat -->
+
+</div> <!-- SessionsCtrl -->
