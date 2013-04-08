@@ -8,15 +8,15 @@
 
 	<div class="well">	    
 	    <div class="row-fluid">
-		<legend>{{sess.title}} - {{sess.date | date:'fullDate'}}</legend>
-	    </div> <!-- row-fluid -->
-
-	    <div class="row-fluid">
-		<span ng-show="sess.speaker != ''">with <strong>{{sess.speaker}}</strong></span>
+		<span class="pull-left">
+		    <div><h3>{{sess.title}}</h3></div>
+		    <div ng-show="sess.speaker != ''">with <strong>{{sess.speaker}}</strong></div>
+		</span>
+		<span class="pull-right"><h3><small>{{sess.date | date:'fullDate'}}</small></h3></span>
 	    </div> <!-- row-fluid -->
 
 	    <div class="row-fluid" style="padding-top:10px">
-		<div ng-bind-html-unsafe="sess.content"></div>
+		<div class="well well-small" ng-bind-html-unsafe="sess.content"></div>
 	    </div> <!-- row-fluid -->
 	</div> <!-- well -->
 
