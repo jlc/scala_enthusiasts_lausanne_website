@@ -102,7 +102,7 @@ object ContentDao {
       // TODO: quite ugly here since we execute 2 calls to cassandra for each session
       vs.map { kv =>
         getEnthusiastSession(kv._2)
-      }.flatten.toList
+      }.flatten.toList.sortBy(_.date).reverse
     }
   }
 
