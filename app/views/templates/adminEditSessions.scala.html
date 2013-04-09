@@ -9,7 +9,7 @@
 	    <button type="button" class="close" ng-show="sess.type != 'new'" ng-click="destroy(sess.data)">&times;</button>
 
 	    <div class="row-fluid" ng-show="sess.type == 'new'">
-		<legend>Add a new session</legend>
+		<legend>@Messages("tmpl.admineditsessions.addnew")</legend>
 	    </div>
 
 	    <div class="row-fluid">
@@ -17,52 +17,52 @@
 
 		    <!-- date -->
 		    <div class="control-group" ng-class="{error: formEdit.date.$invalid}">
-			<label class="control-label" for="date">Date</label>
+			<label class="control-label" for="date">@Messages("tmpl.admineditsessions.form.date")</label>
 			<div class="controls">
-			    <input type="text" name="date" placeholder="Date" required ng-model="sess.data.date" ui-date="{dateFormat: 'dd MM yy'}"/>
-			    <span class="help-inline" ng-show="formEdit.date.$error.required">Please enter a date</span>
+			    <input type="text" name="date" placeholder="@Messages("tmpl.admineditsessions.form.date")" required ng-model="sess.data.date" ui-date="{dateFormat: 'dd MM yy'}"/>
+			    <span class="help-inline" ng-show="formEdit.date.$error.required">@Messages("tmpl.admineditsessions.form.date.help")</span>
 			</div> <!-- controls -->
 		    </div> <!-- control-group -->
 
 		    <!-- title -->
 		    <div class="control-group" ng-class="{error: formEdit.title.$invalid}">
-			<label class="control-label" for="title">Title</label>
+			<label class="control-label" for="title">@Messages("tmpl.admineditsessions.form.title")</label>
 			<div class="controls">
-			    <input type="text" name="title" placeholder="Title" required ng-model="sess.data.title">
-			    <span class="help-inline" ng-show="formEdit.title.$error.required">Please enter a title</span>
+			    <input type="text" name="title" placeholder="@Messages("tmpl.admineditsessions.form.title")" required ng-model="sess.data.title">
+			    <span class="help-inline" ng-show="formEdit.title.$error.required">@Messages("tmpl.admineditsessions.form.title.help")</span>
 			</div> <!-- controls -->
 		    </div> <!-- control-group -->
 
 		    <!-- speaker -->
 		    <div class="control-group" ng-class="{warning: sess.data.speaker == ''}">
-			<label class="control-label" for="speaker">Speaker</label>
+			<label class="control-label" for="speaker">@Messages("tmpl.admineditsessions.form.speaker")</label>
 			<div class="controls">
-			    <input type="text" name="speaker" placeholder="Speaker" ng-model="sess.data.speaker">
-			    <span class="help-inline" ng-show="sess.data.speaker == ''">Are you sure there won't be any speaker?</span>
+			    <input type="text" name="speaker" placeholder="@Messages("tmpl.admineditsessions.form.speaker")" ng-model="sess.data.speaker">
+			    <span class="help-inline" ng-show="sess.data.speaker == ''">@Messages("tmpl.admineditsessions.form.speaker.help")</span>
 			</div> <!-- controls -->
 		    </div> <!-- control-group -->
 
 		    <!-- content -->
 		    <div class="control-group" ng-class="{error: formEdit.content.$invalid}">
-			<label class="control-label" for="content">Content</label>
+			<label class="control-label" for="content">@Messages("tmpl.admineditsessions.form.content")</label>
 			<div class="controls">
-			    <textarea name="content" rows="10" cols="60" placeholder="Introduction here" required ng-model="sess.data.content"></textarea>
-			    <span class="help-inline" ng-show="formEdit.content.$error.required">A content is required</span>
+			    <textarea name="content" rows="10" cols="60" placeholder="@Messages("tmpl.admineditsessions.form.content")" required ng-model="sess.data.content"></textarea>
+			    <span class="help-inline" ng-show="formEdit.content.$error.required">@Messages("tmpl.admineditsessions.form.content.help")</span>
 			</div> <!-- controls -->
 		    </div> <!-- control-group -->
 
 		    <!-- actions -->
 		    <div class="control-group">
 			<div class="controls">
-			    <button type="submit" class="btn btn-primary" ng-disabled="formEdit.$invalid"  ng-click="create()" ng-show="sess.type == 'new'">Add</button>
-			    <button type="submit" class="btn btn-primary" ng-disabled="formEdit.$invalid"  ng-click="update(sess.data)" ng-show="sess.type == 'existing'">Update</button>
+			    <button type="submit" class="btn btn-primary" ng-disabled="formEdit.$invalid"  ng-click="create()" ng-show="sess.type == 'new'">@Messages("tmpl.admineditsessions.form.button.add")</button>
+			    <button type="submit" class="btn btn-primary" ng-disabled="formEdit.$invalid"  ng-click="update(sess.data)" ng-show="sess.type == 'existing'">@Messages("tmpl.admineditsessions.form.button.update")</button>
 			</div> <!-- controls -->
 		    </div> <!-- control-group -->
 
 		    <!-- language -->
 		    <div class="control-group warning">
 			<div class="controls">
-			    <span class="help-inline">Warning! Edit all languages!</span>
+			    <span class="help-inline">@Messages("tmpl.admineditsessions.form.language.warning")</span>
 			</div> <!-- controls -->
 		    </div> <!-- control-group -->
 

@@ -72,13 +72,24 @@ tmpl.admineditintro.form.save = Sauvegarder
 tmpl.admineditintro.form.language.warning = Souvenez-vous d'editer l'introduction pour toutes les langues en les selectionnant en bas a droite.
 
 # template.adminEditSessions
-# todo
+tmpl.admineditsessions.addnew = Ajouter une nouvelle session
+tmpl.admineditsessions.form.date = Date
+tmpl.admineditsessions.form.date.help = Veuillez entrer une date
+tmpl.admineditsessions.form.title = Titre
+tmpl.admineditsessions.form.title.help = Veuillez entre un titre
+tmpl.admineditsessions.form.speaker = Invite
+tmpl.admineditsessions.form.speaker.help = Etes vous sur qu'il n'y aura pas d'invite?
+tmpl.admineditsessions.form.content = Contenu
+tmpl.admineditsessions.form.content.help = Un contenu est indispensable
+tmpl.admineditsessions.form.button.add = Ajouter
+tmpl.admineditsessions.form.button.update = Modifier
+tmpl.admineditsessions.form.language.warning = Avertissement! Veuillez creer une session pour chaque langue disponible!
 
 # template.meetingsAgenda
 tmpl.meetingsagenda.title = Agenda
 
 # template.meetingsSessions
-# todo
+tmpl.meetingssessions.withspeaker = avec
 
 # template.meetingsSpeakers
 # todo

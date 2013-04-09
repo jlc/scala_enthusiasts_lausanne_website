@@ -10,7 +10,7 @@
 	    <div class="row-fluid">
 		<span class="pull-left">
 		    <div><h3>{{sess.title}}</h3></div>
-		    <div ng-show="sess.speaker != ''">with <strong>{{sess.speaker}}</strong></div>
+		    <div ng-show="sess.speaker != ''">@{Messages("tmpl.meetingssessions.withspeaker")} <strong>{{sess.speaker}}</strong></div>
 		</span>
 		<span class="pull-right"><h3><small>{{sess.date | date:'fullDate'}}</small></h3></span>
 	    </div> <!-- row-fluid -->

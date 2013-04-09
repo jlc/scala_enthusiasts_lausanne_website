@@ -16,7 +16,7 @@
 	    <div class="control-group" ng-class="{warning: announce.title == ''}">
 		<label class="control-label" for="title">@Messages("tmpl.admineditannounce.form.title")</label>
 		<div class="controls">
-		    <input type="text" name="title" placeholder="Title" ng-model="announce.title">
+		    <input type="text" name="title" placeholder="@Messages("tmpl.admineditannounce.form.title")" ng-model="announce.title">
 		    <span class="help-inline" ng-show="announce.title == ''">@Messages("tmpl.admineditannounce.form.title.helpinline")</span>
 		</div> <!-- controls -->
 	    </div> <!-- control-group -->
@@ -25,7 +25,7 @@
 	    <div class="control-group" ng-class="{warning: announce.content == ''}">
 		<label class="control-label" for="content">@Messages("tmpl.admineditannounce.form.content")</label>
 		<div class="controls">
-		    <textarea name="content" rows="10" cols="60" placeholder="Great announcement here" ng-model="announce.content"></textarea>
+		    <textarea name="content" rows="10" cols="60" placeholder="@Messages("tmpl.admineditannounce.form.content")" ng-model="announce.content"></textarea>
 		    <span class="help-inline" ng-show="announce.content == ''">@Messages("tmpl.admineditannounce.form.content.helpinline")</span>
 		</div> <!-- controls -->
 	    </div> <!-- control-group -->
