@@ -20,29 +20,30 @@ footer.otherclients.visitor.on = sur
 footer.individualmessage.tmp = Une note pour vous:
 
 # index page
-index.title = Accueil
+index.menu.home = Accueil
 
 # meetings page
-meetings.title = Rendez-vous
 meetings.menu.agenda = Agenda
 meetings.menu.sessions = Sessions
 meetings.menu.speakers = Speakers
 
 # address page
-address.title = Addresse
 address.menu.map = Carte
 address.menu.contact = Contacte
 
 # sponsors page
-sponsors.title = Sponsors
 sponsors.menu.crossingtech = Crossing-Tech
 sponsors.menu.epfl = EPFL
 
 # admin page
-admin.title = Administration
 admin.menu.edit.intro = Edition de l'introduction
 admin.menu.edit.announce = Edition de l'annonce
 admin.menu.edit.sessions = Edition des sessions
+admin.intro.updated = Introduction mise a jour
+admin.announce.updated = Annonce mise a jour
+admin.session.updated = Session mise a jour
+admin.session.created = Session mise a jour
+admin.session.deleted = Session mise a jour
 
 # template.addressContact
 tmpl.addresscontact.title = Contacte

@@ -8,6 +8,15 @@ body {
     padding-top: 60px;
 }
 
+.span0 {
+    width: 0;
+    margin-left: 0;
+    display: inline;
+    min-height: 0;
+    min-width: 0;
+    box-sizing: content-box;
+}
+
 /*
  * Those rules remove default accordion's margins
  */

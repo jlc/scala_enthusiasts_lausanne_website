@@ -7,14 +7,14 @@
     <div class="navbar-inner">
 
 	<div class="container">
-	    <a class="brand" href="@routes.Application.index">@Messages("menu.home")</a>
+	    <a class="brand" href="#/index">@Messages("menu.home")</a>
 
 	    <ul class="nav">
-		<li><a href="@routes.Application.meetings">@Messages("menu.meetings")</a></li>
-		<li><a href="@routes.Application.address">@Messages("menu.address")</a></li>
-		<li><a href="@routes.Application.sponsors">@Messages("menu.sponsors")</a></li>
+		<li><a href="#/meetings/agenda">@Messages("menu.meetings")</a></li>
+		<li><a href="#/address/map">@Messages("menu.address")</a></li>
+		<li><a href="#/sponsors/crossing-tech">@Messages("menu.sponsors")</a></li>
 		@if(user.group == Group.God()) {
-		  <li><a href="@routes.Application.admin"><i class="icon-asterisk"></i></a></li>
+		  <li><a href="#/admin/edit-introduction"><i class="icon-asterisk"></i></a></li>
 		}
 	    </ul>
 

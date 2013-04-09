@@ -4,15 +4,12 @@
  */
 
 /*
- * Angular module
- */
-
-angular.module('index', ['common']);
-
-
-/*
  * Angular Controllers
  */
+
+function IndexCtrl($scope) {
+}
+IndexCtrl.$inject = ['$scope'];
 
 function IntroductionCtrl($scope, ContentIntroduction) {
     $scope.intro = ContentIntroduction.get({}, function(intro) {

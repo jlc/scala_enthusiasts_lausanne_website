@@ -33,30 +33,27 @@ angular.module('common', ['ngResource']).
 	}
     }).
 
-    directive('copyToModel', function($parse) {
-	return function(scope, elem, attrs) {
-	    $parse(attrs.ngModel).assign(scope, attrs.copyToModel);
-	}
+    // Be aware, using Texts will be filled up _after_ controllers initialisation
+    // due to asText copy
+    factory('Texts', function() {
+	return {};
     }).
 
-    // to enable animation, we declare a new directive (fade-it) that create animation
-    directive('fadeIn', function() {
+    directive('asText', function($parse, Texts) {
+	// This directive is very anti-angular since it copy from the view to the model.
+	// angular is supposed to work the other way arround. However, if well controled, this is ok.
 	return {
-	    compile: function(elm) {
-		// set default
-		//$(elm).fadeOut(0);
-		$(elm).css('opacity', 0.0);
-
-		// executed when element is displayed
-		return function(scope, elm, attrs) {
-
-		    scope.$watch(attrs.fadeIn, function(duration) {
-			$(elm).animate({opacity: 1.0});
-			//$(elm).fadeIn(duration);
-		    });
+	    compile: function(elm, attrs, transclude) {
+		return {
+		    pre: function preLink(scope, elem, attrs, ctrl) {
+			// NOTE: copy as earlier as possible
+			$parse(attrs.ngModel).assign(Texts, attrs.asText);
+		    },
+		    post: function postLink(scope, elem, attrs, ctrl) {}
 		}
-	    }
-	};
+	    },
+	    link: function postLink(scope, elem, attrs) {}
+	}
     }).
 
     directive('dynamicResizeRatio', function() {
@@ -77,7 +74,64 @@ angular.module('common', ['ngResource']).
 		update(attrs.dynamicResizeRatio);
 	    });
 	};
+    }).
+
+    // to enable animation, we declare a new directive (fade-it) that create animation
+    directive('fadeIt', function() {
+	return {
+	    compile: function(elm) {
+		// set default
+		$(elm).css('opacity', 0.0);
+
+		// executed when element is displayed
+		return function(scope, elm, attrs) {
+		    $(elm).animate({opacity: 1.0}, 1000);
+		}
+	    }
+	};
+    }).
+
+    directive('locationWithGoogleMap', function($timeout) {
+	return {
+	    link: function(scope, elm, attrs) {
+		function renderMap() {
+		    $(elm).gmap3({
+			map: {
+			    options: {
+				center: [46.517454, 6.562097],
+				zoom: 12,
+				mapTypeId: google.maps.MapTypeId.ROADMAP,
+				//disableDefaultUI: true,
+				// controls
+				panControl: false,
+				zoomControl: false,
+				mapTypeControl: true,
+				scaleControl: true,
+				streetViewControl: false,
+				overviewMapControl: false,
+				mapTypeControlOptions: {
+				    style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+				},
+				scrollWheel: true
+			    }
+			},
+			marker: {
+			    latLng: [46.517454, 6.562097],
+			    options: {
+				icon: new google.maps.MarkerImage('/assets/images/magicshow.png', new google.maps.Size(32, 37, 'px', 'px'))
+			    }
+			}
+		    });
+		}
+
+		$timeout(function(){
+		    renderMap();
+		    //$(elm).gmap3({trigger: 'resize'});
+		}, 500);
+	    }
+	};
     });
+
 
 function ViewLoadingCtrl($scope) {
     $scope.showLoading = true;
@@ -109,3 +163,4 @@ function GeneralMessageCtrl($scope, $timeout, GeneralMessage) {
     $scope.update();
 }
 GeneralMessageCtrl.$inject = ['$scope', '$timeout', 'GeneralMessage'];
+

@@ -4,10 +4,6 @@
 
 # Pages
 GET     /                           controllers.Application.index
-GET	/meetings		    controllers.Application.meetings
-GET	/address		    controllers.Application.address
-GET	/sponsors		    controllers.Application.sponsors
-GET	/admin			    controllers.Application.admin
 GET	/admin/initialise	    controllers.Application.initialise
 
 GET	/auth/logout		    controllers.Application.logout
@@ -32,6 +28,7 @@ DELETE	 /content/session/:uuid	controllers.DataProvider.deleteSession(uuid)
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 # Templates
+GET	/templates/index				controllers.Templates.index
 GET	/templates/address/map				controllers.Templates.addressMap
 GET	/templates/address/contact			controllers.Templates.addressContact
 GET	/templates/sponsors/crossing-tech		controllers.Templates.sponsorsCrossingTech

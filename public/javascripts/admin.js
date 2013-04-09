@@ -4,26 +4,10 @@
  */
 
 /*
- * Angular module
- */
-
-angular.module('admin', ['common', 'ui']).
-
-    // configure view routes
-    config(['$routeProvider', function($routeProvider) {
-	$routeProvider.
-	    when('/edit-introduction', {templateUrl: '/templates/admin/edit-introduction', controller: EditIntroductionCtrl}).
-	    when('/edit-announcement', {templateUrl: '/templates/admin/edit-announcement', controller: EditAnnouncementCtrl}).
-	    when('/edit-sessions', {templateUrl: '/templates/admin/edit-sessions', controller: EditSessionsCtrl}).
-	    otherwise({redirectTo: '/edit-introduction'});
-    }]);
-
-
-/*
  * Angular Controllers
  */
 
-function EditIntroductionCtrl($scope, $routeParams, ContentIntroduction) {
+function EditIntroductionCtrl($scope, $routeParams, ContentIntroduction, Texts, GeneralMessage) {
     $scope.intro = ContentIntroduction.get({}, function(intro) {
 	console.debug("EditIntroductionCtrl.intro.callback: ");
 	console.debug(intro);
@@ -31,13 +15,15 @@ function EditIntroductionCtrl($scope, $routeParams, ContentIntroduction) {
     });
 
     $scope.save = function() {
-	$scope.intro.$save();
+	$scope.intro.$save(function(intro, headers) {
+	    GeneralMessage.update(Texts.admin.intro.updated, 'info');
+	});
     }
 }
-EditIntroductionCtrl.$inject = ['$scope', '$routeParams', 'ContentIntroduction'];
+EditIntroductionCtrl.$inject = ['$scope', '$routeParams', 'ContentIntroduction', 'Texts', 'GeneralMessage'];
 
 
-function EditAnnouncementCtrl($scope, $routeParams, ContentAnnouncement) {
+function EditAnnouncementCtrl($scope, $routeParams, ContentAnnouncement, Texts, GeneralMessage) {
     $scope.announce = ContentAnnouncement.get({}, function(ann) {
 	console.debug("EditAnnouncementCtrl.announce.callback: ");
 	console.debug(ann);
@@ -45,13 +31,15 @@ function EditAnnouncementCtrl($scope, $routeParams, ContentAnnouncement) {
     });
 
     $scope.save = function() {
-	$scope.announce.$save();
+	$scope.announce.$save(function(ann, headers) {
+	    GeneralMessage.update(Texts.admin.announce.updated, 'info');
+	});
     }
 }
-EditAnnouncementCtrl.$inject = ['$scope', '$routeParams', 'ContentAnnouncement'];
+EditAnnouncementCtrl.$inject = ['$scope', '$routeParams', 'ContentAnnouncement', 'Texts', 'GeneralMessage'];
 
 
-function EditSessionsCtrl($scope, $route, ContentSession, GeneralMessage) {
+function EditSessionsCtrl($scope, $route, ContentSession, Texts, GeneralMessage) {
     $scope.newSession = {type: 'new', data: {}};
 
     //$scope.text will be filled by the view (yes! not the angular way, but usefull to reuse server internationalisation)
@@ -85,7 +73,7 @@ function EditSessionsCtrl($scope, $route, ContentSession, GeneralMessage) {
 	createdSession.$save(function(sess, headers) {
 	    console.debug("EditSessionsCtrl.create: session created");
 
-	    GeneralMessage.update($scope.text.sessionCreated, 'info');
+	    GeneralMessage.update(Texts.admin.session.created, 'info');
 
 	    // update the view
 	    sess.date = new Date(Number(sess.date));
@@ -108,7 +96,7 @@ function EditSessionsCtrl($scope, $route, ContentSession, GeneralMessage) {
 	sess.$save(function(sess, headers) {
 	    console.debug("EditSessionsCtrl.update: session updated");
 
-	    GeneralMessage.update($scope.text.sessionUpdated, 'info');
+	    GeneralMessage.update(Texts.admin.session.updated, 'info');
 
 	    sess.date = new Date(Number(sess.date));
 	    session = sess;
@@ -120,12 +108,12 @@ function EditSessionsCtrl($scope, $route, ContentSession, GeneralMessage) {
 
 	session.$delete(function(sess, headers) {
 	    console.debug("EditSessionsCtrl.update: session deleted");
-	    GeneralMessage.update($scope.text.sessionDeleted, 'info');
+	    GeneralMessage.update(Texts.admin.session.deleted, 'info');
 
 	    $route.reload();
 	});
     }
 }
-EditSessionsCtrl.$inject = ['$scope', '$route', 'ContentSession', 'GeneralMessage'];
+EditSessionsCtrl.$inject = ['$scope', '$route', 'ContentSession', 'Texts', 'GeneralMessage'];
 
 

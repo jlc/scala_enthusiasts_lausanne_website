@@ -5,6 +5,10 @@ import play.api.mvc._
 
 object Templates extends Controller with LangHelper {
 
+  def index = DiscretGuardedAction { implicit request => user =>
+    Ok(views.html.templates.indexHome()(clientLanguage))
+  }
+
   def addressMap = DiscretGuardedAction { implicit request => user =>
     Ok(views.html.templates.addressMap()(clientLanguage))
   }

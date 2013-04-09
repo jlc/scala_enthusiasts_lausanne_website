@@ -1,13 +1,12 @@
-@(ngAppModule: Option[String] = None, extraJs: List[String] = Nil, extraCss: List[String] = Nil,
-externalJs: List[String] = Nil, externalCss: List[String] = Nil)(subTitle: String)(content: Html)(implicit user: User, lang: Lang)
+@(extraJs: List[String] = Nil, extraCss: List[String] = Nil,
+externalJs: List[String] = Nil, externalCss: List[String] = Nil)(content: Html)(implicit user: User, lang: Lang)
 
 @import play.api.i18n.Messages
 
 <!DOCTYPE html>
-<html ng-app="@ngAppModule.getOrElse("")">
+<html ng-app="segl">
     <head>
-        <title>@Messages("main.title") - @subTitle</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <title>@Messages("main.title")</title>
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
 
 	@* jquery *@
@@ -40,11 +39,21 @@ externalJs: List[String] = Nil, externalCss: List[String] = Nil)(subTitle: Strin
 	<![endif]-->
 
 	@* google map (key linked to jlchasseriau@gmail.com) and gmap3 jquery plugin *@
-	@* loaded when required *@
-	
+        <script src="@routes.Assets.at("javascripts/gmap3/gmap3.js")" type="text/javascript"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDb4NCzXMokpVNhBOhu0mlje_ir61NkeqA&sensor=false" type="text/javascript"></script>
+
 	@* application specific *@
 	<link rel="stylesheet" href="@routes.Assets.at("stylesheets/common.css")">
+	<link rel="stylesheet" href="@routes.Assets.at("stylesheets/address.css")">
+        <link rel="stylesheet" href="@routes.Assets.at("stylesheets/main.css")">
         <script src="@routes.Assets.at("javascripts/common.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/menu.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/footer.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/index.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/address.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/meetings.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/sponsors.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/admin.js")" type="text/javascript"></script>
         <script src="@routes.Assets.at("javascripts/main.js")" type="text/javascript"></script>
 
 	@for(js <- extraJs) {
