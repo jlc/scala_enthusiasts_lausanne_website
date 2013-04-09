@@ -8,6 +8,24 @@
  */
 
 function AgendaCtrl($scope, $routeParams) {
+    $scope.eventSource = {
+	url: 'https://www.google.com/calendar/feeds/scala.enthusiasts.lausanne%40gmail.com/public/basic',
+	className: 'badge badge-info',
+	currentTimezone: 'Europe/Zurich'
+    };
+
+    $scope.fullCalendarSettings = {
+	editable: false,
+	firstDay: 1,
+	aspectRatio: 1.8,
+	header: {
+	    left: 'today prev,next',
+	    center: 'month agendaWeek',
+	    right: 'title'
+	}
+    };
+
+    $scope.eventSources = [$scope.eventSource];
 }
 AgendaCtrl.$inject = ['$scope', '$routeParams'];
 
