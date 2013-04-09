@@ -109,6 +109,12 @@ function DynamicMenuCtrl($scope, $location, $timeout, Texts) {
 	//console.debug($scope.links);
 	if ($scope.links.length > 0) $scope.showMenu = true;
 	else $scope.showMenu = false;
+
+	/*
+	console.debug('$routeChangeStart: url: ' + $location.url());
+	console.debug('$routeChangeStart: hash ' + $location.hash());
+	console.debug('$routeChangeStart: path ' + $location.path());
+	*/
     });
 }
 DynamicMenuCtrl.$inject = ['$scope', '$location', '$timeout', 'Texts'];

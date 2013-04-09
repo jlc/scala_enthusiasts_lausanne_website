@@ -6,7 +6,8 @@
 angular.module('segl', ['common', 'ui']).
 
     // configure view routes
-    config(['$routeProvider', function($routeProvider) {
+    config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+
 	$routeProvider.
 	    // index
 	    when('/index', {

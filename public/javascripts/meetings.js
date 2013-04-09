@@ -11,7 +11,7 @@ function AgendaCtrl($scope, $routeParams) {
 }
 AgendaCtrl.$inject = ['$scope', '$routeParams'];
 
-function SessionsCtrl($scope, ContentSession) {
+function SessionsCtrl($scope, $location, ContentSession) {
     $scope.sessions = ContentSession.query(function(sessions) {
 	console.debug("SessionCtrl.sessions.callback: ");
 	console.debug(sessions);
@@ -23,8 +23,17 @@ function SessionsCtrl($scope, ContentSession) {
 	    return elm;
 	});
     });
+
+    $scope.$on('$routeChangeStart', function(next, current) {
+	if ($location.path() == '/meetings/sessions')
+	    $scope.showSessionsMenu = true;
+	else
+	    $scope.showSessionsMenu = false;
+    });
+
+    $scope.showSessionsMenu = false;
 }
-SessionsCtrl.$inject = ['$scope', 'ContentSession'];
+SessionsCtrl.$inject = ['$scope', '$location', 'ContentSession'];
 
 function SpeakersCtrl($scope, $routeParams) {
 }
