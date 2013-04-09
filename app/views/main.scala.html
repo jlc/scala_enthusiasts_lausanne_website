@@ -38,6 +38,12 @@ externalJs: List[String] = Nil, externalCss: List[String] = Nil)(content: Html)(
             <script src="@routes.Assets.at("javascripts/angular-ui/angular-ui-ieshiv.js")" type="text/javascript"></script>
 	<![endif]-->
 
+	@* jquery-ui plugin: fullcalendar (http://arshaw.com/fullcalendar) *@
+        <script src="@routes.Assets.at("javascripts/jquery-ui-fullcalendar/fullcalendar.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/jquery-ui-fullcalendar/gcal.js")" type="text/javascript"></script>
+	<link rel="stylesheet" href="@routes.Assets.at("stylesheets/jquery-ui-fullcalendar/fullcalendar.css")">
+	<link rel="stylesheet" href="@routes.Assets.at("stylesheets/jquery-ui-fullcalendar/fullcalendar.print.css")">
+
 	@* google map (key linked to jlchasseriau@gmail.com) and gmap3 jquery plugin *@
         <script src="@routes.Assets.at("javascripts/gmap3/gmap3.js")" type="text/javascript"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDb4NCzXMokpVNhBOhu0mlje_ir61NkeqA&sensor=false" type="text/javascript"></script>
