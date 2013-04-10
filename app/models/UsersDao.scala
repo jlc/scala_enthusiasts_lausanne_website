@@ -83,39 +83,5 @@ object UsersDao {
     }
   }}
 
-  def initialise() { DB { session =>
-    object Default {
-      val email = "admin@admin.com"
-      val password = "password"
-      val uuid = UUID.randomUUID()
-
-      val keyUser = ks \ CF.User \ uuid.toString
-      val keyEmailUserUUID = ks \ CF.UserIdsByEmail \ email
-
-      val userValues =
-        Insert(keyUser \ ("email", email)) :: Insert(keyUser \ ("group", Group.God().toString)) ::
-        Insert(keyUser \ ("realname", "admin")) :: Insert(keyUser \ ("password", password)) :: Insert(keyUser \ ("twitter", "@admin")) :: Nil
-
-      val emailUserValues =
-        Insert(keyEmailUserUUID \ ("uuid", uuid.toString)) :: Nil
-    }
-
-    getUser(User.Email("admin@admin")).map { user =>
-      Logger.info("initialise: admin user already exists ("+user.uuid.toString+")")
-      Logger.info("initialise: removing previous admin user...")
-
-      session.remove(ks \ CF.User \ user.uuid.toString)
-      session.remove(ks \ CF.UserIdsByEmail \ user.email.toString)
-    }
-
-    Logger.info("initialise: creating admin user...")
-    // NOTE: using '->' notation generate an '[InvalidRequestException: null]', use the second form instead
-    //session.insert(Default.keyUser \ ("email" -> Default.email))
-    //session.insert(Default.keyUser \ ("email", Default.email))
-
-    session.batch(Default.userValues)
-    session.batch(Default.emailUserValues)
-    Logger.info("initialise: done")
-  }}
 }
 

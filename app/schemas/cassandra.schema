@@ -28,3 +28,11 @@ create column family MiscContent
        and comparator = 'UTF8Type'
        and default_validation_class = 'UTF8Type';
 
+set User[56eca0fb-651a-4dd5-b262-d91b1c6dbc15][email] = 'admin@admin.com';
+set User[56eca0fb-651a-4dd5-b262-d91b1c6dbc15][group] = 'God';
+set User[56eca0fb-651a-4dd5-b262-d91b1c6dbc15][password] = 'password';
+set User[56eca0fb-651a-4dd5-b262-d91b1c6dbc15][realname] = 'Administrator';
+set User[56eca0fb-651a-4dd5-b262-d91b1c6dbc15][twitter] = '@segladmin';
+
+set UserIdsByEmail['admin@admin.com'][uuid] = '56eca0fb-651a-4dd5-b262-d91b1c6dbc15';
+

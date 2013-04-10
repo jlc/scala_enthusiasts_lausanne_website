@@ -4,7 +4,6 @@
 
 # Pages
 GET     /                           controllers.Application.index
-GET	/admin/initialise	    controllers.Application.initialise
 
 GET	/auth/logout		    controllers.Application.logout
 POST	 /auth/authenticate	    controllers.Application.authenticate

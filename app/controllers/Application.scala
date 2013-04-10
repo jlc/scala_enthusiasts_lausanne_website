@@ -30,12 +30,6 @@ object Application extends Controller with LangHelper {
     }
   }
 
-  // TODO: this should definitely be removed!
-  def initialise = Action { implicit request =>
-    UsersDao.initialise()
-    Ok("done")
-  }
-
   /*
    * Authentication
    */
