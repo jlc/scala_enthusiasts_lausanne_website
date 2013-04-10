@@ -39,11 +39,15 @@ sponsors.menu.epfl = EPFL
 admin.menu.edit.intro = Edition de l'introduction
 admin.menu.edit.announce = Edition de l'annonce
 admin.menu.edit.sessions = Edition des sessions
+admin.menu.edit.password = Edition du mot de passe
 admin.intro.updated = Introduction mise a jour
 admin.announce.updated = Annonce mise a jour
 admin.session.updated = Session mise a jour
-admin.session.created = Session mise a jour
-admin.session.deleted = Session mise a jour
+admin.session.created = Session cree
+admin.session.deleted = Session effacee
+admin.password.saved = Mot de passe sauvegarde
+admin.password.dontmatch = Nouveaux mot de passe differents
+admin.password.wrongoldpassword = Ancien mot de pass incorect
 
 # template.addressContact
 tmpl.addresscontact.title = Contacte
@@ -84,6 +88,17 @@ tmpl.admineditsessions.form.content.help = Un contenu est indispensable
 tmpl.admineditsessions.form.button.add = Ajouter
 tmpl.admineditsessions.form.button.update = Modifier
 tmpl.admineditsessions.form.language.warning = Avertissement! Veuillez creer une session pour chaque langue disponible!
+
+# template.adminEditPassword
+tmpl.admineditpwd.title = Changement du mot de passe administrateur
+tmpl.admineditpwd.form.oldpassword = Mot de passe actuel
+tmpl.admineditpwd.form.oldpassword.help = Veuillez specifier votre mot de passe actuel
+tmpl.admineditpwd.form.newpassword = Nouveau mot de passe
+tmpl.admineditpwd.form.newpassword.help = Veuillez specifier gore nouveau mot de passe
+tmpl.admineditpwd.form.newpasswordbis = Verification du nouveau mot de passe
+tmpl.admineditpwd.form.newpasswordbis.help = Veuilleiz re-entrer votre nouveau mot de passe
+tmpl.admineditpwd.form.newpasswordbis.dontmatch.help = Les nouveaux mots de passe sont differents
+tmpl.admineditpwd.form.save = Sauvegarder
 
 # template.meetingsAgenda
 tmpl.meetingsagenda.title = Agenda

@@ -2,8 +2,10 @@ package models
 
 import java.util.UUID
 
-case class User(uuid: UUID, group: Group, realname: String, email: User.Email, password: String, twitter: String)
-
+case class User(uuid: UUID, group: Group, realname: String, email: User.Email, password: String, twitter: String) {
+  def withPassword(newPassword: String) =
+    User(uuid, group, realname, email, newPassword, twitter)
+}
 
 object User {
 

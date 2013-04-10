@@ -23,7 +23,7 @@ import play.api.libs.EventSource
 import play.api.libs.json.{Json, JsValue}
 import play.api.libs.iteratee.{Concurrent, Enumeratee, Enumerator, Iteratee}
 
-import models.{MiscContent, EnthusiastSession, ContentDao, Group}
+import models.{MiscContent, EnthusiastSession, ContentDao, Group, UsersDao}
 import models.ContentWrites._
 
 object DataProvider extends Controller with LangHelper {
@@ -89,6 +89,43 @@ object DataProvider extends Controller with LangHelper {
         val json = Json.toJson(eSession)
         Logger.debug("saveSession: uuid: " + suuid + " - json: " + json)
         Ok(json)
+      }
+    )
+  }
+
+  def savePassword = DiscretGuardedAction.restrictedTo(Group.God()) { implicit request => user =>
+    val textForm = Form(
+      tuple(
+        "oldPassword" -> nonEmptyText,
+        "newPassword" -> nonEmptyText,
+        "newPasswordBis" -> nonEmptyText
+      )
+    )
+
+    textForm.bindFromRequest.fold(
+      formWithError => {
+        Logger.debug("savePassword: form with error: " + formWithError)
+        Ok(Json.obj("return" -> false))
+      },
+      form => {
+        val (oldPassword, newPassword, newPasswordBis) = (form._1.trim, form._2.trim, form._3.trim)
+
+        // check new password
+        if (newPassword != newPasswordBis) {
+          Logger.debug("savePassword: " + user.uuid + " new password does not match")
+          Ok(Json.obj("say" -> "dontmatch"))
+        }
+        // check old password
+        else if (user.password != oldPassword) {
+          Logger.warn("savePassword: " + user.uuid + " old password not valid")
+          Ok(Json.obj("say" -> "wrongoldpassword"))
+        }
+        else {
+          Logger.debug("savePassword: " + user.uuid + " saving new password")
+          val updatedUser = user.withPassword(newPassword)
+          UsersDao.saveUser(updatedUser)
+          Ok(Json.obj("say" -> "ok"))
+        }
       }
     )
   }

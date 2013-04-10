@@ -55,6 +55,34 @@ object UsersDao {
     }
   }
 
+  def saveUser(user: User) { DB { session =>
+    val keyUser = ks \ CF.User \ user.uuid.toString
+    val keyEmailUserUUID = ks \ CF.UserIdsByEmail \ user.email.value
+
+    val userValues =
+      Insert(keyUser \ ("email", user.email.value)) :: Insert(keyUser \ ("group", Group.God().toString)) ::
+      Insert(keyUser \ ("realname", user.realname)) :: Insert(keyUser \ ("password", user.password)) ::
+      Insert(keyUser \ ("twitter", user.twitter)) :: Nil
+
+    val emailUserValues =
+      Insert(keyEmailUserUUID \ ("uuid", user.uuid.toString)) :: Nil
+
+    session.batch(userValues)
+  }}
+
+  def deleteUser(uuid: UUID) { DB { session =>
+    val key = ks \ CF.User \ uuid.toString
+
+    getUser(uuid).map { user =>
+      Logger.debug("UsersDao.deleteUser: user uuid: " + uuid.toString)
+
+      val values =
+        Delete(ks \ CF.User \ user.uuid.toString) ::
+        Delete(ks \ CF.UserIdsByEmail \ user.email.toString)
+      session.batch(values)
+    }
+  }}
+
   def initialise() { DB { session =>
     object Default {
       val email = "admin@admin.com"

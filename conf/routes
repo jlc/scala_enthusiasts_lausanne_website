@@ -23,6 +23,7 @@ GET	 /content/session	controllers.DataProvider.listSession
 GET	 /content/session/:uuid	controllers.DataProvider.getSession(uuid)
 POST	 /content/session/:uuid	controllers.DataProvider.saveSession(uuid)
 DELETE	 /content/session/:uuid	controllers.DataProvider.deleteSession(uuid)
+POST	 /content/user/password	controllers.DataProvider.savePassword
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
@@ -39,4 +40,5 @@ GET	/templates/meetings/speakers			controllers.Templates.meetingsSpeakers
 GET	/templates/admin/edit-introduction		controllers.Templates.adminEditIntroduction
 GET	/templates/admin/edit-announcement		controllers.Templates.adminEditAnnouncement
 GET	/templates/admin/edit-sessions			controllers.Templates.adminEditSessions
+GET	/templates/admin/edit-password			controllers.Templates.adminEditPassword
 

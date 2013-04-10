@@ -39,11 +39,15 @@ sponsors.menu.epfl = EPFL
 admin.menu.edit.intro = Edit introduction
 admin.menu.edit.announce = Edit announcement
 admin.menu.edit.sessions = Edit sessions
+admin.menu.edit.password = Edit password
 admin.intro.updated = Introduction updated
 admin.announce.updated = Announce updated
 admin.session.updated = Session updated
 admin.session.created = Session created
 admin.session.deleted = Session deleted
+admin.password.saved = Password saved
+admin.password.dontmatch = New password mismatch
+admin.password.wrongoldpassword = Wrong old password
 
 # template.addressContact
 tmpl.addresscontact.title = Contact
@@ -84,6 +88,17 @@ tmpl.admineditsessions.form.content.help = A content is required
 tmpl.admineditsessions.form.button.add = Add
 tmpl.admineditsessions.form.button.update = Update
 tmpl.admineditsessions.form.language.warning = Warning! Please, create a session for all available languages!
+
+# template.adminEditPassword
+tmpl.admineditpwd.title = Change admin password
+tmpl.admineditpwd.form.oldpassword = Current password
+tmpl.admineditpwd.form.oldpassword.help = Please, specify your current password
+tmpl.admineditpwd.form.newpassword = New password
+tmpl.admineditpwd.form.newpassword.help = Please, specify your new password
+tmpl.admineditpwd.form.newpasswordbis = Repeat new password
+tmpl.admineditpwd.form.newpasswordbis.help = Please, specify again your new password
+tmpl.admineditpwd.form.newpasswordbis.dontmatch.help = New passwords don't match
+tmpl.admineditpwd.form.save = Save
 
 # template.meetingsAgenda
 tmpl.meetingsagenda.title = Agenda

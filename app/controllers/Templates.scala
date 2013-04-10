@@ -3,6 +3,8 @@ package controllers
 import play.api._
 import play.api.mvc._
 
+import models.Group
+
 object Templates extends Controller with LangHelper {
 
   def index = DiscretGuardedAction { implicit request => user =>
@@ -37,16 +39,20 @@ object Templates extends Controller with LangHelper {
     Ok(views.html.templates.meetingsSpeakers()(clientLanguage))
   }
 
-  def adminEditIntroduction = DiscretGuardedAction { implicit request => user =>
+  def adminEditIntroduction = DiscretGuardedAction.restrictedTo(Group.God()) { implicit request => user =>
     Ok(views.html.templates.adminEditIntroduction()(clientLanguage))
   }
 
-  def adminEditAnnouncement = DiscretGuardedAction { implicit request => user =>
+  def adminEditAnnouncement = DiscretGuardedAction.restrictedTo(Group.God()) { implicit request => user =>
     Ok(views.html.templates.adminEditAnnouncement()(clientLanguage))
   }
 
-  def adminEditSessions = DiscretGuardedAction { implicit request => user =>
+  def adminEditSessions = DiscretGuardedAction.restrictedTo(Group.God()) { implicit request => user =>
     Ok(views.html.templates.adminEditSessions()(clientLanguage))
+  }
+
+  def adminEditPassword = DiscretGuardedAction.restrictedTo(Group.God()) { implicit request => user =>
+    Ok(views.html.templates.adminEditPassword()(clientLanguage))
   }
 
 }

@@ -62,6 +62,10 @@ angular.module('segl', ['common', 'ui']).
 		templateUrl: '/templates/admin/edit-sessions',
 		controller: EditSessionsCtrl
 	    }).
+	    when('/admin/edit-password', {
+		templateUrl: '/templates/admin/edit-password',
+		controller: EditPasswordCtrl
+	    }).
 
 	    otherwise({redirectTo: '/index'});
     }]);

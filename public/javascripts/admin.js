@@ -116,4 +116,29 @@ function EditSessionsCtrl($scope, $route, ContentSession, Texts, GeneralMessage)
 }
 EditSessionsCtrl.$inject = ['$scope', '$route', 'ContentSession', 'Texts', 'GeneralMessage'];
 
+function EditPasswordCtrl($scope, $resource, Texts, GeneralMessage) {
+    var UserPassword = $resource('/content/user/password');
+
+    $scope.oldPassword = '';
+    $scope.newPassword = '';
+    $scope.newPasswordBis = '';
+
+    $scope.save = function() {
+	var userPassword = new UserPassword();
+	userPassword.oldPassword = $scope.oldPassword;
+	userPassword.newPassword = $scope.newPassword;
+	userPassword.newPasswordBis = $scope.newPasswordBis;
+
+	userPassword.$save(function (answer, headers) {
+	    console.debug('EditPasswordCtrl.save.callbeck: answer: ' + answer.say);
+	    if (answer.say == 'dontmatch')
+		GeneralMessage.update(Texts.admin.password.dontmatch, 'error');
+	    else if (answer.say == 'wrongoldpassword')
+		GeneralMessage.update(Texts.admin.password.wrongoldpassword, 'error');
+	    else if (answer.say == 'ok')
+		GeneralMessage.update(Texts.admin.password.saved, 'info');
+	});
+    }
+}
+EditPasswordCtrl.$inject = ['$scope', '$resource', 'Texts', 'GeneralMessage'];
 

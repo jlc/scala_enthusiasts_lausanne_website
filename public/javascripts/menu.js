@@ -89,7 +89,8 @@ function DynamicMenuCtrl($scope, $location, $timeout, Texts) {
 	    admin: [
 		{url: '#/admin/edit-introduction', text: Texts.admin.menu.edit.intro},
 		{url: '#/admin/edit-announcement', text: Texts.admin.menu.edit.announce},
-		{url: '#/admin/edit-sessions', text: Texts.admin.menu.edit.sessions}
+		{url: '#/admin/edit-sessions', text: Texts.admin.menu.edit.sessions},
+		{url: '#/admin/edit-password', text: Texts.admin.menu.edit.password}
 	    ]
 	};
 	// reset ensureLinks to empty function to improve efficiency of future calls
@@ -101,12 +102,11 @@ function DynamicMenuCtrl($scope, $location, $timeout, Texts) {
 
 	var parts = $location.url().split('/');
 
-	if (parts.length < 1)
+	if (parts.length < 2)
 	    $scope.links = [];
 	else
 	    $scope.links = self.links[parts[1]];
 
-	//console.debug($scope.links);
 	if ($scope.links.length > 0) $scope.showMenu = true;
 	else $scope.showMenu = false;
 
