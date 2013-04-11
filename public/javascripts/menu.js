@@ -75,8 +75,8 @@ function DynamicMenuCtrl($scope, $location, $timeout, Texts) {
 	    ],
 	    meetings: [
 		{url: '#/meetings/agenda', text: Texts.meetings.menu.agenda},
-		{url: '#/meetings/sessions', text: Texts.meetings.menu.sessions},
-		{url: '#/meetings/speakers', text: Texts.meetings.menu.speakers}
+		{url: '#/meetings/sessions', text: Texts.meetings.menu.sessions} /*,
+		{url: '#/meetings/speakers', text: Texts.meetings.menu.speakers} */
 	    ],
 	    address: [
 		{url: '#/address/map', text: Texts.address.menu.map},
