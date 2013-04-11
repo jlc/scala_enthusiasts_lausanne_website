@@ -7,6 +7,12 @@ externalJs: List[String] = Nil, externalCss: List[String] = Nil)(content: Html)(
 <html ng-app="segl">
     <head>
         <title>@Messages("main.title")</title>
+
+	<meta name="description" content="Scala Enthusiasts Group Lausanne">
+	<meta name="keywords" content="Scala,Enthusiasts,Lausanne">
+	<meta name="author" content="Jeanluc Chasseriau">
+	<meta charset="UTF-8">
+
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
 
 	@* jquery *@
@@ -44,9 +50,9 @@ externalJs: List[String] = Nil, externalCss: List[String] = Nil)(content: Html)(
 	<link rel="stylesheet" href="@routes.Assets.at("stylesheets/jquery-ui-fullcalendar/fullcalendar.css")">
 	<link rel="stylesheet" href="@routes.Assets.at("stylesheets/jquery-ui-fullcalendar/fullcalendar.print.css")">
 
-	@* google map (key linked to jlchasseriau@gmail.com) and gmap3 jquery plugin *@
+	@* google map (key linked to scala.enthusiasts.lausanne@gmail.com) and gmap3 jquery plugin *@
         <script src="@routes.Assets.at("javascripts/gmap3/gmap3.js")" type="text/javascript"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDb4NCzXMokpVNhBOhu0mlje_ir61NkeqA&sensor=false" type="text/javascript"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVHV2VjbPzrB5Aj1XczPPTSjfs21eXekE&sensor=false" type="text/javascript"></script>
 
 	@* application specific *@
 	<link rel="stylesheet" href="@routes.Assets.at("stylesheets/common.css")">
