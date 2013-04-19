@@ -4,6 +4,10 @@
  * comman angular modules
  */
 
+Object.toType = function(obj) {
+  return ({}).toString.call(obj).match(/\s([a-z|A-Z]+)/)[1].toLowerCase();
+}
+
 angular.module('common', ['ngResource']).
 
     factory('ContentIntroduction', function($resource) {
@@ -21,6 +25,70 @@ angular.module('common', ['ngResource']).
 	return ContentSession;
     }).
 
+    factory('Text', function($resource) {
+
+	function Reference() {
+	    this.txt = null;
+	    this.valueOf = this.toString = this.toSource = this.toLocaleString =
+		function() { return this.txt; }
+	}
+
+	Reference.prototype.isInitialised = function() {
+	    return (this.txt == null) ? false : true;
+	}
+
+	Reference.prototype.setText = function (text) {
+	    this.txt = text;
+	}
+
+	return {
+	    texts: {},
+	    resource: $resource('/content/text/:id'),
+
+	    getReference: function(textId, from) {
+		return this.getReferenceFromList(textId.split('.'), from);
+	    },
+
+	    getReferenceFromList: function(ls, from) {
+		if (ls.length == 0) return from;
+		else {
+		    var elm = ls.shift();
+		    if (!(elm in from)) {
+			if (ls.length == 0) from[elm] = new Reference();
+			else from[elm] = {};
+		    }
+		    return this.getReferenceFromList(ls, from[elm]);
+		}
+	    },
+
+	    get: function(textId) {
+		var instance = this.getReference(textId, this.texts);
+
+		if (!instance.isInitialised()) {
+		    this.resource.get({id: textId}, function(value) {
+			instance.setText(value.text);
+		    });
+		}
+
+		return instance;
+	    },
+
+	    // search and update this.texts
+	    search: function(r) {
+		var self = this;
+		this.resource.get({regex: r}, function(results) {
+		    $.each(results, function(key, value) {
+			self.getReference(key, self.texts).setText(value);
+		    });
+		});
+	    },
+
+	    prefetch: function() {
+		this.search('.*');
+	    }
+	};
+    }).
+
     factory('GeneralMessage', function($rootScope) {
 	return {
 	    content: '',
@@ -30,29 +98,6 @@ angular.module('common', ['ngResource']).
 		this.type = type;
 		$rootScope.$broadcast('updateGeneralMessage');
 	    }
-	}
-    }).
-
-    // Be aware, using Texts will be filled up _after_ controllers initialisation
-    // due to asText copy
-    factory('Texts', function() {
-	return {};
-    }).
-
-    directive('asText', function($parse, Texts) {
-	// This directive is very anti-angular since it copy from the view to the model.
-	// angular is supposed to work the other way arround. However, if well controled, this is ok.
-	return {
-	    compile: function(elm, attrs, transclude) {
-		return {
-		    pre: function preLink(scope, elem, attrs, ctrl) {
-			// NOTE: copy as earlier as possible
-			$parse(attrs.ngModel).assign(Texts, attrs.asText);
-		    },
-		    post: function postLink(scope, elem, attrs, ctrl) {}
-		}
-	    },
-	    link: function postLink(scope, elem, attrs) {}
 	}
     }).
 
@@ -147,6 +192,8 @@ function GeneralMessageCtrl($scope, $timeout, GeneralMessage) {
     $scope.message = {content: '', type: ''};
 
     $scope.update = function() {
+	// NOTE: if content is a Text Reference object, we do not go within 'txt' property since
+	// it may not yet initialised with its value.
 	$scope.message.content = GeneralMessage.content;
 	$scope.message.type = 'alert-' + GeneralMessage.type;
     }

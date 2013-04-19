@@ -23,6 +23,8 @@ import play.api.libs.EventSource
 import play.api.libs.json.{Json, JsValue}
 import play.api.libs.iteratee.{Concurrent, Enumeratee, Enumerator, Iteratee}
 
+import play.api.i18n.Messages
+
 import models.{MiscContent, EnthusiastSession, ContentDao, Group, UsersDao}
 import models.ContentWrites._
 
@@ -128,6 +130,35 @@ object DataProvider extends Controller with LangHelper {
         }
       }
     )
+  }
+
+  def getText(id: String) = DiscretGuardedAction { implicit request => user =>
+    val fullId = "client." + id
+    val text = Messages(fullId)(clientLanguage)
+    Ok(Json.obj("text" -> text))
+  }
+
+  def searchText(regex: String) = DiscretGuardedAction { implicit request => user =>
+
+    val lang =
+      if (Messages messages(current) get (clientLanguage.code) map (_.isEmpty) getOrElse (true) ) "default"
+      else clientLanguage.code
+
+    val stripClient = "^client\\.(.*)".r
+
+    val results =
+      Messages.messages(current)(lang).map {
+        case (fullKey, value) =>
+          stripClient findFirstIn fullKey match {
+            case Some(stripClient(key)) =>
+              // if regex contains something and is found first in key, then keep the pair (key, value),
+              // otherwise, keep all pair (key, value)
+              regex.r findFirstIn key map (m => (key -> value))
+            case None => None
+          }
+      }.flatten.toMap
+
+    Ok(Json.toJson(results))
   }
 
   private def getMiscContent(mctype: MiscContent.Type, lang: Lang): JsValue = {
