@@ -11,7 +11,7 @@
 	<div class="span2">
 	    <ul class="nav nav-tabs nav-stacked">
 		<li ng-repeat="link in links">
-		    <a href="{{link.url}}">{{link.text}}</a>
+		    <a href="{{link.url}}">{{link.text.txt}}</a>
 		</li>
 	    </ul> <!-- nav-stacked -->
 
@@ -33,58 +33,5 @@
 	</div> <!-- span10 -->
 
     </div> <!-- row-fluid -->
-
-
-    <div ng-show="false">
-	<span ng-model="index.menu.home"
-	      as-text="@Messages("index.menu.home")"></span>
-
-	<span ng-model="meetings.menu.agenda"
-	      as-text="@Messages("meetings.menu.agenda")"></span>
-	<span ng-model="meetings.menu.sessions"
-	      as-text="@Messages("meetings.menu.sessions")"></span>
-	<span ng-model="meetings.menu.speakers"
-	      as-text="@Messages("meetings.menu.speakers")"></span>
-
-	<span ng-model="address.menu.map"
-	      as-text="@Messages("address.menu.map")"></span>
-	<span ng-model="address.menu.contact"
-	      as-text="@Messages("address.menu.contact")"></span>
-
-	<span ng-model="sponsors.menu.crossingtech"
-	      as-text="@Messages("sponsors.menu.crossingtech")"></span>
-	<span ng-model="sponsors.menu.epfl"
-	      as-text="@Messages("sponsors.menu.epfl")"></span>
-
-	<span ng-model="admin.menu.edit.intro"
-	      as-text="@Messages("admin.menu.edit.intro")"></span>
-	<span ng-model="admin.menu.edit.announce"
-	      as-text="@Messages("admin.menu.edit.announce")"></span>
-	<span ng-model="admin.menu.edit.sessions"
-	      as-text="@Messages("admin.menu.edit.sessions")"></span>
-	<span ng-model="admin.menu.edit.password"
-	      as-text="@Messages("admin.menu.edit.password")"></span>
-
-	<span ng-model="admin.intro.updated"
-	      as-text="@Messages("admin.intro.updated")"></span>
-
-	<span ng-model="admin.announce.updated"
-	      as-text="@Messages("admin.announce.updated")"></span>
-
-	<span ng-model="admin.session.updated"
-	      as-text="@Messages("admin.session.updated")"></span>
-	<span ng-model="admin.session.created"
-	      as-text="@Messages("admin.session.created")"></span>
-	<span ng-model="admin.session.deleted"
-	      as-text="@Messages("admin.session.deleted")"></span>
-	<span ng-model="admin.password.saved"
-	      as-text="@Messages("admin.password.saved")"></span>
-	<span ng-model="admin.password.dontmatch"
-	      as-text="@Messages("admin.password.dontmatch")"></span>
-	<span ng-model="admin.password.wrongoldpassword"
-	      as-text="@Messages("admin.password.wrongoldpassword")"></span>
-
-    </div>
-
 </div>
 }

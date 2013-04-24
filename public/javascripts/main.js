@@ -5,6 +5,10 @@
 
 angular.module('segl', ['common', 'ui']).
 
+    run(['$rootScope', '$timeout', 'Text', function($rootScope, $timeout, Text) {
+	Text.prefetch();
+    }]).
+
     // configure view routes
     config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
 

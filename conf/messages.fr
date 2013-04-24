@@ -19,35 +19,39 @@ footer.otherclients.visitor.use = Le dernier visiteur utilise:
 footer.otherclients.visitor.on = sur
 footer.individualmessage.tmp = Une note pour vous:
 
+# client rendered texts (must be prefixed by client.)
+
 # index page
-index.menu.home = Accueil
+client.index.menu.home = Accueil
 
 # meetings page
-meetings.menu.agenda = Agenda
-meetings.menu.sessions = Sessions
-meetings.menu.speakers = Speakers
+client.meetings.menu.agenda = Agenda
+client.meetings.menu.sessions = Sessions
+client.meetings.menu.speakers = Speakers
 
 # address page
-address.menu.map = Carte
-address.menu.contact = Contacte
+client.address.menu.map = Carte
+client.address.menu.contact = Contacte
 
 # sponsors page
-sponsors.menu.crossingtech = Crossing-Tech
-sponsors.menu.epfl = EPFL
+client.sponsors.menu.crossingtech = Crossing-Tech
+client.sponsors.menu.epfl = EPFL
 
 # admin page
-admin.menu.edit.intro = Edition de l'introduction
-admin.menu.edit.announce = Edition de l'annonce
-admin.menu.edit.sessions = Edition des sessions
-admin.menu.edit.password = Edition du mot de passe
-admin.intro.updated = Introduction mise a jour
-admin.announce.updated = Annonce mise a jour
-admin.session.updated = Session mise a jour
-admin.session.created = Session cree
-admin.session.deleted = Session effacee
-admin.password.saved = Mot de passe sauvegarde
-admin.password.dontmatch = Nouveaux mot de passe differents
-admin.password.wrongoldpassword = Ancien mot de pass incorect
+client.admin.menu.edit.intro = Edition de l'introduction
+client.admin.menu.edit.announce = Edition de l'annonce
+client.admin.menu.edit.sessions = Edition des sessions
+client.admin.menu.edit.password = Edition du mot de passe
+client.admin.intro.updated = Introduction mise a jour
+client.admin.announce.updated = Annonce mise a jour
+client.admin.session.updated = Session mise a jour
+client.admin.session.created = Session cree
+client.admin.session.deleted = Session effacee
+client.admin.password.saved = Mot de passe sauvegarde
+client.admin.password.dontmatch = Nouveaux mot de passe differents
+client.admin.password.wrongoldpassword = Ancien mot de pass incorect
+
+# templates
 
 # template.addressContact
 tmpl.addresscontact.title = Contacte

@@ -61,7 +61,7 @@ LoginCtrl.$inject = ['$scope', '$http', '$timeout'];
 /*
  * DynamicMenuCtrl
  */
-function DynamicMenuCtrl($scope, $location, $timeout, Texts) {
+function DynamicMenuCtrl($scope, $location, $timeout, Text) {
     var self = this;
 
     $scope.links = [];
@@ -71,26 +71,26 @@ function DynamicMenuCtrl($scope, $location, $timeout, Texts) {
 	console.debug("ensureLinks initialise");
 	self.links = {
 	    index: [
-		{url: '#/index', text: Texts.index.menu.home}
+		{url: '#/index', text: Text.get('index.menu.home')}
 	    ],
 	    meetings: [
-		{url: '#/meetings/agenda', text: Texts.meetings.menu.agenda},
-		{url: '#/meetings/sessions', text: Texts.meetings.menu.sessions} /*,
-		{url: '#/meetings/speakers', text: Texts.meetings.menu.speakers} */
+		{url: '#/meetings/agenda', text: Text.get('meetings.menu.agenda')},
+		{url: '#/meetings/sessions', text: Text.get('meetings.menu.sessions')} /*,
+		{url: '#/meetings/speakers', text: Text.get('meetings.menu.speakers')} */
 	    ],
 	    address: [
-		{url: '#/address/map', text: Texts.address.menu.map},
-		{url: '#/address/contact', text: Texts.address.menu.contact}
+		{url: '#/address/map', text: Text.get('address.menu.map')},
+		{url: '#/address/contact', text: Text.get('address.menu.contact')}
 	    ],
 	    sponsors: [
-		{url: '#/sponsors/crossing-tech', text: Texts.sponsors.menu.crossingtech},
-		{url: '#/sponsors/epfl', text: Texts.sponsors.menu.epfl}
+		{url: '#/sponsors/crossing-tech', text: Text.get('sponsors.menu.crossingtech')},
+		{url: '#/sponsors/epfl', text: Text.get('sponsors.menu.epfl')}
 	    ],
 	    admin: [
-		{url: '#/admin/edit-introduction', text: Texts.admin.menu.edit.intro},
-		{url: '#/admin/edit-announcement', text: Texts.admin.menu.edit.announce},
-		{url: '#/admin/edit-sessions', text: Texts.admin.menu.edit.sessions},
-		{url: '#/admin/edit-password', text: Texts.admin.menu.edit.password}
+		{url: '#/admin/edit-introduction', text: Text.get('admin.menu.edit.intro')},
+		{url: '#/admin/edit-announcement', text: Text.get('admin.menu.edit.announce')},
+		{url: '#/admin/edit-sessions', text: Text.get('admin.menu.edit.sessions')},
+		{url: '#/admin/edit-password', text: Text.get('admin.menu.edit.password')}
 	    ]
 	};
 	// reset ensureLinks to empty function to improve efficiency of future calls
@@ -109,13 +109,7 @@ function DynamicMenuCtrl($scope, $location, $timeout, Texts) {
 
 	if ($scope.links.length > 0) $scope.showMenu = true;
 	else $scope.showMenu = false;
-
-	/*
-	console.debug('$routeChangeStart: url: ' + $location.url());
-	console.debug('$routeChangeStart: hash ' + $location.hash());
-	console.debug('$routeChangeStart: path ' + $location.path());
-	*/
     });
 }
-DynamicMenuCtrl.$inject = ['$scope', '$location', '$timeout', 'Texts'];
+DynamicMenuCtrl.$inject = ['$scope', '$location', '$timeout', 'Text'];
 

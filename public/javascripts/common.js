@@ -73,7 +73,10 @@ angular.module('common', ['ngResource']).
 		return instance;
 	    },
 
-	    // search and update this.texts
+	    // TODO: get(textId, callback):
+	    // call the callback with the returned value as soon as the text is available
+	    // Handle some cases where texts (txt) may be used (displayed) but may still not be available.
+	    
 	    search: function(r) {
 		var self = this;
 		this.resource.get({regex: r}, function(results) {

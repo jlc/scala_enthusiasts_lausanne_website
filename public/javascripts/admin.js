@@ -7,7 +7,7 @@
  * Angular Controllers
  */
 
-function EditIntroductionCtrl($scope, $routeParams, ContentIntroduction, Texts, GeneralMessage) {
+function EditIntroductionCtrl($scope, $routeParams, ContentIntroduction, Text, GeneralMessage) {
     $scope.intro = ContentIntroduction.get({}, function(intro) {
 	console.debug("EditIntroductionCtrl.intro.callback: ");
 	console.debug(intro);
@@ -16,14 +16,14 @@ function EditIntroductionCtrl($scope, $routeParams, ContentIntroduction, Texts, 
 
     $scope.save = function() {
 	$scope.intro.$save(function(intro, headers) {
-	    GeneralMessage.update(Texts.admin.intro.updated, 'info');
+	    GeneralMessage.update(Text.get('admin.intro.updated'), 'info');
 	});
     }
 }
-EditIntroductionCtrl.$inject = ['$scope', '$routeParams', 'ContentIntroduction', 'Texts', 'GeneralMessage'];
+EditIntroductionCtrl.$inject = ['$scope', '$routeParams', 'ContentIntroduction', 'Text', 'GeneralMessage'];
 
 
-function EditAnnouncementCtrl($scope, $routeParams, ContentAnnouncement, Texts, GeneralMessage) {
+function EditAnnouncementCtrl($scope, $routeParams, ContentAnnouncement, Text, GeneralMessage) {
     $scope.announce = ContentAnnouncement.get({}, function(ann) {
 	console.debug("EditAnnouncementCtrl.announce.callback: ");
 	console.debug(ann);
@@ -32,14 +32,14 @@ function EditAnnouncementCtrl($scope, $routeParams, ContentAnnouncement, Texts, 
 
     $scope.save = function() {
 	$scope.announce.$save(function(ann, headers) {
-	    GeneralMessage.update(Texts.admin.announce.updated, 'info');
+	    GeneralMessage.update(Text.get('admin.announce.updated'), 'info');
 	});
     }
 }
-EditAnnouncementCtrl.$inject = ['$scope', '$routeParams', 'ContentAnnouncement', 'Texts', 'GeneralMessage'];
+EditAnnouncementCtrl.$inject = ['$scope', '$routeParams', 'ContentAnnouncement', 'Text', 'GeneralMessage'];
 
 
-function EditSessionsCtrl($scope, $route, ContentSession, Texts, GeneralMessage) {
+function EditSessionsCtrl($scope, $route, ContentSession, Text, GeneralMessage) {
     $scope.newSession = {type: 'new', data: {}};
 
     //$scope.text will be filled by the view (yes! not the angular way, but usefull to reuse server internationalisation)
@@ -73,7 +73,7 @@ function EditSessionsCtrl($scope, $route, ContentSession, Texts, GeneralMessage)
 	createdSession.$save(function(sess, headers) {
 	    console.debug("EditSessionsCtrl.create: session created");
 
-	    GeneralMessage.update(Texts.admin.session.created, 'info');
+	    GeneralMessage.update(Text.get('admin.session.created'), 'info');
 
 	    // update the view
 	    sess.date = new Date(Number(sess.date));
@@ -96,7 +96,7 @@ function EditSessionsCtrl($scope, $route, ContentSession, Texts, GeneralMessage)
 	sess.$save(function(sess, headers) {
 	    console.debug("EditSessionsCtrl.update: session updated");
 
-	    GeneralMessage.update(Texts.admin.session.updated, 'info');
+	    GeneralMessage.update(Text.get('admin.session.updated'), 'info');
 
 	    sess.date = new Date(Number(sess.date));
 	    session = sess;
@@ -108,15 +108,15 @@ function EditSessionsCtrl($scope, $route, ContentSession, Texts, GeneralMessage)
 
 	session.$delete(function(sess, headers) {
 	    console.debug("EditSessionsCtrl.update: session deleted");
-	    GeneralMessage.update(Texts.admin.session.deleted, 'info');
+	    GeneralMessage.update(Text.get('admin.session.deleted'), 'info');
 
 	    $route.reload();
 	});
     }
 }
-EditSessionsCtrl.$inject = ['$scope', '$route', 'ContentSession', 'Texts', 'GeneralMessage'];
+EditSessionsCtrl.$inject = ['$scope', '$route', 'ContentSession', 'Text', 'GeneralMessage'];
 
-function EditPasswordCtrl($scope, $resource, Texts, GeneralMessage) {
+function EditPasswordCtrl($scope, $resource, Text, GeneralMessage) {
     var UserPassword = $resource('/content/user/password');
 
     $scope.oldPassword = '';
@@ -132,13 +132,13 @@ function EditPasswordCtrl($scope, $resource, Texts, GeneralMessage) {
 	userPassword.$save(function (answer, headers) {
 	    console.debug('EditPasswordCtrl.save.callbeck: answer: ' + answer.say);
 	    if (answer.say == 'dontmatch')
-		GeneralMessage.update(Texts.admin.password.dontmatch, 'error');
+		GeneralMessage.update(Text.get('admin.password.dontmatch'), 'error');
 	    else if (answer.say == 'wrongoldpassword')
-		GeneralMessage.update(Texts.admin.password.wrongoldpassword, 'error');
+		GeneralMessage.update(Text.get('admin.password.wrongoldpassword'), 'error');
 	    else if (answer.say == 'ok')
-		GeneralMessage.update(Texts.admin.password.saved, 'info');
+		GeneralMessage.update(Text.get('admin.password.saved'), 'info');
 	});
     }
 }
-EditPasswordCtrl.$inject = ['$scope', '$resource', 'Texts', 'GeneralMessage'];
+EditPasswordCtrl.$inject = ['$scope', '$resource', 'Text', 'GeneralMessage'];
 

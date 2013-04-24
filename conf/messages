@@ -19,35 +19,39 @@ footer.otherclients.visitor.use = Last visitor is using:
 footer.otherclients.visitor.on = on
 footer.individualmessage.tmp = Note for you:
 
+# client rendered texts (must be prefixed by client.)
+
 # index page
-index.menu.home = Home
+client.index.menu.home = Home
 
 # meetings page
-meetings.menu.agenda = Agenda
-meetings.menu.sessions = Sessions
-meetings.menu.speakers = Speakers
+client.meetings.menu.agenda = Agenda
+client.meetings.menu.sessions = Sessions
+client.meetings.menu.speakers = Speakers
 
 # address page
-address.menu.map = Map
-address.menu.contact = Contact
+client.address.menu.map = Map
+client.address.menu.contact = Contact
 
 # sponsors page
-sponsors.menu.crossingtech = Crossing-Tech
-sponsors.menu.epfl = EPFL
+client.sponsors.menu.crossingtech = Crossing-Tech
+client.sponsors.menu.epfl = EPFL
 
 # admin page
-admin.menu.edit.intro = Edit introduction
-admin.menu.edit.announce = Edit announcement
-admin.menu.edit.sessions = Edit sessions
-admin.menu.edit.password = Edit password
-admin.intro.updated = Introduction updated
-admin.announce.updated = Announce updated
-admin.session.updated = Session updated
-admin.session.created = Session created
-admin.session.deleted = Session deleted
-admin.password.saved = Password saved
-admin.password.dontmatch = New password mismatch
-admin.password.wrongoldpassword = Wrong old password
+client.admin.menu.edit.intro = Edit introduction
+client.admin.menu.edit.announce = Edit announcement
+client.admin.menu.edit.sessions = Edit sessions
+client.admin.menu.edit.password = Edit password
+client.admin.intro.updated = Introduction updated
+client.admin.announce.updated = Announce updated
+client.admin.session.updated = Session updated
+client.admin.session.created = Session created
+client.admin.session.deleted = Session deleted
+client.admin.password.saved = Password saved
+client.admin.password.dontmatch = New password mismatch
+client.admin.password.wrongoldpassword = Wrong old password
+
+# templates
 
 # template.addressContact
 tmpl.addresscontact.title = Contact
@@ -113,4 +117,3 @@ tmpl.meetingssessions.withspeaker = with
 tmpl.sponsors.contact = Contact
 tmpl.sponsors.phone = Phone
 tmpl.sponsors.email = Email
-
