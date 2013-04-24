@@ -124,8 +124,8 @@ angular.module('common', ['ngResource']).
 	};
     }).
 
-    // to enable animation, we declare a new directive (fade-it) that create animation
-    directive('fadeIt', function() {
+    // to enable animation, we declare a new directive (fade-in) that create animation
+    directive('fadeIn', function() {
 	return {
 	    compile: function(elm) {
 		// set default
